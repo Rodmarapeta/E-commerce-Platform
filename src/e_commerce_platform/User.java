@@ -6,10 +6,7 @@ package e_commerce_platform;
 
 
 import java.util.ArrayList;
-/**
- *
- * @author Rodmar
- */
+
 public class User {
     private int id;
     private String name;
