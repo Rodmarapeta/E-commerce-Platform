@@ -19,7 +19,7 @@ public class homePage extends JFrame implements ActionListener{
     private JTextField sreachproduct;
     private JPanel uppane, midpane, lowpane;
 
-    private homePage(){
+    public homePage(){
         setLayout(null);
         setSize(1920,1080);
         setResizable(true);

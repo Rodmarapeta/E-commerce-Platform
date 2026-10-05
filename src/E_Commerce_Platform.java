@@ -1,4 +1,3 @@
-
 import e_commerce_platform.templates.registerPage;
 
 public class E_Commerce_Platform {

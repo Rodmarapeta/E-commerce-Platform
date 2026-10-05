@@ -1,99 +1,121 @@
 package e_commerce_platform.templates;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class registerPage extends JFrame implements ActionListener {
 
-    JLabel email, password, username, createacc, l5;
-    JButton signupbtn, login, backbtn, helpbtn;
-    JTextField emailid, mobilenum, usernameid;
-    JPasswordField passwordid;
+    private JLabel lblTitle, lblUsername, lblEmail, lblPassword, lblConfirmPassword;
+    private JTextField txtUsername, txtEmail;
+    private JPasswordField txtPassword, txtConfirmPassword;
+    private JButton btnRegister, btnBack;
 
-    // Changed constructor visibility to public
     public registerPage() {
 
-        setTitle("registerPage");
-        setResizable(true);
+        setTitle("E-Commerce Platform - Register");
+        setSize(1000, 650);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 800);
+        setLocationRelativeTo(null);
 
-        //
-        email = new JLabel("Email:");
-        emailid = new JTextField();
-        username = new JLabel("Username:");
-        usernameid = new JTextField();
-        password = new JLabel("Password:");
-        passwordid = new JPasswordField();
-        mobilenum = new JTextField();
-        createacc = new JLabel("Create Account:");
-        l5 = new JLabel("Login Page");
-        login = new JButton("Login");
-        signupbtn = new JButton("Signup");
-        backbtn = new JButton("Back");
-        helpbtn = new JButton("Help");
+        lblTitle = new JLabel("Create Account");
+        lblTitle.setBounds(400, 70, 400, 60);
+        lblTitle.setFont(lblTitle.getFont().deriveFont(28f));
+        add(lblTitle);
 
-        //SetBounds
-        email.setBounds(50, 50, 100, 30);
-        emailid.setBounds(160, 50, 200, 30);
-        username.setBounds(50, 100, 100, 30);
-        usernameid.setBounds(160, 100, 200, 30);
-        password.setBounds(50, 150, 100, 30);
-        passwordid.setBounds(160, 150, 200, 30);
-        createacc.setBounds(50, 200, 120, 30);
-        mobilenum.setBounds(160, 200, 200, 30);
-        signupbtn.setBounds(50, 270, 100, 30);
-        login.setBounds(160, 270, 100, 30);
-        backbtn.setBounds(270, 270, 100, 30);
-        helpbtn.setBounds(380, 270, 100, 30);
+        lblUsername = new JLabel("Username:");
+        lblUsername.setBounds(300, 160, 100, 30);
+        add(lblUsername);
 
-        //ADDtogui
-        add(email);
-        add(username);
-        add(password);
-        add(createacc);
-        add(emailid);
-        add(usernameid);
-        add(passwordid);
-        add(mobilenum);
-        add(signupbtn);
-        add(login);
-        add(backbtn);
-        add(helpbtn);
+        txtUsername = new JTextField();
+        txtUsername.setBounds(400, 160, 300, 35);
+        add(txtUsername);
 
-        //Add Action Listeners
-        signupbtn.addActionListener(this);
-        backbtn.addActionListener(this);
-        helpbtn.addActionListener(this);
-        login.addActionListener(this);
+        lblEmail = new JLabel("Email:");
+        lblEmail.setBounds(300, 215, 100, 30);
+        add(lblEmail);
 
+        txtEmail = new JTextField();
+        txtEmail.setBounds(400, 215, 300, 35);
+        add(txtEmail);
+
+        lblPassword = new JLabel("Password:");
+        lblPassword.setBounds(300, 270, 100, 30);
+        add(lblPassword);
+
+        txtPassword = new JPasswordField();
+        txtPassword.setBounds(400, 270, 300, 35);
+        add(txtPassword);
+
+        lblConfirmPassword = new JLabel("Confirm Password:");
+        lblConfirmPassword.setBounds(300, 325, 120, 30);
+        add(lblConfirmPassword);
+
+        txtConfirmPassword = new JPasswordField();
+        txtConfirmPassword.setBounds(430, 325, 270, 35);
+        add(txtConfirmPassword);
+
+        btnRegister = new JButton("Register");
+        btnRegister.setBounds(300, 390, 400, 45);
+        add(btnRegister);
+
+        btnBack = new JButton("Back to Login");
+        btnBack.setBounds(400, 455, 200, 40);
+        add(btnBack);
+
+        btnRegister.addActionListener(this);
+        btnBack.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //
-        //dito sa signupbtn if nakagawa na ng account dapat matic na sa login page
-        if (e.getSource() == signupbtn) {
-            String userEmail = emailid.getText();
+        if (e.getSource() == btnRegister) {
 
-        } else if (e.getSource() == backbtn) {
-            loginPage l = new loginPage();
-            l.setVisible(true);
+            String username = txtUsername.getText();
+            String email = txtEmail.getText();
+            String password = new String(txtPassword.getPassword());
+            String confirmPassword = new String(txtConfirmPassword.getPassword());
+
+            if (username.isEmpty() || email.isEmpty()
+                    || password.isEmpty() || confirmPassword.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Please complete all fields",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+
+            } else if (!password.equals(confirmPassword)) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Passwords do not match",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Registration successful"
+                );
+            }
+
+        } else if (e.getSource() == btnBack) {
+
+            loginPage login = new loginPage();
+            login.setVisible(true);
             this.dispose();
-        } else if (e.getSource() == helpbtn) {
-            JOptionPane.showMessageDialog(this, "Enter your account details to register.");
-        } else if (e.getSource() == login) {
-
-        } else {
-
         }
     }
 
-    public static void main(String[] args){
-        registerPage lol = new registerPage();
-        lol.setVisible(true);
+    public static void main(String[] args) {
+
+        registerPage register = new registerPage();
+        register.setVisible(true);
     }
 }
