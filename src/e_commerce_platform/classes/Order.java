@@ -1,5 +1,5 @@
 
-package e_commerce_platform;
+package e_commerce_platform.classes;
 
 
 import java.util.ArrayList;

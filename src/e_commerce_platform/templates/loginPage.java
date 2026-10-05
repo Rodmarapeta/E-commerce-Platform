@@ -81,8 +81,8 @@ public class loginPage extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        loginPage lol = new loginPage();
-        lol.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        loginPage lol = new loginPage();
+//        lol.setVisible(true);
+//    }
 }

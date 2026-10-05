@@ -11,9 +11,7 @@ public class userProfilePage extends JFrame implements ActionListener{
 //    private Jlabel dispalyUserid;
     private userProfilePage(){
         setTitle("registerPage");
-        setVisible(true);
         setResizable(false);
-        setLocationRelativeTo(null);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,1000);

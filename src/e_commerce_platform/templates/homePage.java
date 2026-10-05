@@ -24,7 +24,7 @@ public class homePage extends JFrame implements ActionListener{
         setSize(1920,1080);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         frstlbl=new JLabel("Free Shipping order over 500");
         scnd=new JLabel("30 days easy return");
         trhd=new JLabel("warranty");
