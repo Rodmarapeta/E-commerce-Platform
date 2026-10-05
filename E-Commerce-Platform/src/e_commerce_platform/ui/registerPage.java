@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class registerPage extends JFrame implements ActionListener {
 
-    private JLabel lblTitle, lblName, lblEmail, lblPassword, lblConfirmPassword;
-    private JTextField txtName, txtEmail;
+    private JLabel lblTitle, lblUsername, lblEmail, lblPassword, lblConfirmPassword;
+    private JTextField txtUsername, txtEmail;
     private JPasswordField txtPassword, txtConfirmPassword;
     private JButton btnRegister, btnBack;
 
@@ -20,17 +20,17 @@ public class registerPage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
         lblTitle = new JLabel("Create Account");
-        lblTitle.setBounds(350, 70, 400, 60);
+        lblTitle.setBounds(400, 70, 400, 60);
         lblTitle.setFont(lblTitle.getFont().deriveFont(28f));
         add(lblTitle);
 
-        lblName = new JLabel("Name:");
-        lblName.setBounds(300, 160, 100, 30);
-        add(lblName);
+        lblUsername = new JLabel("Username:");
+        lblUsername.setBounds(300, 160, 100, 30);
+        add(lblUsername);
 
-        txtName = new JTextField();
-        txtName.setBounds(400, 160, 300, 35);
-        add(txtName);
+        txtUsername = new JTextField();
+        txtUsername.setBounds(400, 160, 300, 35);
+        add(txtUsername);
 
         lblEmail = new JLabel("Email:");
         lblEmail.setBounds(300, 215, 100, 30);
@@ -73,7 +73,7 @@ public class registerPage extends JFrame implements ActionListener {
 
         if (e.getSource() == btnRegister) {
 
-            String username = txtName.getText();
+            String username = txtUsername.getText();
             String email = txtEmail.getText();
             String password = new String(txtPassword.getPassword());
             String confirmPassword = new String(txtConfirmPassword.getPassword());
