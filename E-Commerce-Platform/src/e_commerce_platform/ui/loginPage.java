@@ -80,13 +80,12 @@ public class loginPage extends JFrame implements ActionListener {
         );
     }
 
-        } else if (e.getSource() == btnSignUp){
+        } else if (e.getSource() == btnSignUp) {
 
-        JOptionPane.showMessageDialog(
-         this,
-        "Register button clicked"
-    );
-}
+            registerPage register = new registerPage();
+            register.setVisible(true);
+            this.dispose();
+        }
     }
 
     public static void main(String[] args) {
