@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 
 public class homePage extends JFrame implements ActionListener{
 
+    //jpanels
+    JPanel topnavbar, productdiplaypanel;
+
     //1row
     private JButton supportbtn,trackorderbtn;
     private JLabel frstlbl, scnd, trhd, label;
@@ -24,6 +27,11 @@ public class homePage extends JFrame implements ActionListener{
         setSize(1920,1080);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //topnavbar
+        topnavbar = new JPanel();
+        topnavbar.setLayout(null);
+        topnavbar.setBounds(0,0,1920,1080);
         
         frstlbl=new JLabel("Free Shipping order over 500");
         scnd=new JLabel("30 days easy return");
@@ -67,18 +75,21 @@ public class homePage extends JFrame implements ActionListener{
         backbtn.setFocusPainted(false);
 
         //addtogui
+
+        add(topnavbar);
+
         //1row
-        add(frstlbl);
-        add(scnd);
-        add(trhd);
-        add(supportbtn);
-        add(trackorderbtn);
+        topnavbar.add(frstlbl);
+        topnavbar.add(scnd);
+        topnavbar.add(trhd);
+        topnavbar.add(supportbtn);
+        topnavbar.add(trackorderbtn);
 
         //2row
-        add(backbtn);
-        add(logo);
-        add(label);
-        add(comboBox);
+        topnavbar.add(backbtn);
+        topnavbar.add(logo);
+        topnavbar.add(label);
+        topnavbar.add(comboBox);
 
         supportbtn.addActionListener(this);
         trackorderbtn.addActionListener(this);
@@ -88,7 +99,6 @@ public class homePage extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
-
 
 
     }
