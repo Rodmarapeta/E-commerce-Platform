@@ -1,22 +1,21 @@
 package e_commerce_platform.ui;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 public class homePage extends JFrame {
 
-    // Row 1
-    private JButton supportbtn, trackorderbtn;
-    private JLabel frstlbl, scnd, trhd;
+    private JPanel upperPanel;
+    private JPanel mainPanel;
+    private JPanel categoryPanel;
+    private JPanel navigationPanel;
+    private JPanel productPanel;
 
-    // Row 2
-    private JLabel logo;
-    private JButton searchbtn, myaccountbtn, backbtn, userProfilebtn;
-    private JTextField searchproduct;
+    private JComboBox<String> comboBox;
+    private JTextField searchProduct;
 
-    // Category
     private String[] allCat = {
+        "All Categories",
         "Electronics",
         "Kitchen and Living",
         "Fashion and Apparel",
@@ -28,81 +27,78 @@ public class homePage extends JFrame {
         "Sport and Outdoor"
     };
 
-    private JComboBox<String> comboBox;
-
-    private JPanel upperPanel, navigationPanel, productPanel;
-
     homePage() {
 
         setTitle("E-Commerce Platform - Home");
-        setLayout(null);
         setSize(1000, 650);
-        setResizable(true);
+        setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         upperPanel = new JPanel();
         upperPanel.setLayout(null);
-        upperPanel.setBounds(0, 0, 1000, 110);
+        upperPanel.setBounds(0, 0, 1000, 70);
         add(upperPanel);
 
-        // Row 1
-        frstlbl = new JLabel("Free Shipping order over 500");
-        scnd = new JLabel("30 days easy return");
-        trhd = new JLabel("Warranty");
+        JLabel shippingLabel = new JLabel("Free Shipping on Orders over 500");
+        shippingLabel.setBounds(25, 15, 220, 30);
+        upperPanel.add(shippingLabel);
 
-        supportbtn = new JButton("Support");
-        trackorderbtn = new JButton("Track Order");
+        JLabel returnLabel = new JLabel("30 days easy returns");
+        returnLabel.setBounds(300, 15, 180, 30);
+        upperPanel.add(returnLabel);
 
-        frstlbl.setBounds(20, 10, 200, 30);
-        scnd.setBounds(250, 10, 200, 30);
-        trhd.setBounds(470, 10, 150, 30);
+        JLabel warrantyLabel = new JLabel("1 Year Warranty");
+        warrantyLabel.setBounds(520, 15, 150, 30);
+        upperPanel.add(warrantyLabel);
 
-        supportbtn.setBounds(680, 10, 120, 30);
-        trackorderbtn.setBounds(820, 10, 140, 30);
+        JButton supportButton = new JButton("Support");
+        supportButton.setBounds(730, 15, 100, 30);
+        upperPanel.add(supportButton);
 
-        // Add Row 1
-        upperPanel.add(frstlbl);
-        upperPanel.add(scnd);
-        upperPanel.add(trhd);
-        upperPanel.add(supportbtn);
-        upperPanel.add(trackorderbtn);
+        JButton trackOrderButton = new JButton("Track Order");
+        trackOrderButton.setBounds(835, 15, 120, 30);
+        upperPanel.add(trackOrderButton);
 
-        navigationPanel = new JPanel();
-        navigationPanel.setLayout(null);
-        navigationPanel.setBounds(0, 110, 1000, 100);
-        add(navigationPanel);
+        mainPanel = new JPanel();
+        mainPanel.setLayout(null);
+        mainPanel.setBounds(0, 70, 1000, 125);
+        add(mainPanel);
 
-        logo = new JLabel("Store 📦");
-        logo.setBounds(20, 20, 150, 30);
-        navigationPanel.add(logo);
+        // Store name 
+        JLabel storeLabel = new JLabel("Store");
+        storeLabel.setBounds(25, 20, 180, 60);
+        storeLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        mainPanel.add(storeLabel);
 
+        // All Categories Nung Product
         comboBox = new JComboBox<>(allCat);
-        comboBox.setBounds(180, 20, 180, 30);
-        comboBox.setEditable(false);
-        navigationPanel.add(comboBox);
+        comboBox.setBounds(210, 25, 170, 40);
+        mainPanel.add(comboBox);
 
-        searchproduct = new JTextField();
-        searchproduct.setBounds(380, 20, 220, 30);
-        navigationPanel.add(searchproduct);
+        // Search bar ng mga product
+        searchProduct = new JTextField();
+        searchProduct.setBounds(380, 25, 260, 40);
+        mainPanel.add(searchProduct);
 
-        searchbtn = new JButton("Search");
-        searchbtn.setBounds(610, 20, 100, 30);
-        navigationPanel.add(searchbtn);
+        JButton searchButton = new JButton("Search");
+        searchButton.setBounds(640, 25, 90, 40);
+        mainPanel.add(searchButton);
 
-        myaccountbtn = new JButton("My Account");
-        myaccountbtn.setBounds(720, 20, 120, 30);
-        navigationPanel.add(myaccountbtn);
+        // My Account button
+        JButton myAccountButton = new JButton("My Account");
+        myAccountButton.setBounds(740, 25, 110, 40);
+        mainPanel.add(myAccountButton);
 
-        backbtn = new JButton("Back");
-        backbtn.setBounds(850, 20, 100, 30);
-        navigationPanel.add(backbtn);
+        // Back button
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(855, 25, 80, 40);
+        mainPanel.add(backButton);
 
-        productPanel = new JPanel();
-        productPanel.setLayout(null);
-        productPanel.setBounds(0, 210, 1000, 400);
-        add(productPanel);
-
+        // Cart button
+        JButton cartButton = new JButton("Cart");
+        cartButton.setBounds(935, 25, 60, 40);
+        mainPanel.add(cartButton);
     }
 
 }
