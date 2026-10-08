@@ -9,7 +9,7 @@ public class userShop extends JFrame implements ActionListener {
     private JPanel usershoppane;
     private JLabel myshop;
     private JButton backbtn, addproduct, removeproduct,
-            shopOrders, sales, inventoryReport;
+            shopOrders, sales, inventoryReport, manageinventory;
 
     public userShop() {
 
@@ -30,11 +30,15 @@ public class userShop extends JFrame implements ActionListener {
         backbtn = new JButton("Back");
         backbtn.setBounds(680, 10, 100, 30);
 
+        manageinventory = new JButton("Manage Inventory");
+        manageinventory.setBounds(680, 10, 100, 30);
+
         //styles
 
         //add gui
         usershoppane.add(myshop);
         usershoppane.add(backbtn);
+        usershoppane.add(manageinventory);
 
         //
         backbtn.addActionListener(this);

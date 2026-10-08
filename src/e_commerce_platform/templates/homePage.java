@@ -22,6 +22,9 @@ public class homePage extends JFrame implements ActionListener{
     private JTextField sreachproduct;
     private JPanel uppane, midpane, lowpane;
 
+    //Display product
+    private JScrollPane displaypane;
+
     public homePage(){
         setLayout(null);
         setSize(1920,1080);
@@ -78,14 +81,13 @@ public class homePage extends JFrame implements ActionListener{
 
         add(topnavbar);
 
-        //1row
+        //add to Jpanel
         topnavbar.add(frstlbl);
         topnavbar.add(scnd);
         topnavbar.add(trhd);
         topnavbar.add(supportbtn);
         topnavbar.add(trackorderbtn);
 
-        //2row
         topnavbar.add(backbtn);
         topnavbar.add(logo);
         topnavbar.add(label);

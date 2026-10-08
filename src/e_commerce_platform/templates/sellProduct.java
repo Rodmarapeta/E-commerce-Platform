@@ -11,7 +11,7 @@ public class sellProduct extends JFrame implements ActionListener{
     JLabel productName, productId, productPrice, productcategory, productQuantity;
     JTextField prdctName, prdctPrice, prdctCategory, prdctId, prdctQuantity;
     JComboBox prdctcategory;
-    JButton sellProduct;
+    JButton sellProduct, mngeInventory;
 
     public sellProduct() {
 
@@ -84,7 +84,7 @@ public class sellProduct extends JFrame implements ActionListener{
             String productQuantity = prdctQuantity.getText();
 
             if( productName.isEmpty()|| productId.isEmpty()|| productPrice.isEmpty()|| productCategory.isEmpty()|| productQuantity.isEmpty()){
-                JOptionPane.showMessageDialog(null, "Fill all the fields");
+
             }
             else{
 
