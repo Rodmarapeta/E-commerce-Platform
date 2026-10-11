@@ -135,6 +135,62 @@ public class homePage extends JFrame {
         applianceButton.setBounds(765, 10, 130, 35);
         categoryPanel.add(applianceButton);
         
+        // Product Panel
+        
+        productPanel = new JPanel();
+        productPanel.setLayout(new GridLayout(0, 4, 15, 15));
+
+        // Mga Sample Product 
+        
+        JPanel product1 = createProduct("Power Bank", "₱500");
+        JPanel product2 = createProduct("Smart Watch", "₱1,999");
+        JPanel product3 = createProduct("Laptop", "₱39,999");
+        JPanel product4 = createProduct("Headphones", "₱999");
+        JPanel product5 = createProduct("Iphone 14 Pro Max", "₱30,999");
+        JPanel product6 = createProduct("Charger", "₱1,499");
+        JPanel product7 = createProduct("Air Fryer", "₱2,799");
+        JPanel product8 = createProduct("Keyboard", "₱1,499");
+
+        productPanel.add(product1);
+        productPanel.add(product2);
+        productPanel.add(product3);
+        productPanel.add(product4);
+        productPanel.add(product5);
+        productPanel.add(product6);
+        productPanel.add(product7);
+        productPanel.add(product8);
+        
+        JScrollPane scrollPane = new JScrollPane(productPanel);
+        scrollPane.setBounds(25, 255, 950, 345);
+        add(scrollPane);
+    }
+
+    private JPanel createProduct(String name, String price) {
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setPreferredSize(new Dimension(200, 220));
+        panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+
+        JLabel productName = new JLabel(name);
+        productName.setBounds(15, 25, 170, 30);
+        productName.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(productName);
+
+        JLabel productPrice = new JLabel(price);
+        productPrice.setBounds(15, 65, 170, 30);
+        productPrice.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(productPrice);
+
+        JButton orderButton = new JButton("Order");
+        orderButton.setBounds(15, 120, 80, 35);
+        panel.add(orderButton);
+
+        JButton addCartButton = new JButton("Add to Cart");
+        addCartButton.setBounds(100, 120, 90, 35);
+        panel.add(addCartButton);
+
+        return panel;
     }
 
 }
