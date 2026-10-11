@@ -99,6 +99,42 @@ public class homePage extends JFrame {
         JButton cartButton = new JButton("Cart");
         cartButton.setBounds(935, 25, 60, 40);
         mainPanel.add(cartButton);
+        
+        // Category Panel 
+        
+        categoryPanel = new JPanel();
+        categoryPanel.setLayout(null);
+        categoryPanel.setBounds(0, 195, 1000, 55);
+        add(categoryPanel);
+
+        JButton homeButton = new JButton("Home");
+        homeButton.setBounds(30, 10, 90, 35);
+        categoryPanel.add(homeButton);
+
+        JButton shopButton = new JButton("Shop");
+        shopButton.setBounds(130, 10, 90, 35);
+        categoryPanel.add(shopButton);
+
+        JLabel categoryLabel = new JLabel("Categories:");
+        categoryLabel.setBounds(250, 10, 90, 35);
+        categoryPanel.add(categoryLabel);
+
+        JButton electronicsButton = new JButton("Electronics");
+        electronicsButton.setBounds(340, 10, 110, 35);
+        categoryPanel.add(electronicsButton);
+
+        JButton kitchenButton = new JButton("Kitchen and Living");
+        kitchenButton.setBounds(455, 10, 150, 35);
+        categoryPanel.add(kitchenButton);
+
+        JButton fashionButton = new JButton("Fashion and Apparel");
+        fashionButton.setBounds(610, 10, 150, 35);
+        categoryPanel.add(fashionButton);
+
+        JButton applianceButton = new JButton("Home Appliances");
+        applianceButton.setBounds(765, 10, 130, 35);
+        categoryPanel.add(applianceButton);
+        
     }
 
 }
