@@ -78,6 +78,13 @@ public class homePage extends JFrame {
         comboBox = new JComboBox<>(allCat);
         comboBox.setBounds(210, 25, 170, 40);
         mainPanel.add(comboBox);
+        
+        comboBox.addActionListener(e -> {
+         String selectedCategory =
+        (String) comboBox.getSelectedItem();
+
+        displayProducts(selectedCategory);
+        });
 
         // Search bar ng mga product
         searchProduct = new JTextField();
@@ -138,6 +145,22 @@ public class homePage extends JFrame {
         applianceButton.setBounds(765, 10, 130, 35);
         categoryPanel.add(applianceButton);
         
+        electronicsButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Electronics");
+        });
+
+        kitchenButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Kitchen and Living");
+        });
+
+        fashionButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Fashion and Apparel");
+        });
+
+        applianceButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Home Appliances");
+        });
+        
         // Product Panel
         
         productPanel = new JPanel();
@@ -163,33 +186,41 @@ public class homePage extends JFrame {
         add(scrollPane);
     }
 
-    private JPanel createProduct(String name, String price) {
+    private JPanel createProduct(Product product) {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(200, 220));
-        panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        panel.setBorder(
+        BorderFactory.createLineBorder(Color.LIGHT_GRAY)
+    );
 
-        JLabel productName = new JLabel(name);
-        productName.setBounds(15, 25, 170, 30);
+        JLabel productName = new JLabel(product.getName());
+        productName.setBounds(15, 25, 185, 30);
         productName.setFont(new Font("Arial", Font.BOLD, 16));
         panel.add(productName);
 
-        JLabel productPrice = new JLabel(price);
-        productPrice.setBounds(15, 65, 170, 30);
+        JLabel productPrice = new JLabel(
+        String.format("₱%,.2f", product.getPrice())
+    );
+        productPrice.setBounds(15, 65, 185, 30);
         productPrice.setFont(new Font("Arial", Font.BOLD, 18));
         panel.add(productPrice);
 
+        JLabel productCategory = new JLabel(product.getCategory());
+        productCategory.setBounds(15, 95, 185, 20);
+        panel.add(productCategory);
+
         JButton orderButton = new JButton("Order");
-        orderButton.setBounds(15, 120, 80, 35);
+        orderButton.setBounds(15, 145, 80, 35);
         panel.add(orderButton);
 
         JButton addCartButton = new JButton("Add to Cart");
-        addCartButton.setBounds(100, 120, 90, 35);
+        addCartButton.setBounds(100, 145, 90, 35);
         panel.add(addCartButton);
 
-        return panel;
-    }
+    return panel;
+}
     
     private void displayProducts(String selectedCategory) {
 
@@ -200,6 +231,7 @@ public class homePage extends JFrame {
         if (selectedCategory.equals("All Categories")
                 || product.getCategory().equalsIgnoreCase(selectedCategory)) {
 
+            productPanel.add(createProduct(product));
         }
     }
 
