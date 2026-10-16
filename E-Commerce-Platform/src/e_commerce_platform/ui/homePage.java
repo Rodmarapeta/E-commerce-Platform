@@ -155,6 +155,8 @@ public class homePage extends JFrame {
         allProducts.add(new Product(8, "Keyboard", 1499.00, "Electronics"));
 
         // To Display all products initially
+
+        displayProducts("All Categories");
         
         JScrollPane scrollPane = new JScrollPane(productPanel);
         scrollPane.setBounds(25, 255, 950, 345);
@@ -189,5 +191,20 @@ public class homePage extends JFrame {
         return panel;
     }
     
+    private void displayProducts(String selectedCategory) {
+
+    productPanel.removeAll();
+
+    for (Product product : allProducts) {
+
+        if (selectedCategory.equals("All Categories")
+                || product.getCategory().equalsIgnoreCase(selectedCategory)) {
+
+        }
+    }
+
+    productPanel.revalidate();
+    productPanel.repaint();
+}
 
 }
