@@ -2,6 +2,9 @@ package e_commerce_platform.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import e_commerce_platform.Product;
 
 public class homePage extends JFrame {
 
@@ -10,9 +13,9 @@ public class homePage extends JFrame {
     private JPanel categoryPanel;
     private JPanel navigationPanel;
     private JPanel productPanel;
-
     private JComboBox<String> comboBox;
     private JTextField searchProduct;
+    private List<Product> allProducts = new ArrayList<>();
 
     private String[] allCat = {
         "All Categories",
@@ -142,23 +145,16 @@ public class homePage extends JFrame {
 
         // Mga Sample Product 
         
-        JPanel product1 = createProduct("Power Bank", "₱500");
-        JPanel product2 = createProduct("Smart Watch", "₱1,999");
-        JPanel product3 = createProduct("Laptop", "₱39,999");
-        JPanel product4 = createProduct("Headphones", "₱999");
-        JPanel product5 = createProduct("Iphone 14 Pro Max", "₱30,999");
-        JPanel product6 = createProduct("Charger", "₱1,499");
-        JPanel product7 = createProduct("Air Fryer", "₱2,799");
-        JPanel product8 = createProduct("Keyboard", "₱1,499");
+        allProducts.add(new Product(1, "Power Bank", 500.00, "Electronics"));
+        allProducts.add(new Product(2, "Smart Watch", 1999.00, "Electronics"));
+        allProducts.add(new Product(3, "Laptop", 39999.00, "Electronics"));
+        allProducts.add(new Product(4, "Headphones", 999.00, "Electronics"));
+        allProducts.add(new Product(5, "Iphone 14 Pro Max", 30999.00, "Electronics"));
+        allProducts.add(new Product(6, "Charger", 1499.00, "Electronics"));
+        allProducts.add(new Product(7, "Air Fryer", 2799.00, "Home Appliances"));
+        allProducts.add(new Product(8, "Keyboard", 1499.00, "Electronics"));
 
-        productPanel.add(product1);
-        productPanel.add(product2);
-        productPanel.add(product3);
-        productPanel.add(product4);
-        productPanel.add(product5);
-        productPanel.add(product6);
-        productPanel.add(product7);
-        productPanel.add(product8);
+        // To Display all products initially
         
         JScrollPane scrollPane = new JScrollPane(productPanel);
         scrollPane.setBounds(25, 255, 950, 345);
@@ -192,5 +188,6 @@ public class homePage extends JFrame {
 
         return panel;
     }
+    
 
 }
