@@ -94,6 +94,9 @@ public class homePage extends JFrame {
         JButton searchButton = new JButton("Search");
         searchButton.setBounds(640, 25, 90, 40);
         mainPanel.add(searchButton);
+        searchButton.addActionListener(e -> {
+        searchProducts();
+        });
 
         // My Account button
         JButton myAccountButton = new JButton("My Account");
@@ -231,6 +234,25 @@ public class homePage extends JFrame {
         if (selectedCategory.equals("All Categories")
                 || product.getCategory().equalsIgnoreCase(selectedCategory)) {
 
+            productPanel.add(createProduct(product));
+        }
+    }
+
+    productPanel.revalidate();
+    productPanel.repaint();
+}
+    
+    private void searchProducts() {
+
+    String keyword = searchProduct.getText()
+            .trim()
+            .toLowerCase();
+
+    productPanel.removeAll();
+
+    for (Product product : allProducts) {
+
+        if (product.getName().toLowerCase().contains(keyword)) {
             productPanel.add(createProduct(product));
         }
     }
