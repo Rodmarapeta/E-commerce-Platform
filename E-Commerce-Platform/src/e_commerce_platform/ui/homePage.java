@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import e_commerce_platform.Product;
+import e_commerce_platform.Cart;
 
 public class homePage extends JFrame {
 
@@ -16,6 +17,7 @@ public class homePage extends JFrame {
     private JComboBox<String> comboBox;
     private JTextField searchProduct;
     private List<Product> allProducts = new ArrayList<>();
+    Cart cart= new Cart();
 
     private String[] allCat = {
         "All Categories",
@@ -80,10 +82,7 @@ public class homePage extends JFrame {
         mainPanel.add(comboBox);
         
         comboBox.addActionListener(e -> {
-         String selectedCategory =
-        (String) comboBox.getSelectedItem();
-
-        displayProducts(selectedCategory);
+        searchProducts();
         });
 
         // Search bar ng mga product
@@ -221,6 +220,11 @@ public class homePage extends JFrame {
         JButton addCartButton = new JButton("Add to Cart");
         addCartButton.setBounds(100, 145, 90, 35);
         panel.add(addCartButton);
+        addCartButton.addActionListener( e ->{
+            cart.addProduct(product);
+            
+            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
+        });
 
     return panel;
 }
@@ -248,11 +252,24 @@ public class homePage extends JFrame {
             .trim()
             .toLowerCase();
 
+    String selectedCategory =
+            (String) comboBox.getSelectedItem();
+
     productPanel.removeAll();
 
     for (Product product : allProducts) {
 
-        if (product.getName().toLowerCase().contains(keyword)) {
+        boolean matchesCategory =
+                selectedCategory.equals("All Categories")
+                || product.getCategory()
+                        .equalsIgnoreCase(selectedCategory);
+
+        boolean matchesKeyword =
+                product.getName()
+                        .toLowerCase()
+                        .contains(keyword);
+
+        if (matchesCategory && matchesKeyword) {
             productPanel.add(createProduct(product));
         }
     }
