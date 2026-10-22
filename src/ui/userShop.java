@@ -1,4 +1,4 @@
-package e_commerce_platform.templates;
+package ui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

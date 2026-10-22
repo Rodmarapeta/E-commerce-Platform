@@ -1,4 +1,4 @@
-package e_commerce_platform.templates;
+package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +9,7 @@ public class inventory extends JFrame implements ActionListener {
     private JLabel lblName,lblId,lblPrice,lblQuantity,lblCategory;
     private JTextField txtId, txtName, txtPrice, txtQuantity, txtCategory;
     private JTable productTable;
+    private JButton btnAdd, btnUpdate , btnRemove, btnClear, btnSelect;
 
     public inventory() {
 
@@ -17,7 +18,6 @@ public class inventory extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
-
 
         lblId = new JLabel("Product ID:");
         lblId.setBounds(30, 30, 100, 25);
@@ -79,6 +79,7 @@ public class inventory extends JFrame implements ActionListener {
         btnSelect.setBounds(220, 280, 90, 30);
         add(btnSelect);
 
+        //make columns for product info
         String[] columns = {"ID", "Name", "Price", "Quantity", "Category"};
         productTable = new JTable(new Object[0][5], columns);
 
@@ -91,6 +92,14 @@ public class inventory extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
+        if (e.getSource() == btnAdd) {
+            int id = Integer.parseInt(txtId.getText());
+            String name = txtName.getText();
+            int price = Integer.parseInt(txtPrice.getText());
+            String quantity = txtQuantity.getText();
+            String category = txtCategory.getText();
+
+        }
 
     }
 

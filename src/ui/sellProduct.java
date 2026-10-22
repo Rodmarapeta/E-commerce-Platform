@@ -1,7 +1,6 @@
-package e_commerce_platform.templates;
+package ui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +19,7 @@ public class sellProduct extends JFrame implements ActionListener{
         setSize(800,800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setLayout(null);
@@ -72,6 +72,7 @@ public class sellProduct extends JFrame implements ActionListener{
         contentPane.add(sellProduct);
         contentPane.add(prdctQuantity);
 
+        sellProduct.addActionListener(this);
     }
 
     @Override
@@ -84,12 +85,13 @@ public class sellProduct extends JFrame implements ActionListener{
             String productQuantity = prdctQuantity.getText();
 
             if( productName.isEmpty()|| productId.isEmpty()|| productPrice.isEmpty()|| productCategory.isEmpty()|| productQuantity.isEmpty()){
-
+                JOptionPane.showMessageDialog(null, "Please fill all the fields");
             }
             else{
-
+                JOptionPane.showMessageDialog(null, "Product added to sell successfully");
             }
         }
+        else if (e.getSource() == mngeInventory){}
     }
 
     public static void main(String[] args) {
@@ -97,4 +99,7 @@ public class sellProduct extends JFrame implements ActionListener{
         sellProduct frame = new sellProduct();
         frame.setVisible(true);
     }
+
+
+
 }
