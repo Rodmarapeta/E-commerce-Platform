@@ -42,6 +42,11 @@ public class ShoppingCartPage extends JFrame {
         JLabel subtotalLabel = new JLabel("Subtotal");
         subtotalLabel.setBounds(650, 30, 100, 30);
         cartPanel.add(subtotalLabel);
+        
+        JLabel emptyCartLabel = new JLabel("Your shopping cart is empty.");
+        emptyCartLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        emptyCartLabel.setBounds(300, 150, 350, 30);
+        cartPanel.add(emptyCartLabel);
     }
         
     
