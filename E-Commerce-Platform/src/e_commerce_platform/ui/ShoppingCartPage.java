@@ -47,10 +47,17 @@ public class ShoppingCartPage extends JFrame {
         emptyCartLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         emptyCartLabel.setBounds(300, 150, 350, 30);
         cartPanel.add(emptyCartLabel);
+        
+        JLabel totalLabel = new JLabel("Total: PHP 0.00");
+        totalLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        totalLabel.setBounds(690, 480, 250, 40);
+        add(totalLabel);
+        
+        
     }
         
-    
-    
+   
+
     public static void main(String[] args) {
         ShoppingCartPage cart = new ShoppingCartPage();
         cart.setVisible(true);
