@@ -14,7 +14,7 @@ public class ShoppingCartPage extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Shopping Cart Title
+        
         JLabel titleLabel = new JLabel("Shopping Cart");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setBounds(30, 20, 300, 50);
