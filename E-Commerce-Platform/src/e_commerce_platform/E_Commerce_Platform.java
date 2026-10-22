@@ -14,6 +14,8 @@ public class E_Commerce_Platform {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        UserShop shop = new UserShop();
+        shop.displayShop();
         // TODO code application logic here
 
     }
