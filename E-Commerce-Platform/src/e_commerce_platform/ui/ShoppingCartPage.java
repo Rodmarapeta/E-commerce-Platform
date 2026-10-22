@@ -53,6 +53,17 @@ public class ShoppingCartPage extends JFrame {
         totalLabel.setBounds(690, 480, 250, 40);
         add(totalLabel);
         
+        JButton backButton = new JButton("Back to Shop");
+        backButton.setBounds(30, 30, 140, 35);
+        add(backButton);
+
+        JButton continueButton = new JButton("Continue Shopping");
+        continueButton.setBounds(30, 540, 180, 40);
+        add(continueButton);
+
+        JButton checkoutButton = new JButton("Proceed to Checkout");
+        checkoutButton.setBounds(740, 540, 200, 40);
+        add(checkoutButton);
         
     }
         
