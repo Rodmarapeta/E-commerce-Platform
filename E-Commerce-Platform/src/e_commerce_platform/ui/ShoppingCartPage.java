@@ -19,6 +19,15 @@ public class ShoppingCartPage extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setBounds(30, 20, 300, 50);
         add(titleLabel);
+        
+        
+        JPanel cartPanel = new JPanel();
+        cartPanel.setLayout(null);
+        cartPanel.setBounds(30, 100, 920, 350);
+        cartPanel.setBorder(
+        BorderFactory.createTitledBorder("Your Cart Items")
+      );
+        add(cartPanel);
     }
 
     public static void main(String[] args) {
