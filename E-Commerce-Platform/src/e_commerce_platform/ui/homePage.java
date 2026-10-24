@@ -2,6 +2,10 @@ package e_commerce_platform.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import e_commerce_platform.Product;
+import e_commerce_platform.Cart;
 
 public class homePage extends JFrame {
 
@@ -10,9 +14,10 @@ public class homePage extends JFrame {
     private JPanel categoryPanel;
     private JPanel navigationPanel;
     private JPanel productPanel;
-
     private JComboBox<String> comboBox;
     private JTextField searchProduct;
+    private List<Product> allProducts = new ArrayList<>();
+    Cart cart= new Cart();
 
     private String[] allCat = {
         "All Categories",
@@ -75,6 +80,10 @@ public class homePage extends JFrame {
         comboBox = new JComboBox<>(allCat);
         comboBox.setBounds(210, 25, 170, 40);
         mainPanel.add(comboBox);
+        
+        comboBox.addActionListener(e -> {
+        searchProducts();
+        });
 
         // Search bar ng mga product
         searchProduct = new JTextField();
@@ -84,6 +93,9 @@ public class homePage extends JFrame {
         JButton searchButton = new JButton("Search");
         searchButton.setBounds(640, 25, 90, 40);
         mainPanel.add(searchButton);
+        searchButton.addActionListener(e -> {
+        searchProducts();
+        });
 
         // My Account button
         JButton myAccountButton = new JButton("My Account");
@@ -135,6 +147,22 @@ public class homePage extends JFrame {
         applianceButton.setBounds(765, 10, 130, 35);
         categoryPanel.add(applianceButton);
         
+        electronicsButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Electronics");
+        });
+
+        kitchenButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Kitchen and Living");
+        });
+
+        fashionButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Fashion and Apparel");
+        });
+
+        applianceButton.addActionListener(e -> {
+        comboBox.setSelectedItem("Home Appliances");
+        });
+        
         // Product Panel
         
         productPanel = new JPanel();
@@ -142,55 +170,112 @@ public class homePage extends JFrame {
 
         // Mga Sample Product 
         
-        JPanel product1 = createProduct("Power Bank", "₱500");
-        JPanel product2 = createProduct("Smart Watch", "₱1,999");
-        JPanel product3 = createProduct("Laptop", "₱39,999");
-        JPanel product4 = createProduct("Headphones", "₱999");
-        JPanel product5 = createProduct("Iphone 14 Pro Max", "₱30,999");
-        JPanel product6 = createProduct("Charger", "₱1,499");
-        JPanel product7 = createProduct("Air Fryer", "₱2,799");
-        JPanel product8 = createProduct("Keyboard", "₱1,499");
+        allProducts.add(new Product(1, "Power Bank", 500.00, "Electronics"));
+        allProducts.add(new Product(2, "Smart Watch", 1999.00, "Electronics"));
+        allProducts.add(new Product(3, "Laptop", 39999.00, "Electronics"));
+        allProducts.add(new Product(4, "Headphones", 999.00, "Electronics"));
+        allProducts.add(new Product(5, "Iphone 14 Pro Max", 30999.00, "Electronics"));
+        allProducts.add(new Product(6, "Charger", 1499.00, "Electronics"));
+        allProducts.add(new Product(7, "Air Fryer", 2799.00, "Home Appliances"));
+        allProducts.add(new Product(8, "Keyboard", 1499.00, "Electronics"));
 
-        productPanel.add(product1);
-        productPanel.add(product2);
-        productPanel.add(product3);
-        productPanel.add(product4);
-        productPanel.add(product5);
-        productPanel.add(product6);
-        productPanel.add(product7);
-        productPanel.add(product8);
+        // To Display all products initially
+
+        displayProducts("All Categories");
         
         JScrollPane scrollPane = new JScrollPane(productPanel);
         scrollPane.setBounds(25, 255, 950, 345);
         add(scrollPane);
     }
 
-    private JPanel createProduct(String name, String price) {
+    private JPanel createProduct(Product product) {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(200, 220));
-        panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        panel.setBorder(
+        BorderFactory.createLineBorder(Color.LIGHT_GRAY)
+    );
 
-        JLabel productName = new JLabel(name);
-        productName.setBounds(15, 25, 170, 30);
+        JLabel productName = new JLabel(product.getName());
+        productName.setBounds(15, 25, 185, 30);
         productName.setFont(new Font("Arial", Font.BOLD, 16));
         panel.add(productName);
 
-        JLabel productPrice = new JLabel(price);
-        productPrice.setBounds(15, 65, 170, 30);
+        JLabel productPrice = new JLabel(
+        String.format("₱%,.2f", product.getPrice())
+    );
+        productPrice.setBounds(15, 65, 185, 30);
         productPrice.setFont(new Font("Arial", Font.BOLD, 18));
         panel.add(productPrice);
 
+        JLabel productCategory = new JLabel(product.getCategory());
+        productCategory.setBounds(15, 95, 185, 20);
+        panel.add(productCategory);
+
         JButton orderButton = new JButton("Order");
-        orderButton.setBounds(15, 120, 80, 35);
+        orderButton.setBounds(15, 145, 80, 35);
         panel.add(orderButton);
 
         JButton addCartButton = new JButton("Add to Cart");
-        addCartButton.setBounds(100, 120, 90, 35);
+        addCartButton.setBounds(100, 145, 90, 35);
         panel.add(addCartButton);
+        addCartButton.addActionListener( e ->{
+            cart.addProduct(product);
+            
+            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
+        });
 
-        return panel;
+    return panel;
+}
+    
+    private void displayProducts(String selectedCategory) {
+
+    productPanel.removeAll();
+
+    for (Product product : allProducts) {
+
+        if (selectedCategory.equals("All Categories")
+                || product.getCategory().equalsIgnoreCase(selectedCategory)) {
+
+            productPanel.add(createProduct(product));
+        }
     }
+
+    productPanel.revalidate();
+    productPanel.repaint();
+}
+    
+    private void searchProducts() {
+
+    String keyword = searchProduct.getText()
+            .trim()
+            .toLowerCase();
+
+    String selectedCategory =
+            (String) comboBox.getSelectedItem();
+
+    productPanel.removeAll();
+
+    for (Product product : allProducts) {
+
+        boolean matchesCategory =
+                selectedCategory.equals("All Categories")
+                || product.getCategory()
+                        .equalsIgnoreCase(selectedCategory);
+
+        boolean matchesKeyword =
+                product.getName()
+                        .toLowerCase()
+                        .contains(keyword);
+
+        if (matchesCategory && matchesKeyword) {
+            productPanel.add(createProduct(product));
+        }
+    }
+
+    productPanel.revalidate();
+    productPanel.repaint();
+}
 
 }
