@@ -96,9 +96,21 @@ public class inventory extends JFrame implements ActionListener {
             int id = Integer.parseInt(txtId.getText());
             String name = txtName.getText();
             int price = Integer.parseInt(txtPrice.getText());
-            String quantity = txtQuantity.getText();
+            int quantity = Integer.parseInt(txtQuantity.getText());
             String category = txtCategory.getText();
 
+        }
+        else if (e.getSource() == btnUpdate) {
+            int id = Integer.parseInt(txtId.getText());
+        }
+        else if (e.getSource() == btnRemove) {
+            int id = Integer.parseInt(txtId.getText());
+        }
+        else if (e.getSource() == btnClear) {
+            txtId.setText("");
+            txtName.setText("");
+            txtPrice.setText("");
+            txtQuantity.setText("");
         }
 
     }

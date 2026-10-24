@@ -56,19 +56,24 @@ public class userProfilePage extends JFrame implements ActionListener{
 
         backButton.addActionListener(this);
         cartButton.addActionListener(this);
+        shopButton.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
 
-        if (e.getSource()==backButton){
+        if (e.getSource()== backButton){
             homePage home = new homePage();
             home.setVisible(true);
             this.dispose();
         }
-        else if(e.getSource()==cartButton){
+        else if(e.getSource()== cartButton){
             ShoppingCartPage chinesebaddie = new ShoppingCartPage();
             chinesebaddie.setVisible(true);
+            this.dispose();
+        } else if (e.getSource()== shopButton) {
+            userShop Mobailegends = new userShop();
+            Mobailegends.setVisible(true);
             this.dispose();
         }
     }

@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 public class ShoppingCartPage extends JFrame implements ActionListener {
 
     private JPanel cartPanel;
-    private JButton backbtn;
+    private JButton backbtn, continueButton, checkoutButton;
+    private JLabel productLabel, priceLabel, quantityLabel, subtotalLabel, emptyCartLabel, totalLabel;
 
     public ShoppingCartPage() {
 
@@ -27,7 +28,7 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         backbtn.setBounds(800, 35, 150, 30);
         add(backbtn);
 
-        JPanel cartPanel = new JPanel();
+        cartPanel = new JPanel();
         cartPanel.setLayout(null);
         cartPanel.setBounds(30, 100, 920, 350);
         cartPanel.setBorder(
@@ -35,36 +36,45 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         );
         add(cartPanel);
 
-        JLabel productLabel = new JLabel("Product");
+        productLabel = new JLabel("Product");
         productLabel.setBounds(30, 30, 150, 30);
         cartPanel.add(productLabel);
 
-        JLabel priceLabel = new JLabel("Price");
+        priceLabel = new JLabel("Price");
         priceLabel.setBounds(350, 30, 100, 30);
         cartPanel.add(priceLabel);
 
-        JLabel quantityLabel = new JLabel("Quantity");
+        quantityLabel = new JLabel("Quantity");
         quantityLabel.setBounds(500, 30, 100, 30);
         cartPanel.add(quantityLabel);
 
-        JLabel subtotalLabel = new JLabel("Subtotal");
+        subtotalLabel = new JLabel("Subtotal");
         subtotalLabel.setBounds(650, 30, 100, 30);
         cartPanel.add(subtotalLabel);
 
-        JLabel emptyCartLabel = new JLabel("Your shopping cart is empty.");
+        emptyCartLabel = new JLabel("Your shopping cart is empty.");
         emptyCartLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         emptyCartLabel.setBounds(300, 150, 350, 30);
         cartPanel.add(emptyCartLabel);
 
-        JLabel totalLabel = new JLabel("Total: PHP 0.00");
+        totalLabel = new JLabel("Total: PHP 0.00");
         totalLabel.setFont(new Font("Arial", Font.BOLD, 20));
         totalLabel.setBounds(690, 480, 250, 40);
         add(totalLabel);
 
+        continueButton = new JButton("Continue Shopping");
+        continueButton.setBounds(30, 540, 180, 40);
+        add(continueButton);
+
+        checkoutButton = new JButton("Proceed to Checkout");
+        checkoutButton.setBounds(740, 540, 200, 40);
+        add(checkoutButton);
+
 
         //addtoactionlistener
         backbtn.addActionListener(this);
-
+        continueButton.addActionListener(this);
+        checkoutButton.addActionListener(this);
 
     }
 
@@ -75,7 +85,10 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
             japanese.setVisible(true);
             this.dispose();
         }
-        else if (e.getSource()== backbtn) {
+        else if (e.getSource()== continueButton) {
+            homePage baddies  = new homePage();
+            baddies.setVisible(true);
+            this.dispose();
 
         }
     }

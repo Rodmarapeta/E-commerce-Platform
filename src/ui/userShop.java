@@ -1,57 +1,86 @@
 package ui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class userShop extends JFrame implements ActionListener {
 
-    private JPanel usershoppane;
-    private JLabel myshop;
-    private JButton backbtn, addproduct, removeproduct,
-            shopOrders, sales, inventoryReport, manageinventory;
+    private JLabel headerTitle, nameLabel, locationLabel;
+    private JButton backButton, shopButton, salesButton,
+            ordersButton, accountButton, reportsButton, inventoryButton;
 
     public userShop() {
 
-        setTitle("USER SHOP");
+        setTitle("Shop Owner Dashboard");
+        setSize(800, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(null);
-        setSize(800,800);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
 
-        usershoppane = new JPanel();
-        usershoppane.setLayout(null);
-        usershoppane.setBounds(0,0,800,800);
-        add(usershoppane);
+        headerTitle = new JLabel("SHOP OWNER PORTAL");
+        headerTitle.setBounds(30, 20, 300, 30);
+        add(headerTitle);
 
-        myshop = new JLabel("MY SHOP");
-        myshop.setBounds(10, 10, 300, 30);
+        backButton = new JButton("Back");
+        backButton.setBounds(650, 18, 100, 35);
+        add(backButton);
 
-        backbtn = new JButton("Back");
-        backbtn.setBounds(680, 10, 100, 30);
+        nameLabel = new JLabel("Welcome, Name");
+        nameLabel.setBounds(35, 75, 500, 25);
+        add(nameLabel);
 
-        manageinventory = new JButton("Manage Inventory");
-        manageinventory.setBounds(680, 10, 100, 30);
+        locationLabel = new JLabel("Location: Location of user");
+        locationLabel.setBounds(35, 100, 500, 20);
+        add(locationLabel);
 
-        //styles
+        shopButton = new JButton("Sell Items");
+        shopButton.setBounds(30, 155, 720, 100);
+        add(shopButton);
 
-        //add gui
-        usershoppane.add(myshop);
-        usershoppane.add(backbtn);
-        usershoppane.add(manageinventory);
+        salesButton = new JButton("Generate Sales");
+        salesButton.setBounds(30, 275, 350, 130);
+        add(salesButton);
 
-        //
-        backbtn.addActionListener(this);
+        ordersButton = new JButton("Manage Orders");
+        ordersButton.setBounds(400, 275, 350, 130);
+        add(ordersButton);
 
+        inventoryButton = new JButton("Manage Inventory");
+        inventoryButton.setBounds(30, 420, 350, 130);
+        add(inventoryButton);
+
+        reportsButton = new JButton("Inventory Reports");
+        reportsButton.setBounds(400, 420, 350, 130);
+        add(reportsButton);
+
+        accountButton = new JButton("My Account Settings");
+        accountButton.setBounds(30, 575, 720, 75);
+        add(accountButton);
+
+        //add to actionlistener
+        backButton.addActionListener(this);
+        reportsButton.addActionListener(this);
+        shopButton.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
 
-        if (e.getSource()==backbtn){
-            
+        if (e.getSource()== backButton){
             userProfilePage userpPro = new userProfilePage();
             userpPro.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource()== reportsButton) {
+            inventoryReport valorant = new inventoryReport();
+            valorant.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource() == shopButton) {
+            sellProduct gooditembusseng = new sellProduct();
+            gooditembusseng.setVisible(true);
             this.dispose();
         }
 

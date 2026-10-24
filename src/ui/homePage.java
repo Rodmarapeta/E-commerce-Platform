@@ -14,10 +14,10 @@ public class homePage extends JFrame implements ActionListener {
     private JPanel productPanel;
     private JButton myAccountButton, cartButton, supportButton, searchButton, backButton, orderButton, addCartButton;
 
-    private JComboBox<String> comboBox;
+    public JComboBox<String> comboBox;
     private JTextField searchProduct;
 
-    private String[] allCat = {
+    public String[] allCat = {
             "All Categories",
             "Electronics",
             "Kitchen and Living",
@@ -224,6 +224,9 @@ public class homePage extends JFrame implements ActionListener {
 
         }
         else if (e.getSource()== addCartButton) {
+
+        }
+        else if (e.getSource()== productPanel) {
 
         }
 

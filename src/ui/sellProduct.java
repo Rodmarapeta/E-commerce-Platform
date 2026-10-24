@@ -9,8 +9,21 @@ public class sellProduct extends JFrame implements ActionListener{
     JPanel contentPane;
     JLabel productName, productId, productPrice, productcategory, productQuantity;
     JTextField prdctName, prdctPrice, prdctCategory, prdctId, prdctQuantity;
-    JComboBox prdctcategory;
-    JButton sellProduct, mngeInventory;
+    public JComboBox<String> comboBox;
+    JButton sellProduct, mngeInventory, backButton;
+
+    public String[] allCat = {
+            "All Categories",
+            "Electronics",
+            "Kitchen and Living",
+            "Fashion and Apparel",
+            "Home Appliances",
+            "Personal Care",
+            "Groceries and Supermarket",
+            "Hardware",
+            "Hobbies",
+            "Sport and Outdoor"
+    };
 
     public sellProduct() {
 
@@ -20,6 +33,10 @@ public class sellProduct extends JFrame implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
+
+        backButton = new JButton("Back");
+        backButton.setBounds(680, 20, 100, 30);
+        add(backButton);
 
         contentPane = new JPanel();
         contentPane.setLayout(null);
@@ -39,7 +56,9 @@ public class sellProduct extends JFrame implements ActionListener{
         prdctQuantity = new JTextField();
 
         productcategory = new JLabel("Product Category: ");
-        prdctCategory = new JTextField();
+        comboBox = new JComboBox<>(allCat);
+        comboBox.setBounds(80, 340, 350, 40);
+        add(comboBox);
 
         sellProduct = new JButton("Sell Product");
 
@@ -57,7 +76,6 @@ public class sellProduct extends JFrame implements ActionListener{
         prdctQuantity.setBounds(220, 275, 350, 40);
 
         productcategory.setBounds(80, 340, 130, 40);
-        prdctCategory.setBounds(220, 340, 350, 40);
 
         sellProduct.setBounds(150, 620, 500, 50);
 
@@ -65,14 +83,15 @@ public class sellProduct extends JFrame implements ActionListener{
         contentPane.add(productId);
         contentPane.add(productPrice);
         contentPane.add(productcategory);
+        contentPane.add(productQuantity);
         contentPane.add(prdctName);
         contentPane.add(prdctPrice);
-        contentPane.add(prdctCategory);
         contentPane.add(prdctId);
         contentPane.add(sellProduct);
         contentPane.add(prdctQuantity);
 
         sellProduct.addActionListener(this);
+        backButton.addActionListener(this);
     }
 
     @Override
@@ -91,15 +110,15 @@ public class sellProduct extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Product added to sell successfully");
             }
         }
-        else if (e.getSource() == mngeInventory){}
+        else if (e.getSource() == backButton){
+            userShop shop = new userShop();
+            shop.setVisible(true);
+            this.dispose();
+        }
     }
 
     public static void main(String[] args) {
-
         sellProduct frame = new sellProduct();
         frame.setVisible(true);
     }
-
-
-
 }
