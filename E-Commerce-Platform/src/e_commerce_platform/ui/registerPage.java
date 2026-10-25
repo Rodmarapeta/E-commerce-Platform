@@ -11,7 +11,7 @@ public class registerPage extends JFrame implements ActionListener {
     private JPasswordField txtPassword, txtConfirmPassword;
     private JButton btnRegister, btnBack;
 
-    registerPage() {
+    public registerPage() {
 
         setTitle("E-Commerce Platform - Register");
         setSize(1000, 650);
@@ -82,26 +82,26 @@ public class registerPage extends JFrame implements ActionListener {
                     || password.isEmpty() || confirmPassword.isEmpty()) {
 
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Please complete all fields",
-                    "Input Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "Please complete all fields",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
 
             } else if (!password.equals(confirmPassword)) {
 
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Passwords do not match",
-                    "Input Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "Passwords do not match",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
 
             } else {
 
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Registration successful"
+                        this,
+                        "Registration successful"
                 );
             }
 

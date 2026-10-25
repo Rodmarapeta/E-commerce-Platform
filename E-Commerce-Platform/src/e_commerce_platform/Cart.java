@@ -13,30 +13,30 @@ import java.util.List;
  */
 
 public class Cart {
-    
+
     private List<Product> cartProducts = new ArrayList<>();
-    
+
     public void addProduct(Product product){
         cartProducts.add(product);
     }
-    
+
     public List<Product> getCartProducts(){
         return cartProducts;
     }
-    
+
     public void removeProduct(Product product){
         cartProducts.remove(product);
     }
-    
+
     public double getTotalPrice(){
         double total = 0;
-        
+
         for(Product product: cartProducts){
             total += product.getPrice();
         }
         return total;
     }
-    
+
     public void clearCart(){
         cartProducts.clear();
     }
