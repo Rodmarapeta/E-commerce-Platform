@@ -63,6 +63,7 @@ public class userShop extends JFrame implements ActionListener {
         backButton.addActionListener(this);
         reportsButton.addActionListener(this);
         shopButton.addActionListener(this);
+        inventoryButton.addActionListener(this);
     }
 
     @Override
@@ -81,6 +82,10 @@ public class userShop extends JFrame implements ActionListener {
         else if (e.getSource() == shopButton) {
             sellProduct gooditembusseng = new sellProduct();
             gooditembusseng.setVisible(true);
+            this.dispose();
+        } else if (e.getSource() == inventoryButton) {
+            inventory baihubi = new inventory();
+            baihubi.setVisible(true);
             this.dispose();
         }
 

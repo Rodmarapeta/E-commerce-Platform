@@ -9,7 +9,8 @@ public class inventory extends JFrame implements ActionListener {
     private JLabel lblName,lblId,lblPrice,lblQuantity,lblCategory;
     private JTextField txtId, txtName, txtPrice, txtQuantity, txtCategory;
     private JTable productTable;
-    private JButton btnAdd, btnUpdate , btnRemove, btnClear, btnSelect;
+    private JButton btnback, btnAdd, btnUpdate , btnRemove, btnClear, btnSelect;
+    JScrollPane scrollPane;
 
     public inventory() {
 
@@ -19,74 +20,84 @@ public class inventory extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setLayout(null);
 
+        btnback = new JButton("Back");
+        btnback.setBounds(710, 20, 100, 30);
+        add(btnback);
+
         lblId = new JLabel("Product ID:");
-        lblId.setBounds(30, 30, 100, 25);
+        lblId.setBounds(30, 80, 100, 25);
         add(lblId);
 
         txtId = new JTextField();
-        txtId.setBounds(130, 30, 180, 25);
+        txtId.setBounds(130, 80, 180, 25);
         add(txtId);
 
         lblName = new JLabel("Product Name:");
-        lblName.setBounds(30, 70, 100, 25);
+        lblName.setBounds(30, 120, 100, 25);
         add(lblName);
 
         txtName = new JTextField();
-        txtName.setBounds(130, 70, 180, 25);
+        txtName.setBounds(130, 120, 180, 25);
         add(txtName);
 
         lblPrice = new JLabel("Price:");
-        lblPrice.setBounds(30, 110, 100, 25);
+        lblPrice.setBounds(30, 160, 100, 25);
         add(lblPrice);
 
         txtPrice = new JTextField();
-        txtPrice.setBounds(130, 110, 180, 25);
+        txtPrice.setBounds(130, 160, 180, 25);
         add(txtPrice);
 
         lblQuantity = new JLabel("Quantity:");
-        lblQuantity.setBounds(30, 150, 100, 25);
+        lblQuantity.setBounds(30, 200, 100, 25);
         add(lblQuantity);
 
         txtQuantity = new JTextField();
-        txtQuantity.setBounds(130, 150, 180, 25);
+        txtQuantity.setBounds(130, 200, 180, 25);
         add(txtQuantity);
 
         lblCategory = new JLabel("Category:");
-        lblCategory.setBounds(30, 190, 100, 25);
+        lblCategory.setBounds(30, 240, 100, 25);
         add(lblCategory);
 
         txtCategory = new JTextField();
-        txtCategory.setBounds(130, 190, 180, 25);
+        txtCategory.setBounds(130, 240, 180, 25);
         add(txtCategory);
 
-        JButton btnAdd = new JButton("Add");
-        btnAdd.setBounds(30, 240, 80, 30);
+        btnAdd = new JButton("Add");
+        btnAdd.setBounds(30, 290, 80, 30);
         add(btnAdd);
 
-        JButton btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(120, 240, 90, 30);
+        btnUpdate = new JButton("Update");
+        btnUpdate.setBounds(120, 290, 90, 30);
         add(btnUpdate);
 
-        JButton btnRemove = new JButton("Remove");
-        btnRemove.setBounds(220, 240, 90, 30);
+        btnRemove = new JButton("Remove");
+        btnRemove.setBounds(220, 290, 90, 30);
         add(btnRemove);
 
-        JButton btnClear = new JButton("Clear");
-        btnClear.setBounds(120, 280, 90, 30);
+        btnClear = new JButton("Clear");
+        btnClear.setBounds(120, 330, 90, 30);
         add(btnClear);
 
-        JButton btnSelect = new JButton("Select");
-        btnSelect.setBounds(220, 280, 90, 30);
+        btnSelect = new JButton("Select");
+        btnSelect.setBounds(220, 330, 90, 30);
         add(btnSelect);
 
         //make columns for product info
         String[] columns = {"ID", "Name", "Price", "Quantity", "Category"};
         productTable = new JTable(new Object[0][5], columns);
 
-        JScrollPane scrollPane = new JScrollPane(productTable);
-        scrollPane.setBounds(340, 30, 460, 430);
+        scrollPane = new JScrollPane(productTable);
+        scrollPane.setBounds(340, 80, 470, 430);
         add(scrollPane);
 
+        btnback.addActionListener(this);
+        btnAdd.addActionListener(this);
+        btnUpdate.addActionListener(this);
+        btnRemove.addActionListener(this);
+        btnClear.addActionListener(this);
+        btnSelect.addActionListener(this);
 
     }
 
@@ -111,6 +122,14 @@ public class inventory extends JFrame implements ActionListener {
             txtName.setText("");
             txtPrice.setText("");
             txtQuantity.setText("");
+        }
+        else if (e.getSource() == btnSelect) {
+
+        }
+        else if (e.getSource() == btnback) {
+            userShop blonde  = new userShop();
+            blonde.setVisible(true);
+            this.dispose();
         }
 
     }
