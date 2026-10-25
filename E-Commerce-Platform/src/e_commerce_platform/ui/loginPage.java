@@ -1,4 +1,4 @@
-package ui;
+package e_commerce_platform.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

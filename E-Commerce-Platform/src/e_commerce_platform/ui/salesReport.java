@@ -1,8 +1,6 @@
-package ui;
+package e_commerce_platform.ui;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class salesReport extends JFrame {

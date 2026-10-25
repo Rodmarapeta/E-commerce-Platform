@@ -1,4 +1,4 @@
-import ui.registerPage;
+import e_commerce_platform.ui.registerPage;
 
 public class E_Commerce_Platform {
 

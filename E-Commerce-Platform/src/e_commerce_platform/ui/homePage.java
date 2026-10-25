@@ -1,4 +1,7 @@
-package ui;
+package e_commerce_platform.ui;
+
+import e_commerce_platform.Cart;
+import e_commerce_platform.Product;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import ui.Product;
-import ui.Cart;
 
 public class homePage extends JFrame implements ActionListener {
 

@@ -1,6 +1,5 @@
-package ui;
+package e_commerce_platform.ui;
 
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
