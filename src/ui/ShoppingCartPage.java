@@ -89,7 +89,6 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
             homePage baddies  = new homePage();
             baddies.setVisible(true);
             this.dispose();
-
         }
     }
 
