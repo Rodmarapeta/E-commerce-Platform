@@ -57,6 +57,7 @@ public class userProfilePage extends JFrame implements ActionListener{
         backButton.addActionListener(this);
         cartButton.addActionListener(this);
         shopButton.addActionListener(this);
+        addressButton.addActionListener(this);
     }
 
     @Override
@@ -71,9 +72,15 @@ public class userProfilePage extends JFrame implements ActionListener{
             ShoppingCartPage chinesebaddie = new ShoppingCartPage();
             chinesebaddie.setVisible(true);
             this.dispose();
-        } else if (e.getSource()== shopButton) {
+        }
+        else if (e.getSource()== shopButton) {
             userShop Mobailegends = new userShop();
             Mobailegends.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource() == addressButton) {
+            deliveryAddressPage addressPage = new deliveryAddressPage();
+            addressPage.setVisible(true);
             this.dispose();
         }
     }

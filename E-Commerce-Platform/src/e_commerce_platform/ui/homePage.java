@@ -1,7 +1,7 @@
 package e_commerce_platform.ui;
 
-import e_commerce_platform.Cart;
-import e_commerce_platform.Product;
+import e_commerce_platform.nonUIclass.Product;
+import e_commerce_platform.nonUIclass.Cart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +38,7 @@ public class homePage extends JFrame implements ActionListener {
     homePage() {
 
         setTitle("E-Commerce Platform - Home");
-        setSize(1000, 650);
+        setSize(1020, 650);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

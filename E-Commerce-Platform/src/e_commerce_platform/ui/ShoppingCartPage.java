@@ -90,6 +90,11 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
             baddies.setVisible(true);
             this.dispose();
         }
+        else if (e.getSource() == checkoutButton) {
+            checkoutPage checkout = new checkoutPage();
+            checkout.setVisible(true);
+            this.dispose();
+        }
     }
 
 
