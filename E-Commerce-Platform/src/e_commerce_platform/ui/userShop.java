@@ -96,7 +96,9 @@ public class userShop extends JFrame implements ActionListener {
             this.dispose();
         }
         else if (e.getSource() == ordersButton) {
-
+            orderhistory a = new orderhistory();
+            a.setVisible(true);
+            this.dispose();
         }
 
 

@@ -194,6 +194,8 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.addActionListener(this);
         cartButton.addActionListener(this);
         searchButton.addActionListener(this);
+        trackOrderButton.addActionListener(this);
+
     }
 
     JPanel panel;
@@ -312,6 +314,11 @@ public class homePage extends JFrame implements ActionListener {
         }
         else if (e.getSource()== productPanel) {
 
+        }
+        else if (e.getSource() == trackOrderButton) {
+            userTrackOrder b = new userTrackOrder();
+            b.setVisible(true);
+            this.dispose();
         }
 
     }
