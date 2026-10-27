@@ -11,7 +11,7 @@ public class loginPage extends JFrame implements ActionListener {
     private JPasswordField txtPassword;
     private JButton btnLogin, btnSignUp;
 
-    loginPage() {
+    public loginPage() {
 
         setTitle("E-Commerce Platform - Login");
         setSize(1000, 650);
@@ -61,24 +61,24 @@ public class loginPage extends JFrame implements ActionListener {
 
         if (e.getSource() == btnLogin) {
 
-          String email = txtEmail.getText();
-          String password = new String(txtPassword.getPassword());
+            String email = txtEmail.getText();
+            String password = new String(txtPassword.getPassword());
 
-         if (!email.isEmpty() && !password.isEmpty()) {
+            if (!email.isEmpty() && !password.isEmpty()) {
 
-           homePage home = new homePage();
-           home.setVisible(true);
-           this.dispose();
+                homePage home = new homePage();
+                home.setVisible(true);
+                this.dispose();
 
-          } else {
+            } else {
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Please enter email and password first",
-            "Input Error",
-            JOptionPane.ERROR_MESSAGE
-        );
-    }
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Please enter email and password first",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
 
         } else if (e.getSource() == btnSignUp) {
 

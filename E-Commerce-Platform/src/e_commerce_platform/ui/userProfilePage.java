@@ -1,52 +1,86 @@
 package e_commerce_platform.ui;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
-public class userProfilePage extends JFrame  {
 
-    private JLabel lblTitle, lblUsername, lblEmail;
-    private JTextField txtUsername, txtEmail;
-    private JButton btnSave, btnBack;
+public class userProfilePage extends JFrame implements ActionListener{
 
-    userProfilePage() {
+    private JLabel nameLabel, locationLabel;
+    private JButton backButton, cartButton, orderButton, reviewsButton, shopButton, addressButton, accountButton;
 
-        setTitle("E-Commerce Platform - User Profile");
-        setSize(1000, 650);
-        setLayout(null);
+    public userProfilePage() {
+
+        setTitle("Profile Page");
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(null);
 
-        lblTitle = new JLabel("User Profile");
-        lblTitle.setBounds(350, 80, 400, 60);
-        lblTitle.setFont(lblTitle.getFont().deriveFont(28f));
-        add(lblTitle);
+        nameLabel = new JLabel("Name");
+        nameLabel.setBounds(55, 42, 470, 25);
+        add(nameLabel);
 
-        lblUsername = new JLabel("Username:");
-        lblUsername.setBounds(300, 190, 100, 30);
-        add(lblUsername);
+        locationLabel = new JLabel("Location of user");
+        locationLabel.setBounds(55, 70, 470, 25);
+        add(locationLabel);
 
-        txtUsername = new JTextField();
-        txtUsername.setBounds(400, 190, 300, 35);
-        add(txtUsername);
+        backButton = new JButton("Back to Home Page");
+        backButton.setBounds(460, 30, 300, 30);
+        add(backButton);
 
-        lblEmail = new JLabel("Email:");
-        lblEmail.setBounds(300, 250, 100, 30);
-        add(lblEmail);
+        cartButton = new JButton("My Cart");
+        cartButton.setBounds(40, 150, 340, 160);
+        add(cartButton);
 
-        txtEmail = new JTextField();
-        txtEmail.setBounds(400, 250, 300, 35);
-        add(txtEmail);
+        orderButton = new JButton("My Order");
+        orderButton.setBounds(420, 150, 340, 160);
+        add(orderButton);
 
-        btnSave = new JButton("Save Changes");
-        btnSave.setBounds(300, 330, 400, 45);
-        add(btnSave);
+        reviewsButton = new JButton("My reviews");
+        reviewsButton.setBounds(40, 340, 340, 160);
+        add(reviewsButton);
 
-        btnBack = new JButton("Back to Home");
-        btnBack.setBounds(400, 400, 200, 40);
-        add(btnBack);
+        shopButton = new JButton("Manage My shop");
+        shopButton.setBounds(420, 340, 340, 160);
+        add(shopButton);
 
+        addressButton = new JButton("Delivery address");
+        addressButton.setBounds(40, 530, 340, 160);
+        add(addressButton);
+
+        accountButton = new JButton("My account");
+        accountButton.setBounds(420, 530, 340, 160);
+        add(accountButton);
+
+        backButton.addActionListener(this);
+        cartButton.addActionListener(this);
+        shopButton.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+
+        if (e.getSource()== backButton){
+            homePage home = new homePage();
+            home.setVisible(true);
+            this.dispose();
+        }
+        else if(e.getSource()== cartButton){
+            ShoppingCartPage chinesebaddie = new ShoppingCartPage();
+            chinesebaddie.setVisible(true);
+            this.dispose();
+        } else if (e.getSource()== shopButton) {
+            userShop Mobailegends = new userShop();
+            Mobailegends.setVisible(true);
+            this.dispose();
+        }
+    }
+
+    public static void main(String[] args){
+        userProfilePage lol = new userProfilePage();
+        lol.setVisible(true);
     }
 
 }

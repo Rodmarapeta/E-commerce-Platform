@@ -1,35 +1,38 @@
 package e_commerce_platform.ui;
 
+import e_commerce_platform.Cart;
+import e_commerce_platform.Product;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import e_commerce_platform.Product;
-import e_commerce_platform.Cart;
 
-public class homePage extends JFrame {
+public class homePage extends JFrame implements ActionListener {
 
-    private JPanel upperPanel;
-    private JPanel mainPanel;
-    private JPanel categoryPanel;
-    private JPanel navigationPanel;
-    private JPanel productPanel;
+    private JLabel shippingLabel, returnLabel, warrantyLabel, storeLabel, categoryLabel;
+    private JPanel upperPanel, mainPanel, categoryPanel, productPanel;
+    private JButton myAccountButton, cartButton, supportButton, trackOrderButton,
+                    searchButton, backButton, homeButton, shopButton, electronicsButton, kitchenButton,
+                    fashionButton, applianceButton;
     private JComboBox<String> comboBox;
     private JTextField searchProduct;
     private List<Product> allProducts = new ArrayList<>();
     Cart cart= new Cart();
 
     private String[] allCat = {
-        "All Categories",
-        "Electronics",
-        "Kitchen and Living",
-        "Fashion and Apparel",
-        "Home Appliances",
-        "Personal Care",
-        "Groceries and Supermarket",
-        "Hardware",
-        "Hobbies",
-        "Sport and Outdoor"
+            "All Categories",
+            "Electronics",
+            "Kitchen and Living",
+            "Fashion and Apparel",
+            "Home Appliances",
+            "Personal Care",
+            "Groceries and Supermarket",
+            "Hardware",
+            "Hobbies",
+            "Sport and Outdoor"
     };
 
     homePage() {
@@ -45,23 +48,23 @@ public class homePage extends JFrame {
         upperPanel.setBounds(0, 0, 1000, 70);
         add(upperPanel);
 
-        JLabel shippingLabel = new JLabel("Free Shipping on Orders over 500");
+        shippingLabel = new JLabel("Free Shipping on Orders over 500");
         shippingLabel.setBounds(25, 15, 220, 30);
         upperPanel.add(shippingLabel);
 
-        JLabel returnLabel = new JLabel("30 days easy returns");
+        returnLabel = new JLabel("30 days easy returns");
         returnLabel.setBounds(300, 15, 180, 30);
         upperPanel.add(returnLabel);
 
-        JLabel warrantyLabel = new JLabel("1 Year Warranty");
+        warrantyLabel = new JLabel("1 Year Warranty");
         warrantyLabel.setBounds(520, 15, 150, 30);
         upperPanel.add(warrantyLabel);
 
-        JButton supportButton = new JButton("Support");
+        supportButton = new JButton("Support");
         supportButton.setBounds(730, 15, 100, 30);
         upperPanel.add(supportButton);
 
-        JButton trackOrderButton = new JButton("Track Order");
+        trackOrderButton = new JButton("Track Order");
         trackOrderButton.setBounds(835, 15, 120, 30);
         upperPanel.add(trackOrderButton);
 
@@ -70,8 +73,8 @@ public class homePage extends JFrame {
         mainPanel.setBounds(0, 70, 1000, 125);
         add(mainPanel);
 
-        // Store name 
-        JLabel storeLabel = new JLabel("Store");
+        // Store name
+        storeLabel = new JLabel("Store");
         storeLabel.setBounds(25, 20, 180, 60);
         storeLabel.setFont(new Font("Arial", Font.BOLD, 40));
         mainPanel.add(storeLabel);
@@ -80,9 +83,9 @@ public class homePage extends JFrame {
         comboBox = new JComboBox<>(allCat);
         comboBox.setBounds(210, 25, 170, 40);
         mainPanel.add(comboBox);
-        
+
         comboBox.addActionListener(e -> {
-        searchProducts();
+            searchProducts();
         });
 
         // Search bar ng mga product
@@ -90,86 +93,86 @@ public class homePage extends JFrame {
         searchProduct.setBounds(380, 25, 260, 40);
         mainPanel.add(searchProduct);
 
-        JButton searchButton = new JButton("Search");
+        searchButton = new JButton("Search");
         searchButton.setBounds(640, 25, 90, 40);
         mainPanel.add(searchButton);
         searchButton.addActionListener(e -> {
-        searchProducts();
+            searchProducts();
         });
 
         // My Account button
-        JButton myAccountButton = new JButton("My Account");
+        myAccountButton = new JButton("My Account");
         myAccountButton.setBounds(740, 25, 110, 40);
         mainPanel.add(myAccountButton);
 
         // Back button
-        JButton backButton = new JButton("Back");
+        backButton = new JButton("Back");
         backButton.setBounds(855, 25, 80, 40);
         mainPanel.add(backButton);
 
         // Cart button
-        JButton cartButton = new JButton("Cart");
+        cartButton = new JButton("Cart");
         cartButton.setBounds(935, 25, 60, 40);
         mainPanel.add(cartButton);
-        
-        // Category Panel 
-        
+
+        // Category Panel
+
         categoryPanel = new JPanel();
         categoryPanel.setLayout(null);
         categoryPanel.setBounds(0, 195, 1000, 55);
         add(categoryPanel);
 
-        JButton homeButton = new JButton("Home");
+        homeButton = new JButton("Home");
         homeButton.setBounds(30, 10, 90, 35);
         categoryPanel.add(homeButton);
 
-        JButton shopButton = new JButton("Shop");
+        shopButton = new JButton("Shop");
         shopButton.setBounds(130, 10, 90, 35);
         categoryPanel.add(shopButton);
 
-        JLabel categoryLabel = new JLabel("Categories:");
+        categoryLabel = new JLabel("Categories:");
         categoryLabel.setBounds(250, 10, 90, 35);
         categoryPanel.add(categoryLabel);
 
-        JButton electronicsButton = new JButton("Electronics");
+        electronicsButton = new JButton("Electronics");
         electronicsButton.setBounds(340, 10, 110, 35);
         categoryPanel.add(electronicsButton);
 
-        JButton kitchenButton = new JButton("Kitchen and Living");
+        kitchenButton = new JButton("Kitchen and Living");
         kitchenButton.setBounds(455, 10, 150, 35);
         categoryPanel.add(kitchenButton);
 
-        JButton fashionButton = new JButton("Fashion and Apparel");
+        fashionButton = new JButton("Fashion and Apparel");
         fashionButton.setBounds(610, 10, 150, 35);
         categoryPanel.add(fashionButton);
 
-        JButton applianceButton = new JButton("Home Appliances");
+        applianceButton = new JButton("Home Appliances");
         applianceButton.setBounds(765, 10, 130, 35);
         categoryPanel.add(applianceButton);
-        
+
         electronicsButton.addActionListener(e -> {
-        comboBox.setSelectedItem("Electronics");
+            comboBox.setSelectedItem("Electronics");
         });
 
         kitchenButton.addActionListener(e -> {
-        comboBox.setSelectedItem("Kitchen and Living");
+            comboBox.setSelectedItem("Kitchen and Living");
         });
 
         fashionButton.addActionListener(e -> {
-        comboBox.setSelectedItem("Fashion and Apparel");
+            comboBox.setSelectedItem("Fashion and Apparel");
         });
 
         applianceButton.addActionListener(e -> {
-        comboBox.setSelectedItem("Home Appliances");
+            comboBox.setSelectedItem("Home Appliances");
         });
-        
+
         // Product Panel
-        
+
         productPanel = new JPanel();
         productPanel.setLayout(new GridLayout(0, 4, 15, 15));
 
-        // Mga Sample Product 
-        
+        // Mga Sample Product
+
         allProducts.add(new Product(1, "Power Bank", 500.00, "Electronics"));
         allProducts.add(new Product(2, "Smart Watch", 1999.00, "Electronics"));
         allProducts.add(new Product(3, "Laptop", 39999.00, "Electronics"));
@@ -182,100 +185,141 @@ public class homePage extends JFrame {
         // To Display all products initially
 
         displayProducts("All Categories");
-        
+
         JScrollPane scrollPane = new JScrollPane(productPanel);
         scrollPane.setBounds(25, 255, 950, 345);
         add(scrollPane);
+
+        //addtoactionlistener
+        myAccountButton.addActionListener(this);
+        cartButton.addActionListener(this);
+        searchButton.addActionListener(this);
     }
+
+    JPanel panel;
+    JLabel productName, productPrice, productCategory;
+    JButton orderButton,addCartButton;
 
     private JPanel createProduct(Product product) {
 
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(200, 220));
         panel.setBorder(
-        BorderFactory.createLineBorder(Color.LIGHT_GRAY)
-    );
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY)
+        );
 
-        JLabel productName = new JLabel(product.getName());
+        productName = new JLabel(product.getName());
         productName.setBounds(15, 25, 185, 30);
         productName.setFont(new Font("Arial", Font.BOLD, 16));
         panel.add(productName);
 
-        JLabel productPrice = new JLabel(
-        String.format("₱%,.2f", product.getPrice())
-    );
+        productPrice = new JLabel(String.format("₱%,.2f", product.getPrice()));
         productPrice.setBounds(15, 65, 185, 30);
         productPrice.setFont(new Font("Arial", Font.BOLD, 18));
         panel.add(productPrice);
 
-        JLabel productCategory = new JLabel(product.getCategory());
+        productCategory = new JLabel(product.getCategory());
         productCategory.setBounds(15, 95, 185, 20);
         panel.add(productCategory);
 
-        JButton orderButton = new JButton("Order");
+        orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
         panel.add(orderButton);
 
-        JButton addCartButton = new JButton("Add to Cart");
+        addCartButton = new JButton("Add to Cart");
         addCartButton.setBounds(100, 145, 90, 35);
         panel.add(addCartButton);
         addCartButton.addActionListener( e ->{
             cart.addProduct(product);
-            
-            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
+
+            JOptionPane.showMessageDialog(this, product.name + " Added to Cart!");
         });
 
-    return panel;
-}
-    
+        return panel;
+    }
+
     private void displayProducts(String selectedCategory) {
 
-    productPanel.removeAll();
+        productPanel.removeAll();
 
-    for (Product product : allProducts) {
+        for (Product product : allProducts) {
 
-        if (selectedCategory.equals("All Categories")
-                || product.getCategory().equalsIgnoreCase(selectedCategory)) {
+            if (selectedCategory.equals("All Categories")
+                    || product.category.equalsIgnoreCase(selectedCategory)) {
 
-            productPanel.add(createProduct(product));
+                productPanel.add(createProduct(product));
+            }
         }
+
+        productPanel.revalidate();
+        productPanel.repaint();
     }
 
-    productPanel.revalidate();
-    productPanel.repaint();
-}
-    
     private void searchProducts() {
 
-    String keyword = searchProduct.getText()
-            .trim()
-            .toLowerCase();
+        String keyword = searchProduct.getText()
+                .trim()
+                .toLowerCase();
 
-    String selectedCategory =
-            (String) comboBox.getSelectedItem();
+        String selectedCategory =
+                (String) comboBox.getSelectedItem();
 
-    productPanel.removeAll();
+        productPanel.removeAll();
 
-    for (Product product : allProducts) {
+        for (Product product : allProducts) {
 
-        boolean matchesCategory =
-                selectedCategory.equals("All Categories")
-                || product.getCategory()
-                        .equalsIgnoreCase(selectedCategory);
+            boolean matchesCategory =
+                    selectedCategory.equals("All Categories")
+                            || product.category
+                            .equalsIgnoreCase(selectedCategory);
 
-        boolean matchesKeyword =
-                product.getName()
-                        .toLowerCase()
-                        .contains(keyword);
+            boolean matchesKeyword =
+                    product.name
+                            .toLowerCase()
+                            .contains(keyword);
 
-        if (matchesCategory && matchesKeyword) {
-            productPanel.add(createProduct(product));
+            if (matchesCategory && matchesKeyword) {
+                productPanel.add(createProduct(product));
+            }
         }
+
+        productPanel.revalidate();
+        productPanel.repaint();
     }
 
-    productPanel.revalidate();
-    productPanel.repaint();
-}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource()== myAccountButton) {
+            userProfilePage bisaya = new userProfilePage();
+            bisaya.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource()== cartButton) {
+            ShoppingCartPage ilocano = new ShoppingCartPage();
+            ilocano.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource()== searchButton) {
+
+        }
+        else if (e.getSource()== orderButton) {
+
+        }
+        else if (e.getSource()== addCartButton) {
+
+        }
+        else if (e.getSource()== productPanel) {
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+        homePage tagalog = new homePage();
+        tagalog.setVisible(true);
+    }
+
 
 }
