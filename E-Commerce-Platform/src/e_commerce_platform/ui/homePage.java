@@ -232,6 +232,10 @@ public class homePage extends JFrame implements ActionListener {
         
         ratingLabel.setBounds(15, 115, 185, 25);
         panel.add(ratingLabel);
+        
+        JButton rateButton = new JButton("Rate");
+        rateButton.setBounds(15, 185, 80, 30);
+        panel.add(rateButton);
 
         orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
