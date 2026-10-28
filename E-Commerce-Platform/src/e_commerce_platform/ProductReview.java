@@ -78,4 +78,16 @@ public static int getReviewCount(int productId) {
     
     return count;
 }
+
+public static List<ProductReview> getReviewsForProduct(int productId) {
+    List<ProductReview> result = new ArrayList<>();
+    
+    for (ProductReview review : reviews) {
+        if (review.getProductId() == productId) {
+            result.add(review);
+        }
+    }
+    
+    return result;
+  }
 }
