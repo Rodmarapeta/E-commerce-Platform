@@ -2,6 +2,7 @@ package e_commerce_platform.ui;
 
 import e_commerce_platform.Cart;
 import e_commerce_platform.Product;
+import e_commerce_platform.ProductReview;
 
 import javax.swing.*;
 import java.awt.*;
@@ -222,6 +223,15 @@ public class homePage extends JFrame implements ActionListener {
         productCategory = new JLabel(product.getCategory());
         productCategory.setBounds(15, 95, 185, 20);
         panel.add(productCategory);
+        
+        double averageRating = ProductReview.getAverageRating(product.getId());
+        int reviewCount = ProductReview.getReviewCount(product.getId());
+        JLabel ratingLabel = new JLabel(String.format("★ %.1f (%d reviews)", averageRating, reviewCount)
+        
+        );
+        
+        ratingLabel.setBounds(15, 115, 185, 25);
+        panel.add(ratingLabel);
 
         orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
