@@ -48,4 +48,23 @@ public static void addReview(ProductReview review) {
         reviews.add(review);
     }
   }
+
+public static double getAverageRating(int productId) {
+    int totalStars = 0;
+    int count = 0;
+    
+    for (ProductReview review : reviews) {
+        if (review.getProductId() == productId) {
+            totalStars += review.getStars();
+            count++;
+        }
+    }
+    
+    if (count == 0) {
+        return 0.0;
+    }
+    
+    return (double) totalStars / count;
+ }
+
 }
