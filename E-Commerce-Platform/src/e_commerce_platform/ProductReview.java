@@ -67,4 +67,15 @@ public static double getAverageRating(int productId) {
     return (double) totalStars / count;
  }
 
+public static int getReviewCount(int productId) {
+    int count = 0;
+    
+    for (ProductReview review : reviews) {
+        if (review.getProductId() == productId) {
+            count++;
+        }
+    }
+    
+    return count;
+}
 }
