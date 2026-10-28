@@ -17,8 +17,7 @@ public class ProductReview {
     private int stars;
     private String comment;
 
-    private static final List<ProductReview> reviews =
-            new ArrayList<>();
+    private static final List<ProductReview> reviews = new ArrayList<>();
 
     public ProductReview(int productId, String reviewer,
                          int stars, String comment) {
@@ -44,4 +43,9 @@ public class ProductReview {
         return comment;
     }
 
+public static void addReview(ProductReview review) {
+    if (review != null && review.getStars() >= 1 && review.getStars() <= 5) {
+        reviews.add(review);
+    }
+  }
 }
