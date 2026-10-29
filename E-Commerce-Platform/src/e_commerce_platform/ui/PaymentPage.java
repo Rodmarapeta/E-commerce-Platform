@@ -177,6 +177,10 @@ public class PaymentPage extends JFrame {
             cart.setVisible(true);
             dispose();
         });
-
+        
+    }
+        public static void main(String[] args) {
+        ShoppingCartPage cart = new ShoppingCartPage();
+        cart.setVisible(true);
     }
 }
