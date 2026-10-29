@@ -123,9 +123,7 @@ public class PaymentPage extends JFrame {
         totalValue.setFont(new Font("Arial", Font.BOLD, 17));
         totalValue.setBounds(220, 230, 130, 35);
         summaryPanel.add(totalValue);
-        
-        
-        // CONFIRM PAYMENT BUTTON
+
         JButton confirmButton = new JButton("Confirm Payment");
         confirmButton.setBounds(570, 490, 360, 45);
         confirmButton.setFocusPainted(false);
@@ -170,6 +168,15 @@ public class PaymentPage extends JFrame {
                     + "\nPayment Method: " + method);
         });
 
+        JButton backButton = new JButton("Back to Cart");
+        backButton.setBounds(570, 545, 360, 35);
+        add(backButton);
+
+        backButton.addActionListener(e -> {
+            ShoppingCartPage cart = new ShoppingCartPage();
+            cart.setVisible(true);
+            dispose();
+        });
 
     }
 }
