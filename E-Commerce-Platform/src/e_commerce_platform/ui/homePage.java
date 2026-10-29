@@ -59,7 +59,7 @@ public class homePage extends JFrame {
         JButton trackOrderButton = new JButton("Track Order");
         trackOrderButton.setBounds(835, 15, 120, 30);
         upperPanel.add(trackOrderButton);
-
+        
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBounds(0, 70, 1000, 125);
@@ -84,7 +84,7 @@ public class homePage extends JFrame {
         JButton searchButton = new JButton("Search");
         searchButton.setBounds(640, 25, 90, 40);
         mainPanel.add(searchButton);
-
+        
         // My Account button
         JButton myAccountButton = new JButton("My Account");
         myAccountButton.setBounds(740, 25, 110, 40);
@@ -99,6 +99,11 @@ public class homePage extends JFrame {
         JButton cartButton = new JButton("Cart");
         cartButton.setBounds(935, 25, 60, 40);
         mainPanel.add(cartButton);
+        
+        cartButton.addActionListener(e -> {
+    ShoppingCartPage cart = new ShoppingCartPage();
+    cart.setVisible(true);
+});
         
         // Category Panel 
         
@@ -192,5 +197,5 @@ public class homePage extends JFrame {
 
         return panel;
     }
-
-}
+    
+            }

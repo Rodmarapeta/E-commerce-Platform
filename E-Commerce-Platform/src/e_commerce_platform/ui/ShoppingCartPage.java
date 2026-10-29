@@ -16,7 +16,7 @@ public class ShoppingCartPage extends JFrame {
 
         JLabel titleLabel = new JLabel("Shopping Cart");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        titleLabel.setBounds(30, 20, 300, 50);
+        titleLabel.setBounds(20, 20, 300, 90);
         add(titleLabel);
         
         JPanel cartPanel = new JPanel();
@@ -54,7 +54,7 @@ public class ShoppingCartPage extends JFrame {
         add(totalLabel);
         
         JButton backButton = new JButton("Back to Shop");
-        backButton.setBounds(30, 30, 140, 35);
+        backButton.setBounds(780, 50, 150, 40);
         add(backButton);
 
         JButton continueButton = new JButton("Continue Shopping");
@@ -67,8 +67,6 @@ public class ShoppingCartPage extends JFrame {
         
     }
         
-   
-
     public static void main(String[] args) {
         ShoppingCartPage cart = new ShoppingCartPage();
         cart.setVisible(true);
