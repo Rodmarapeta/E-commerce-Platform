@@ -84,5 +84,45 @@ public class PaymentPage extends JFrame {
         add(gcashButton);
         add(cardButton);
 
+        JPanel summaryPanel = new JPanel();
+        summaryPanel.setLayout(null);
+        summaryPanel.setBounds(570, 110, 360, 350);
+        add(summaryPanel);
+
+        JLabel summaryTitle = new JLabel("Order Summary");
+        summaryTitle.setFont(new Font("Arial", Font.BOLD, 21));
+        summaryTitle.setBounds(20, 20, 300, 35);
+        summaryPanel.add(summaryTitle);
+
+        JLabel subtotalLabel = new JLabel("Subtotal:");
+        subtotalLabel.setBounds(20, 90, 150, 30);
+        summaryPanel.add(subtotalLabel);
+
+        JLabel subtotalValue = new JLabel("PHP 0.00");
+        subtotalValue.setBounds(230, 90, 120, 30);
+        summaryPanel.add(subtotalValue);
+
+        JLabel shippingLabel = new JLabel("Shipping Fee:");
+        shippingLabel.setBounds(20, 140, 150, 30);
+        summaryPanel.add(shippingLabel);
+
+        JLabel shippingValue = new JLabel("PHP 0.00");
+        shippingValue.setBounds(230, 140, 120, 30);
+        summaryPanel.add(shippingValue);
+
+        JSeparator separator = new JSeparator();
+        separator.setBounds(20, 200, 320, 10);
+        summaryPanel.add(separator);
+
+        JLabel totalLabel = new JLabel("Total Payment:");
+        totalLabel.setFont(new Font("Arial", Font.BOLD, 17));
+        totalLabel.setBounds(20, 230, 180, 35);
+        summaryPanel.add(totalLabel);
+
+        JLabel totalValue = new JLabel("PHP 0.00");
+        totalValue.setFont(new Font("Arial", Font.BOLD, 17));
+        totalValue.setBounds(220, 230, 130, 35);
+        summaryPanel.add(totalValue);
+
     }
 }
