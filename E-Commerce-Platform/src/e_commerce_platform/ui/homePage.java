@@ -249,6 +249,10 @@ public class homePage extends JFrame implements ActionListener {
             
             ProductReview.addReview(review);
             
+            double newAverage = ProductReview.getAverageRating(product.getId());
+            int newCount = ProductReview.getReviewCount(product.getId());
+            ratingLabel.setText(String.format("★ %.1f (%d reviews)", newAverage, newCount));
+            
             JOptionPane.showMessageDialog(this, "Thank you for rating " + product.getName() + "!");
           }
         });
