@@ -61,5 +61,28 @@ public class PaymentPage extends JFrame {
         contactField.setBounds(170, 240, 330, 30);
         add(contactField);
 
+        JLabel paymentTitle = new JLabel("Select Payment Method");
+        paymentTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        paymentTitle.setBounds(40, 310, 350, 30);
+        add(paymentTitle);
+
+        codButton = new JRadioButton("Cash on Delivery");
+        codButton.setBounds(40, 355, 200, 30);
+
+        gcashButton = new JRadioButton("GCash");
+        gcashButton.setBounds(40, 390, 200, 30);
+
+        cardButton = new JRadioButton("Credit / Debit Card");
+        cardButton.setBounds(40, 425, 200, 30);
+
+        ButtonGroup paymentGroup = new ButtonGroup();
+        paymentGroup.add(codButton);
+        paymentGroup.add(gcashButton);
+        paymentGroup.add(cardButton);
+
+        add(codButton);
+        add(gcashButton);
+        add(cardButton);
+
     }
 }
