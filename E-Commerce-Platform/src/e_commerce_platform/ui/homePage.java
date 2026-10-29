@@ -236,6 +236,22 @@ public class homePage extends JFrame implements ActionListener {
         JButton rateButton = new JButton("Rate");
         rateButton.setBounds(15, 185, 80, 30);
         panel.add(rateButton);
+        
+        rateButton.addActionListener(e -> { String[] ratings = {"1", "2", "3", "4", "5"};
+        
+        String selectedRating = (String) JOptionPane.showInputDialog(this, "Select Your Rating (1-5 Stars):", 
+                "Rate Product", JOptionPane.QUESTION_MESSAGE, null, ratings, ratings[4]);
+        
+        if (selectedRating != null) {
+            int stars = Integer.parseInt(selectedRating);
+            
+            ProductReview review = new ProductReview(product.getId(), "User", stars, "");
+            
+            ProductReview.addReview(review);
+            
+            JOptionPane.showMessageDialog(this, "Thank you for rating " + product.getName() + "!");
+          }
+        });
 
         orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
