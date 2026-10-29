@@ -3,6 +3,8 @@ package e_commerce_platform.ui;
 import e_commerce_platform.Cart;
 import e_commerce_platform.Product;
 import e_commerce_platform.ProductReview;
+import e_commerce_platform.DBConnection;
+import dao.ProductDao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -176,17 +178,11 @@ public class homePage extends JFrame implements ActionListener {
 
         // Mga Sample Product
 
-        allProducts.add(new Product(1, "Power Bank", 500.00, "Electronics"));
-        allProducts.add(new Product(2, "Smart Watch", 1999.00, "Electronics"));
-        allProducts.add(new Product(3, "Laptop", 39999.00, "Electronics"));
-        allProducts.add(new Product(4, "Headphones", 999.00, "Electronics"));
-        allProducts.add(new Product(5, "Iphone 14 Pro Max", 30999.00, "Electronics"));
-        allProducts.add(new Product(6, "Charger", 1499.00, "Electronics"));
-        allProducts.add(new Product(7, "Air Fryer", 2799.00, "Home Appliances"));
-        allProducts.add(new Product(8, "Keyboard", 1499.00, "Electronics"));
+        // Load products from MySQL database
+        ProductDao productDao = new ProductDao();
+        allProducts = productDao.getAllProducts();
 
-        // To Display all products initially
-
+        // Display all products initially
         displayProducts("All Categories");
 
         JScrollPane scrollPane = new JScrollPane(productPanel);
