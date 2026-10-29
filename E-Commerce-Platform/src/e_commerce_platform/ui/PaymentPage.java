@@ -123,6 +123,53 @@ public class PaymentPage extends JFrame {
         totalValue.setFont(new Font("Arial", Font.BOLD, 17));
         totalValue.setBounds(220, 230, 130, 35);
         summaryPanel.add(totalValue);
+        
+        
+        // CONFIRM PAYMENT BUTTON
+        JButton confirmButton = new JButton("Confirm Payment");
+        confirmButton.setBounds(570, 490, 360, 45);
+        confirmButton.setFocusPainted(false);
+        add(confirmButton);
+
+        confirmButton.addActionListener(e -> {
+
+            String name = nameField.getText().trim();
+            String address = addressField.getText().trim();
+            String contact = contactField.getText().trim();
+
+            if (name.isEmpty() || address.isEmpty()
+                    || contact.isEmpty()) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Please complete all shipping information.");
+                return;
+            }
+            if (!contact.matches("[0-9]{11}")) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a valid 11-digit contact number.");
+                return;
+            }
+            if (paymentGroup.getSelection() == null) {
+                JOptionPane.showMessageDialog(this,
+                        "Please select a payment method.");
+                return;
+            }
+
+            String method = "";
+
+            if (codButton.isSelected()) {
+                method = "Cash on Delivery";
+            } else if (gcashButton.isSelected()) {
+                method = "GCash";
+            } else if (cardButton.isSelected()) {
+                method = "Credit / Debit Card";
+            }
+            JOptionPane.showMessageDialog(this,
+                    "Order Submitted Successfully!"
+                    + "\nCustomer: " + name
+                    + "\nPayment Method: " + method);
+        });
+
 
     }
 }
