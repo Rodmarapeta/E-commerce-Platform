@@ -14,12 +14,14 @@ public class Product {
     public String name;
     public double price;
     public String category;
+    public int quantity;
 
-    public Product(int productId, String productName, double productPrice, String productCategory) {
+    public Product(int productId, String productName, double productPrice, String productCategory, int productQuantity) {
         id = productId;
         name = productName;
         price = productPrice;
         category = productCategory;
+        quantity = productQuantity;
 
     }
     public int getId() {
@@ -33,6 +35,9 @@ public class Product {
     }
     public String getCategory() {
         return category;
+    }
+    public int getQuantity() {
+        return quantity;
     }
 
 }
