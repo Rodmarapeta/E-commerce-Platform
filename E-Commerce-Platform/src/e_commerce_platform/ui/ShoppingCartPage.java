@@ -79,14 +79,6 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
 
         backbtn.addActionListener(this);
         continueButton.addActionListener(this);
-        checkoutButton.addActionListener(this);
-        
-        checkoutButton.addActionListener(e -> {
-        PaymentPage payment = new PaymentPage();
-        payment.setVisible(true);
-        dispose();
-});
-
 
     }
 
