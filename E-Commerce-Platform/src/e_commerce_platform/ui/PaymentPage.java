@@ -1,11 +1,12 @@
-
 package e_commerce_platform.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import e_commerce_platform.Cart;
 
 public class PaymentPage extends JFrame {
 
+    private Cart cart;
     private JTextField nameField;
     private JTextField addressField;
     private JTextField contactField;
@@ -14,7 +15,8 @@ public class PaymentPage extends JFrame {
     private JRadioButton gcashButton;
     private JRadioButton cardButton;
 
-    public PaymentPage() {
+    public PaymentPage(Cart cart) {
+    this.cart = cart;
 
         setTitle("E-Commerce Platform - Checkout");
         setSize(1000, 650);
@@ -173,10 +175,10 @@ public class PaymentPage extends JFrame {
         add(backButton);
 
         backButton.addActionListener(e -> {
-            ShoppingCartPage cart = new ShoppingCartPage();
-            cart.setVisible(true);
+        ShoppingCartPage cartPage = new ShoppingCartPage(this.cart);
+            cartPage.setVisible(true);
             dispose();
-        });
+});
         
     }
         public static void main(String[] args) {

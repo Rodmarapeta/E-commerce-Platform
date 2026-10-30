@@ -37,6 +37,9 @@ public class Cart {
         return total;
     }
 
+    public boolean isEmpty(){
+    return cartProducts.isEmpty();
+}
     public void clearCart(){
         cartProducts.clear();
     }

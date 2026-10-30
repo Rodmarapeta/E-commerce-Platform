@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class homePage extends JFrame implements ActionListener {
 
     private JLabel shippingLabel, returnLabel, warrantyLabel, storeLabel, categoryLabel;
@@ -67,7 +68,7 @@ public class homePage extends JFrame implements ActionListener {
         trackOrderButton = new JButton("Track Order");
         trackOrderButton.setBounds(835, 15, 120, 30);
         upperPanel.add(trackOrderButton);
-        
+
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBounds(0, 70, 1000, 125);
@@ -114,14 +115,9 @@ public class homePage extends JFrame implements ActionListener {
         cartButton = new JButton("Cart");
         cartButton.setBounds(935, 25, 60, 40);
         mainPanel.add(cartButton);
-        
-        cartButton.addActionListener(e -> {
-    ShoppingCartPage cart = new ShoppingCartPage();
-    cart.setVisible(true);
-});
-        
-        // Category Panel 
-        
+
+        // Category Panel
+
         categoryPanel = new JPanel();
         categoryPanel.setLayout(null);
         categoryPanel.setBounds(0, 195, 1000, 55);
@@ -238,7 +234,7 @@ public class homePage extends JFrame implements ActionListener {
         addCartButton.addActionListener( e ->{
             cart.addProduct(product);
 
-            JOptionPane.showMessageDialog(this, product.name + " Added to Cart!");
+            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
         });
 
         return panel;
@@ -251,7 +247,7 @@ public class homePage extends JFrame implements ActionListener {
         for (Product product : allProducts) {
 
             if (selectedCategory.equals("All Categories")
-                    || product.category.equalsIgnoreCase(selectedCategory)) {
+                    || product.getCategory().equalsIgnoreCase(selectedCategory)){
 
                 productPanel.add(createProduct(product));
             }
@@ -276,13 +272,13 @@ public class homePage extends JFrame implements ActionListener {
 
             boolean matchesCategory =
                     selectedCategory.equals("All Categories")
-                            || product.category
-                            .equalsIgnoreCase(selectedCategory);
+                    || product.getCategory()
+                           .equalsIgnoreCase(selectedCategory);
 
             boolean matchesKeyword =
-                    product.name
-                            .toLowerCase()
-                            .contains(keyword);
+                    product.getName()
+                           .toLowerCase()
+                           .contains(keyword);
 
             if (matchesCategory && matchesKeyword) {
                 productPanel.add(createProduct(product));
@@ -302,7 +298,7 @@ public class homePage extends JFrame implements ActionListener {
             this.dispose();
         }
         else if (e.getSource()== cartButton) {
-            ShoppingCartPage ilocano = new ShoppingCartPage();
+            ShoppingCartPage ilocano = new ShoppingCartPage(cart);
             ilocano.setVisible(true);
             this.dispose();
         }

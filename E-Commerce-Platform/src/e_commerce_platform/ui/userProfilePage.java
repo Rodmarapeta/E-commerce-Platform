@@ -67,10 +67,8 @@ public class userProfilePage extends JFrame implements ActionListener{
             home.setVisible(true);
             this.dispose();
         }
-        else if(e.getSource()== cartButton){
-            ShoppingCartPage chinesebaddie = new ShoppingCartPage();
-            chinesebaddie.setVisible(true);
-            this.dispose();
+        else if (e.getSource() == cartButton) {
+            JOptionPane.showMessageDialog (this, "Please open the cart from the Home Page.");
         } else if (e.getSource()== shopButton) {
             userShop Mobailegends = new userShop();
             Mobailegends.setVisible(true);
