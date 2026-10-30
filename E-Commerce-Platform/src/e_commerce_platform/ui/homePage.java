@@ -67,7 +67,7 @@ public class homePage extends JFrame implements ActionListener {
         trackOrderButton = new JButton("Track Order");
         trackOrderButton.setBounds(835, 15, 120, 30);
         upperPanel.add(trackOrderButton);
-
+        
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBounds(0, 70, 1000, 125);
@@ -114,9 +114,14 @@ public class homePage extends JFrame implements ActionListener {
         cartButton = new JButton("Cart");
         cartButton.setBounds(935, 25, 60, 40);
         mainPanel.add(cartButton);
-
-        // Category Panel
-
+        
+        cartButton.addActionListener(e -> {
+    ShoppingCartPage cart = new ShoppingCartPage();
+    cart.setVisible(true);
+});
+        
+        // Category Panel 
+        
         categoryPanel = new JPanel();
         categoryPanel.setLayout(null);
         categoryPanel.setBounds(0, 195, 1000, 55);

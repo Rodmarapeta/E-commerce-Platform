@@ -22,17 +22,19 @@ public class Product {
         category = productCategory;
 
     }
-    public int getId() {
+public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public double getPrice() {
         return price;
     }
+
     public String getCategory() {
         return category;
     }
-
 }

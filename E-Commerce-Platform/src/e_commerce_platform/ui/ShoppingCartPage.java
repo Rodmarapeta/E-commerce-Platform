@@ -69,12 +69,16 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         checkoutButton = new JButton("Proceed to Checkout");
         checkoutButton.setBounds(740, 540, 200, 40);
         add(checkoutButton);
+        
+        checkoutButton.addActionListener(e -> {
+            PaymentPage payment = new PaymentPage();
+            payment.setVisible(true);
+            dispose();
+        });
 
 
-        //addtoactionlistener
         backbtn.addActionListener(this);
         continueButton.addActionListener(this);
-        checkoutButton.addActionListener(this);
 
     }
 
