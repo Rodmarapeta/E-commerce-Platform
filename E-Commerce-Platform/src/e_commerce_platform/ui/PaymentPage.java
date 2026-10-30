@@ -174,15 +174,16 @@ public class PaymentPage extends JFrame {
         backButton.setBounds(570, 545, 360, 35);
         add(backButton);
 
-        backButton.addActionListener(e -> {
-        ShoppingCartPage cartPage = new ShoppingCartPage(this.cart);
+                backButton.addActionListener(e -> {
+            ShoppingCartPage cartPage = new ShoppingCartPage(this.cart);
             cartPage.setVisible(true);
             dispose();
-});
-        
+        });
     }
-        public static void main(String[] args) {
-        ShoppingCartPage cart = new ShoppingCartPage();
-        cart.setVisible(true);
+
+    public static void main(String[] args) {
+        Cart cart = new Cart();
+        ShoppingCartPage cartPage = new ShoppingCartPage(cart);
+        cartPage.setVisible(true);
     }
 }
