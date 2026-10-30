@@ -3,12 +3,14 @@ package e_commerce_platform.ui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import dao.ProductDao;
+import e_commerce_platform.Product;
 
 public class sellProduct extends JFrame implements ActionListener{
 
     JPanel contentPane;
-    JLabel productName, productId, productPrice, productcategory, productQuantity;
-    JTextField prdctName, prdctPrice, prdctCategory, prdctId, prdctQuantity;
+    JLabel productName, productPrice, productcategory, productQuantity;
+    JTextField prdctName, prdctPrice, prdctCategory, prdctQuantity;
     public JComboBox<String> comboBox;
     JButton sellProduct, mngeInventory, backButton;
 
@@ -46,9 +48,6 @@ public class sellProduct extends JFrame implements ActionListener{
         productName = new JLabel("Product Name: ");
         prdctName = new JTextField();
 
-        productId = new JLabel("Product ID: ");
-        prdctId = new JTextField();
-
         productPrice = new JLabel("Product Price: ");
         prdctPrice = new JTextField();
 
@@ -58,35 +57,25 @@ public class sellProduct extends JFrame implements ActionListener{
         productcategory = new JLabel("Product Category: ");
         comboBox = new JComboBox<>(allCat);
         comboBox.setBounds(80, 340, 350, 40);
-        add(comboBox);
+        contentPane.add(comboBox);
 
         sellProduct = new JButton("Sell Product");
 
-
         productName.setBounds(80, 80, 130, 40);
         prdctName.setBounds(220, 80, 350, 40);
-
-        productId.setBounds(80, 145, 130, 40);
-        prdctId.setBounds(220, 145, 350, 40);
-
         productPrice.setBounds(80, 210, 130, 40);
         prdctPrice.setBounds(220, 210, 350, 40);
-
         productQuantity.setBounds(80, 275, 130, 40);
         prdctQuantity.setBounds(220, 275, 350, 40);
-
         productcategory.setBounds(80, 340, 130, 40);
-
         sellProduct.setBounds(150, 620, 500, 50);
 
         contentPane.add(productName);
-        contentPane.add(productId);
         contentPane.add(productPrice);
         contentPane.add(productcategory);
         contentPane.add(productQuantity);
         contentPane.add(prdctName);
         contentPane.add(prdctPrice);
-        contentPane.add(prdctId);
         contentPane.add(sellProduct);
         contentPane.add(prdctQuantity);
 
@@ -95,26 +84,51 @@ public class sellProduct extends JFrame implements ActionListener{
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource() == sellProduct){
-            String productName = prdctName.getText();
-            String productId = prdctId.getText();
-            String productPrice = prdctPrice.getText();
-            String productCategory = prdctCategory.getText();
-            String productQuantity = prdctQuantity.getText();
+    public void actionPerformed(ActionEvent e){    
+    if (e.getSource() == sellProduct) {
 
-            if( productName.isEmpty()|| productId.isEmpty()|| productPrice.isEmpty()|| productCategory.isEmpty()|| productQuantity.isEmpty()){
-                JOptionPane.showMessageDialog(null, "Please fill all the fields");
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Product added to sell successfully");
-            }
+    String name = prdctName.getText().trim();
+    String priceText = prdctPrice.getText().trim();
+    String quantityText = prdctQuantity.getText().trim();
+    String category = comboBox.getSelectedItem().toString();
+
+    if (name.isEmpty() || priceText.isEmpty() || quantityText.isEmpty()
+            || category.equals("All Categories")) {
+
+        JOptionPane.showMessageDialog(this, "Please fill all fields.");
+        return;
+    }
+
+    try {
+        double price = Double.parseDouble(priceText);
+        int quantity = Integer.parseInt(quantityText);
+
+        if (price <= 0 || quantity <= 0) {
+            JOptionPane.showMessageDialog(this, "Price must be greater than 0 and quantity cannot be negative.");
+            return;
         }
-        else if (e.getSource() == backButton){
-            userShop shop = new userShop();
-            shop.setVisible(true);
-            this.dispose();
+
+        Product product = new Product(0, name, price, category, quantity);
+
+        ProductDao dao = new ProductDao();
+
+        if (dao.addProduct(product)) {
+            JOptionPane.showMessageDialog(this, "Product added successfully!");
+
+            prdctName.setText("");
+            prdctPrice.setText("");
+            prdctQuantity.setText("");
+            comboBox.setSelectedIndex(0);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to add product.");
         }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter valid price and quantity.");
+    }
+}
+
     }
 
     public static void main(String[] args) {
