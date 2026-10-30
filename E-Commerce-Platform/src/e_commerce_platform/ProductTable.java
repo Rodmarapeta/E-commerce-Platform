@@ -18,11 +18,12 @@ public class ProductTable {
     public static void createTable() {
 
         String sql = "CREATE TABLE IF NOT EXISTS products ("
-                + "id INT AUTO_INCREMENT PRIMARY KEY, "
-                + "name VARCHAR(100) NOT NULL, "
-                + "price DOUBLE NOT NULL, "
-                + "category VARCHAR(100) NOT NULL"
-                + ")";
+        + "id INT AUTO_INCREMENT PRIMARY KEY, "
+        + "name VARCHAR(100) NOT NULL, "
+        + "price DOUBLE NOT NULL, "
+        + "category VARCHAR(100) NOT NULL, "
+        + "quantity INT NOT NULL DEFAULT 0"
+        + ")";
 
         try (Connection conn = DBConnection.getConnection()) {
 
