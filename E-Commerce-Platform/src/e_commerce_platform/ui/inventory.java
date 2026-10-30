@@ -4,11 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import dao.ProductDao;
+import e_commerce_platform.Product;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 public class inventory extends JFrame implements ActionListener {
 
     private JLabel lblName,lblId,lblPrice,lblQuantity,lblCategory;
     private JTextField txtId, txtName, txtPrice, txtQuantity, txtCategory;
     private JTable productTable;
+    private DefaultTableModel tableModel;
     private JButton btnback, btnAdd, btnUpdate , btnRemove, btnClear, btnSelect;
     JScrollPane scrollPane;
 
@@ -86,7 +92,15 @@ public class inventory extends JFrame implements ActionListener {
 
         //make columns for product info
         String[] columns = {"ID", "Name", "Price", "Quantity", "Category"};
-        productTable = new JTable(new Object[0][5], columns);
+
+        tableModel = new DefaultTableModel(columns, 0) {
+         @Override
+          public boolean isCellEditable(int row, int column) {
+          return false;
+           }
+        };
+        
+        productTable = new JTable(tableModel);
 
         scrollPane = new JScrollPane(productTable);
         scrollPane.setBounds(340, 80, 470, 430);
@@ -98,8 +112,32 @@ public class inventory extends JFrame implements ActionListener {
         btnRemove.addActionListener(this);
         btnClear.addActionListener(this);
         btnSelect.addActionListener(this);
+        
+        loadProducts();
 
     }
+    
+    public void loadProducts() {
+
+    ProductDao dao = new ProductDao();
+
+    List<Product> products = dao.getAllProducts();
+
+    tableModel.setRowCount(0);
+
+    for (Product product : products) {
+
+        Object[] row = {
+            product.getId(),
+            product.getName(),
+            product.getPrice(),
+            product.getQuantity(),
+            product.getCategory()
+        };
+
+        tableModel.addRow(row);
+    }
+}
 
     @Override
     public void actionPerformed(ActionEvent e){
