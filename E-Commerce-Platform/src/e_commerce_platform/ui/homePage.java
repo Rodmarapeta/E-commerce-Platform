@@ -179,11 +179,7 @@ public class homePage extends JFrame implements ActionListener {
         // Mga Sample Product
 
         // Load products from MySQL database
-        ProductDao productDao = new ProductDao();
-        allProducts = productDao.getAllProducts();
-
-        // Display all products initially
-        displayProducts("All Categories");
+        loadProducts();
 
         JScrollPane scrollPane = new JScrollPane(productPanel);
         scrollPane.setBounds(25, 255, 950, 345);
@@ -193,6 +189,13 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.addActionListener(this);
         cartButton.addActionListener(this);
         searchButton.addActionListener(this);
+    }
+    
+    public void loadProducts() {
+        
+        ProductDao productDao = new ProductDao();
+        allProducts = productDao.getAllProducts();
+        displayProducts("All Categories");
     }
 
     JPanel panel;
