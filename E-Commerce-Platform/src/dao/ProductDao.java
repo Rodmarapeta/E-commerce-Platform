@@ -22,8 +22,9 @@ public class ProductDao {
 
     public boolean addProduct(Product product) {
 
-        String sql = "INSERT INTO products (name, price, category) "
-                   + "VALUES (?, ?, ?)";
+        String sql = "INSERT INTO products "
+                   + "(name, price, category, quantity) "
+                   + "VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection()) {
 
@@ -36,6 +37,7 @@ public class ProductDao {
                 stmt.setString(1, product.getName());
                 stmt.setDouble(2, product.getPrice());
                 stmt.setString(3, product.getCategory());
+                stmt.setInt(4, product.getQuantity());
 
                 stmt.executeUpdate();
                 System.out.println("Product added successfully!");
@@ -52,7 +54,8 @@ public class ProductDao {
 
         List<Product> products = new ArrayList<>();
 
-        String sql = "SELECT id, name, price, category FROM products";
+        String sql = "SELECT id, name, price, category, quantity "
+                + "FROM products";
 
         try (Connection conn = DBConnection.getConnection()) {
 
@@ -68,7 +71,8 @@ public class ProductDao {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getDouble("price"),
-                        rs.getString("category")
+                        rs.getString("category"),
+                        rs.getInt("quantity")
                     );
 
                     products.add(product);
