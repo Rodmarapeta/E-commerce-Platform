@@ -114,17 +114,12 @@ public class inventory extends JFrame implements ActionListener {
         btnSelect.addActionListener(this);
         
         loadProducts();
-
     }
     
     public void loadProducts() {
-
     ProductDao dao = new ProductDao();
-
     List<Product> products = dao.getAllProducts();
-
     tableModel.setRowCount(0);
-
     for (Product product : products) {
 
         Object[] row = {
@@ -163,7 +158,22 @@ public class inventory extends JFrame implements ActionListener {
         }
         else if (e.getSource() == btnSelect) {
 
+        int selectedRow = productTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a product from the table.");
         }
+        
+        else {
+
+        txtId.setText(tableModel.getValueAt(selectedRow, 0).toString());
+        txtName.setText(tableModel.getValueAt(selectedRow, 1).toString());
+        txtPrice.setText(tableModel.getValueAt(selectedRow, 2).toString());
+        txtQuantity.setText(tableModel.getValueAt(selectedRow, 3).toString());
+        txtCategory.setText(tableModel.getValueAt(selectedRow, 4).toString());
+
+    }
+}
         else if (e.getSource() == btnback) {
             userShop blonde  = new userShop();
             blonde.setVisible(true);
