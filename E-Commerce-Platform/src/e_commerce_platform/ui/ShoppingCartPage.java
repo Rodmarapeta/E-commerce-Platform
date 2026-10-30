@@ -179,7 +179,7 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
 
         // Sample product for testing
         cart.addProduct(
-                new Product(1, "Power Bank", 500.00, "Electronics")
+                new Product(1, "Power Bank", 500.00, "Electronics", 1)
         );
 
         ShoppingCartPage page = new ShoppingCartPage(cart);
