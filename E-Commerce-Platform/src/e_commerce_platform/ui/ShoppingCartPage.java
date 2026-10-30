@@ -77,7 +77,6 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         });
 
 
-        //addtoactionlistener
         backbtn.addActionListener(this);
         continueButton.addActionListener(this);
         checkoutButton.addActionListener(this);
