@@ -24,20 +24,24 @@ public class Product {
         quantity = productQuantity;
 
     }
-    public int getId() {
+public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public double getPrice() {
         return price;
     }
+
     public String getCategory() {
         return category;
     }
+    
     public int getQuantity() {
         return quantity;
     }
-
+    
 }

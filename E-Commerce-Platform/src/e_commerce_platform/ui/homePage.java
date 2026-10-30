@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
 
+
 public class homePage extends JFrame implements ActionListener {
 
     private JLabel shippingLabel, returnLabel, warrantyLabel, storeLabel, categoryLabel;
@@ -268,7 +269,7 @@ public class homePage extends JFrame implements ActionListener {
         addCartButton.addActionListener( e ->{
             cart.addProduct(product);
 
-            JOptionPane.showMessageDialog(this, product.name + " Added to Cart!");
+            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
         });
 
         return panel;
@@ -281,7 +282,7 @@ public class homePage extends JFrame implements ActionListener {
         for (Product product : allProducts) {
 
             if (selectedCategory.equals("All Categories")
-                    || product.category.equalsIgnoreCase(selectedCategory)) {
+                    || product.getCategory().equalsIgnoreCase(selectedCategory)){
 
                 productPanel.add(createProduct(product));
             }
@@ -306,13 +307,13 @@ public class homePage extends JFrame implements ActionListener {
 
             boolean matchesCategory =
                     selectedCategory.equals("All Categories")
-                            || product.category
-                            .equalsIgnoreCase(selectedCategory);
+                    || product.getCategory()
+                           .equalsIgnoreCase(selectedCategory);
 
             boolean matchesKeyword =
-                    product.name
-                            .toLowerCase()
-                            .contains(keyword);
+                    product.getName()
+                           .toLowerCase()
+                           .contains(keyword);
 
             if (matchesCategory && matchesKeyword) {
                 productPanel.add(createProduct(product));
@@ -332,7 +333,7 @@ public class homePage extends JFrame implements ActionListener {
             this.dispose();
         }
         else if (e.getSource()== cartButton) {
-            ShoppingCartPage ilocano = new ShoppingCartPage();
+            ShoppingCartPage ilocano = new ShoppingCartPage(cart);
             ilocano.setVisible(true);
             this.dispose();
         }

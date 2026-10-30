@@ -1,6 +1,7 @@
-build/ 
-nbproject/private/ 
-E-Commerce-Platform/nbproject/private/ 
+
+build/
+nbproject/private/
+E-Commerce-Platform/nbproject/private/
 
 # Java compiled files
 *.class
@@ -8,3 +9,6 @@ E-Commerce-Platform/nbproject/private/
 # IntelliJ IDEA files
 .idea/
 *.iml
+
+# NetBeans distribution files
+/E-Commerce-Platform/dist/
