@@ -121,6 +121,7 @@ public class inventory extends JFrame implements ActionListener {
         btnClear.addActionListener(this);
         btnSelect.addActionListener(this);
         btnSearch.addActionListener(this);
+        txtSearch.addActionListener(this);
         
         loadProducts();
     }
@@ -278,8 +279,11 @@ public class inventory extends JFrame implements ActionListener {
             txtPrice.setText("");
             txtQuantity.setText("");
             txtCategory.setText("");
+            txtSearch.setText("");
             
             productTable.clearSelection();
+            
+            loadProducts();
         }
         
         else if (e.getSource() == btnSelect) {
@@ -299,7 +303,7 @@ public class inventory extends JFrame implements ActionListener {
 
     }
 }
-        else if (e.getSource() == btnSearch) {
+        else if (e.getSource() == btnSearch || e.getSource() == txtSearch) {
         searchProducts();
 }
         else if (e.getSource() == btnback) {
