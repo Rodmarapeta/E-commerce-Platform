@@ -137,27 +137,116 @@ public class inventory extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == btnAdd) {
-            int id = Integer.parseInt(txtId.getText());
-            String name = txtName.getText();
-            int price = Integer.parseInt(txtPrice.getText());
-            int quantity = Integer.parseInt(txtQuantity.getText());
-            String category = txtCategory.getText();
+
+        try {
+
+        String name = txtName.getText().trim();
+        double price = Double.parseDouble(txtPrice.getText());
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        String category = txtCategory.getText().trim();
+
+        if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) {
+            JOptionPane.showMessageDialog(this, "Please enter valid product details.");
+            return;
+        }
+
+        Product product = new Product(0, name, price, category, quantity);
+        ProductDao dao = new ProductDao();
+
+        if (dao.addProduct(product)) {
+            JOptionPane.showMessageDialog(this, "Product added successfully!");
+
+            loadProducts();
+
+            txtId.setText("");
+            txtName.setText("");
+            txtPrice.setText("");
+            txtQuantity.setText("");
+            txtCategory.setText("");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to add product.");
+        }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid price and quantity.");
+    }
+}
+         else if (e.getSource() == btnUpdate) {
+
+        try {
+
+        int id = Integer.parseInt(txtId.getText());
+        String name = txtName.getText().trim();
+        double price = Double.parseDouble(txtPrice.getText());
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        String category = txtCategory.getText().trim();
+
+        if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) {
+            JOptionPane.showMessageDialog(this, "Please enter valid product details.");
+            return;
+        }
+
+        Product product = new Product(id, name, price, category, quantity);
+        ProductDao dao = new ProductDao();
+        if (dao.updateProduct(product)) {
+            JOptionPane.showMessageDialog(this, "Product updated successfully!");
+
+            loadProducts();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Product update failed.");
 
         }
-        else if (e.getSource() == btnUpdate) {
-            int id = Integer.parseInt(txtId.getText());
-        }
+
+    }   catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter valid ID, price, and quantity.");
+    }
+}
         else if (e.getSource() == btnRemove) {
-            int id = Integer.parseInt(txtId.getText());
+
+        try {
+
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a product first.");
+            return;
         }
+
+        int id = Integer.parseInt(txtId.getText());
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this product?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            ProductDao dao = new ProductDao();
+
+            if (dao.deleteProduct(id)) {
+                JOptionPane.showMessageDialog(this, "Product removed successfully!");
+                loadProducts();
+
+                txtId.setText("");
+                txtName.setText("");
+                txtPrice.setText("");
+                txtQuantity.setText("");
+                txtCategory.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Product removal failed.");
+            }
+        }
+
+    } catch (NumberFormatException ex) {JOptionPane.showMessageDialog(this, "Invalid Product ID.");
+    }
+}
         else if (e.getSource() == btnClear) {
             txtId.setText("");
             txtName.setText("");
             txtPrice.setText("");
             txtQuantity.setText("");
+            txtCategory.setText("");
+            
+            productTable.clearSelection();
         }
+        
         else if (e.getSource() == btnSelect) {
-
         int selectedRow = productTable.getSelectedRow();
 
         if (selectedRow == -1) {
