@@ -2,6 +2,9 @@ package e_commerce_platform.ui;
 
 import e_commerce_platform.Cart;
 import e_commerce_platform.Product;
+import e_commerce_platform.ProductReview;
+import e_commerce_platform.DBConnection;
+import dao.ProductDao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
+import java.util.Collections;
+
 
 public class homePage extends JFrame implements ActionListener {
 
@@ -67,7 +73,7 @@ public class homePage extends JFrame implements ActionListener {
         trackOrderButton = new JButton("Track Order");
         trackOrderButton.setBounds(835, 15, 120, 30);
         upperPanel.add(trackOrderButton);
-        
+
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBounds(0, 70, 1000, 125);
@@ -114,14 +120,9 @@ public class homePage extends JFrame implements ActionListener {
         cartButton = new JButton("Cart");
         cartButton.setBounds(935, 25, 60, 40);
         mainPanel.add(cartButton);
-        
-        cartButton.addActionListener(e -> {
-    ShoppingCartPage cart = new ShoppingCartPage();
-    cart.setVisible(true);
-});
-        
-        // Category Panel 
-        
+
+        // Category Panel
+
         categoryPanel = new JPanel();
         categoryPanel.setLayout(null);
         categoryPanel.setBounds(0, 195, 1000, 55);
@@ -178,18 +179,8 @@ public class homePage extends JFrame implements ActionListener {
 
         // Mga Sample Product
 
-        allProducts.add(new Product(1, "Power Bank", 500.00, "Electronics"));
-        allProducts.add(new Product(2, "Smart Watch", 1999.00, "Electronics"));
-        allProducts.add(new Product(3, "Laptop", 39999.00, "Electronics"));
-        allProducts.add(new Product(4, "Headphones", 999.00, "Electronics"));
-        allProducts.add(new Product(5, "Iphone 14 Pro Max", 30999.00, "Electronics"));
-        allProducts.add(new Product(6, "Charger", 1499.00, "Electronics"));
-        allProducts.add(new Product(7, "Air Fryer", 2799.00, "Home Appliances"));
-        allProducts.add(new Product(8, "Keyboard", 1499.00, "Electronics"));
-
-        // To Display all products initially
-
-        displayProducts("All Categories");
+        // Load products from MySQL database
+        loadProducts();
 
         JScrollPane scrollPane = new JScrollPane(productPanel);
         scrollPane.setBounds(25, 255, 950, 345);
@@ -199,6 +190,13 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.addActionListener(this);
         cartButton.addActionListener(this);
         searchButton.addActionListener(this);
+    }
+    
+    public void loadProducts() {
+        
+        ProductDao productDao = new ProductDao();
+        allProducts = productDao.getAllProducts();
+        displayProducts("All Categories");
     }
 
     JPanel panel;
@@ -227,6 +225,39 @@ public class homePage extends JFrame implements ActionListener {
         productCategory = new JLabel(product.getCategory());
         productCategory.setBounds(15, 95, 185, 20);
         panel.add(productCategory);
+        
+        double averageRating = ProductReview.getAverageRating(product.getId());
+        int reviewCount = ProductReview.getReviewCount(product.getId());
+        JLabel ratingLabel = new JLabel(String.format("★ %.1f (%d reviews)", averageRating, reviewCount)
+        
+        );
+        
+        ratingLabel.setBounds(15, 115, 185, 25);
+        panel.add(ratingLabel);
+        
+        JButton rateButton = new JButton("Rate");
+        rateButton.setBounds(15, 185, 80, 30);
+        panel.add(rateButton);
+        
+        rateButton.addActionListener(e -> { String[] ratings = {"1", "2", "3", "4", "5"};
+        
+        String selectedRating = (String) JOptionPane.showInputDialog(this, "Select Your Rating (1-5 Stars):", 
+                "Rate Product", JOptionPane.QUESTION_MESSAGE, null, ratings, ratings[4]);
+        
+        if (selectedRating != null) {
+            int stars = Integer.parseInt(selectedRating);
+            
+            ProductReview review = new ProductReview(product.getId(), "User", stars, "");
+            
+            ProductReview.addReview(review);
+            
+            double newAverage = ProductReview.getAverageRating(product.getId());
+            int newCount = ProductReview.getReviewCount(product.getId());
+            ratingLabel.setText(String.format("★ %.1f (%d reviews)", newAverage, newCount));
+            
+            JOptionPane.showMessageDialog(this, "Thank you for rating " + product.getName() + "!");
+          }
+        });
 
         orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
@@ -238,7 +269,7 @@ public class homePage extends JFrame implements ActionListener {
         addCartButton.addActionListener( e ->{
             cart.addProduct(product);
 
-            JOptionPane.showMessageDialog(this, product.name + " Added to Cart!");
+            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
         });
 
         return panel;
@@ -251,7 +282,7 @@ public class homePage extends JFrame implements ActionListener {
         for (Product product : allProducts) {
 
             if (selectedCategory.equals("All Categories")
-                    || product.category.equalsIgnoreCase(selectedCategory)) {
+                    || product.getCategory().equalsIgnoreCase(selectedCategory)){
 
                 productPanel.add(createProduct(product));
             }
@@ -276,13 +307,13 @@ public class homePage extends JFrame implements ActionListener {
 
             boolean matchesCategory =
                     selectedCategory.equals("All Categories")
-                            || product.category
-                            .equalsIgnoreCase(selectedCategory);
+                    || product.getCategory()
+                           .equalsIgnoreCase(selectedCategory);
 
             boolean matchesKeyword =
-                    product.name
-                            .toLowerCase()
-                            .contains(keyword);
+                    product.getName()
+                           .toLowerCase()
+                           .contains(keyword);
 
             if (matchesCategory && matchesKeyword) {
                 productPanel.add(createProduct(product));
@@ -302,7 +333,7 @@ public class homePage extends JFrame implements ActionListener {
             this.dispose();
         }
         else if (e.getSource()== cartButton) {
-            ShoppingCartPage ilocano = new ShoppingCartPage();
+            ShoppingCartPage ilocano = new ShoppingCartPage(cart);
             ilocano.setVisible(true);
             this.dispose();
         }

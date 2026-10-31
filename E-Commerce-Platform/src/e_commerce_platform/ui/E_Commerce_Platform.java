@@ -4,6 +4,10 @@
  */
 package e_commerce_platform.ui;
 
+import e_commerce_platform.DBConnection;
+import javax.swing.JOptionPane;
+import e_commerce_platform.ProductTable;
+
 /**
  *
  * @author Rodmar
@@ -15,9 +19,13 @@ public class E_Commerce_Platform {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        DBConnection.getConnection();
+        ProductTable.createTable();
+        
         loginPage frame = new loginPage();
         frame.setVisible(true);
-        
+                
     }
     
 }
