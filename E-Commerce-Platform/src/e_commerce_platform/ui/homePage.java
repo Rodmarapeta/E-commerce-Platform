@@ -190,6 +190,7 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.addActionListener(this);
         cartButton.addActionListener(this);
         searchButton.addActionListener(this);
+        homeButton.addActionListener(this);
     }
     
     public void loadProducts() {
@@ -331,6 +332,11 @@ public class homePage extends JFrame implements ActionListener {
             userProfilePage bisaya = new userProfilePage();
             bisaya.setVisible(true);
             this.dispose();
+        }
+        else if (e.getSource() == homeButton) {
+        searchProduct.setText("");
+        comboBox.setSelectedItem("All Categories");
+        displayProducts("All Categories");
         }
         else if (e.getSource()== cartButton) {
             ShoppingCartPage ilocano = new ShoppingCartPage(cart);
