@@ -46,7 +46,7 @@ public class MyOrderPage extends JFrame implements ActionListener {
             return false;
     }
 };
-
+        
         orderTable = new JTable(tableModel);
         orderTable.setRowHeight(45);
         orderTable.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -65,13 +65,27 @@ public class MyOrderPage extends JFrame implements ActionListener {
         refreshButton = new JButton("Refresh Orders");
         refreshButton.setBounds(780, 450, 160, 40);
         add(refreshButton);
+        
+        backButton.addActionListener(this);
+        refreshButton.addActionListener(this);
     }
-
+    
     @Override
-    public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
 
+    if (e.getSource() == backButton) {
+        userProfilePage profile = new userProfilePage();
+        profile.setVisible(true);
+        this.dispose();
     }
+    else if (e.getSource() == refreshButton) {
 
+        JOptionPane.showMessageDialog(
+            this,
+            "Order refresh will be connected to the database."
+        );
+    }
+}
     public static void main(String[] args) {
         MyOrderPage orders = new MyOrderPage();
         orders.setVisible(true);
