@@ -102,13 +102,46 @@ public class SupportPage extends JFrame implements ActionListener {
         backButton.addActionListener(this);
         mainPanel.add(backButton);
     }
+    
+@Override
+public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == submitButton) {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
+        String name = nameField.getText().trim();
+        String email = emailField.getText().trim();
+        String message = messageArea.getText().trim();
 
+        if (name.isEmpty() || email.isEmpty() || message.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Please complete all required fields."
+            );
+        } else {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Your support request has been submitted successfully!"
+            );
+            nameField.setText("");
+            emailField.setText("");
+            orderField.setText("");
+            messageArea.setText("");
+        }
+}       
+        else if (e.getSource() == clearButton) {
+
+            nameField.setText("");
+            emailField.setText("");
+            orderField.setText("");
+            messageArea.setText("");
+       
+    
+    } else if (e.getSource() == backButton) {
+
+         this.dispose();
+}
+}       
     public static void main(String[] args) {
-
         SupportPage page = new SupportPage();
         page.setVisible(true);
     }
