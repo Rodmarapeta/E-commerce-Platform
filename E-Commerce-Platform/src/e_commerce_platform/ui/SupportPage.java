@@ -21,8 +21,7 @@ public class SupportPage extends JFrame implements ActionListener {
     private JButton clearButton;
     private JButton backButton;
     private JLabel titleLabel;
-    
-
+  
     public SupportPage() {
 
         setTitle("Customer Support");
