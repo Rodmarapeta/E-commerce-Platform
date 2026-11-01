@@ -22,6 +22,15 @@ public class MyOrderPage extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
+ 
+        titleLabel = new JLabel("My Orders");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 60));
+        titleLabel.setBounds(40, 20, 400, 40);
+
+        sectionLabel = new JLabel("Orders");
+        sectionLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        sectionLabel.setBounds(60, 40, 800, 90);
+        add(sectionLabel);
     }
 
     @Override
