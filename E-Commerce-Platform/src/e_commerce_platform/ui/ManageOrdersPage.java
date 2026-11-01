@@ -26,6 +26,16 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        headerPanel = new JPanel();
+        headerPanel.setBounds(0, 0, 1000, 100);
+        headerPanel.setLayout(null);
+        add(headerPanel);
+
+        titleLabel = new JLabel("Manage Orders");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        titleLabel.setBounds(30, 25, 400, 50);
+        headerPanel.add(titleLabel);
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {
