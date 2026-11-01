@@ -12,6 +12,13 @@ public class SupportPage extends JFrame implements ActionListener {
     private JLabel emailLabel;
     private JTextField nameField;
     private JTextField emailField;
+    private JLabel orderLabel;
+    private JTextField orderField;
+    private JLabel messageLabel;
+    private JTextArea messageArea;
+    private JScrollPane messageScroll;
+    private JButton submitButton;
+    private JButton clearButton;
     private JLabel titleLabel;
     
 
@@ -58,6 +65,36 @@ public class SupportPage extends JFrame implements ActionListener {
         emailField = new JTextField();
         emailField.setBounds(320, 175, 500, 35);
         mainPanel.add(emailField);
+
+        orderLabel = new JLabel("Order ID:");
+        orderLabel.setBounds(150, 240, 150, 30);
+        mainPanel.add(orderLabel);
+
+        orderField = new JTextField();
+        orderField.setBounds(320, 240, 500, 35);
+        mainPanel.add(orderField);
+        // Message
+        messageLabel = new JLabel("Your Message:");
+        messageLabel.setBounds(150, 305, 150, 30);
+        mainPanel.add(messageLabel);
+
+        messageArea = new JTextArea();
+        messageArea.setLineWrap(true);
+        messageArea.setWrapStyleWord(true);
+
+        messageScroll = new JScrollPane(messageArea);
+        messageScroll.setBounds(320, 305, 500, 150);
+        mainPanel.add(messageScroll);
+
+        submitButton = new JButton("Submit Request");
+        submitButton.setBounds(320, 485, 160, 40);
+        submitButton.addActionListener(this);
+        mainPanel.add(submitButton);
+
+        clearButton = new JButton("Clear");
+        clearButton.setBounds(500, 485, 120, 40);
+        clearButton.addActionListener(this);
+        mainPanel.add(clearButton);
     }
 
     @Override
