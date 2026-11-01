@@ -19,6 +19,7 @@ public class SupportPage extends JFrame implements ActionListener {
     private JScrollPane messageScroll;
     private JButton submitButton;
     private JButton clearButton;
+    private JButton backButton;
     private JLabel titleLabel;
     
 
@@ -95,6 +96,11 @@ public class SupportPage extends JFrame implements ActionListener {
         clearButton.setBounds(500, 485, 120, 40);
         clearButton.addActionListener(this);
         mainPanel.add(clearButton);
+
+        backButton = new JButton("Back");
+        backButton.setBounds(40, 530, 120, 40);
+        backButton.addActionListener(this);
+        mainPanel.add(backButton);
     }
 
     @Override
