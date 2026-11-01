@@ -14,7 +14,7 @@ public class userShop extends JFrame implements ActionListener {
 
         setTitle("Shop Owner Dashboard");
         setSize(800, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
@@ -89,11 +89,6 @@ public class userShop extends JFrame implements ActionListener {
         }
 
 
-    }
-
-    public static void main(String[] args) {
-        userShop bisaya = new userShop();
-        bisaya.setVisible(true);
     }
 
 }

@@ -314,8 +314,4 @@ public class inventory extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        inventory frame = new inventory();
-        frame.setVisible(true);
-    }
 }

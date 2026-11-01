@@ -110,8 +110,5 @@ public class inventoryReport extends JFrame implements ActionListener{
 
         }
     }
-    public static  void main(String[] args) {
-        inventoryReport obj = new inventoryReport();
-        obj.setVisible(true);
-    }
+
 }

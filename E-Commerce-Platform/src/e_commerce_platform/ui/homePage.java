@@ -358,10 +358,7 @@ public class homePage extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        homePage tagalog = new homePage();
-        tagalog.setVisible(true);
-    }
+
 
 
 }

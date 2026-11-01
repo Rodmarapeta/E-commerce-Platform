@@ -76,9 +76,4 @@ public class userProfilePage extends JFrame implements ActionListener{
         }
     }
 
-    public static void main(String[] args){
-        userProfilePage lol = new userProfilePage();
-        lol.setVisible(true);
-    }
-
 }

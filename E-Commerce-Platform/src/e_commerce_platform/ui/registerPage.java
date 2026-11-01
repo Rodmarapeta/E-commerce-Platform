@@ -113,9 +113,4 @@ public class registerPage extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-
-        registerPage register = new registerPage();
-        register.setVisible(true);
-    }
 }
