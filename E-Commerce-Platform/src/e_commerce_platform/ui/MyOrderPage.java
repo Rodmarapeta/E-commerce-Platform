@@ -31,6 +31,29 @@ public class MyOrderPage extends JFrame implements ActionListener {
         sectionLabel.setFont(new Font("Arial", Font.BOLD, 22));
         sectionLabel.setBounds(60, 40, 800, 90);
         add(sectionLabel);
+        // Table Columns
+        String[] columns = {
+            "Product Name",
+            "Deliver Date",
+            "Total Price",
+            "Order Status"
+};
+
+        tableModel = new DefaultTableModel(columns, 0) {
+
+    @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+    }
+};
+
+        orderTable = new JTable(tableModel);
+        orderTable.setRowHeight(45);
+        orderTable.setFont(new Font("Arial", Font.PLAIN, 13));
+
+        scrollPane = new JScrollPane(orderTable);
+        scrollPane.setBounds(40, 150, 900, 280);
+        add(scrollPane);
     }
 
     @Override
