@@ -53,13 +53,65 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         ordersTable.getTableHeader().setFont(
             new Font("Arial", Font.BOLD, 12)
 );
-
+        
         scrollPane = new JScrollPane(ordersTable);
         scrollPane.setBounds(20, 140, 950, 350);
         add(scrollPane);
+
+        JLabel emptyLabel = new JLabel("No orders available.");
+        emptyLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        emptyLabel.setBounds(30, 500, 300, 30);
+        add(emptyLabel);
+
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 550, 130, 40);
+        backButton.addActionListener(this);
+        add(backButton);
+
+        viewOrderButton = new JButton("View Order");
+        viewOrderButton.setBounds(600, 550, 150, 40);
+        viewOrderButton.addActionListener(this);
+        add(viewOrderButton);
+        
+        updateStatusButton = new JButton("Update Status");
+        updateStatusButton.setBounds(780, 550, 170, 40);
+        updateStatusButton.addActionListener(this);
+        add(updateStatusButton);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == backButton) {
+        userShop shop = new userShop();
+        shop.setVisible(true);
+        this.dispose();
+}
+        else if (e.getSource() == viewOrderButton) {
+
+    int selectedRow = ordersTable.getSelectedRow();
+
+    if (selectedRow == -1) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Please select an order first."
+        );
+
+    } else {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Order ID: " + model.getValueAt(selectedRow, 0)
+            + "\nCustomer: " + model.getValueAt(selectedRow, 1)
+            + "\nProduct: " + model.getValueAt(selectedRow, 2)
+            + "\nTotal Price: " + model.getValueAt(selectedRow, 3)
+            + "\nPayment Status: " + model.getValueAt(selectedRow, 4)
+            + "\nOrder Status: " + model.getValueAt(selectedRow, 5)
+            + "\nTracking Number: " + model.getValueAt(selectedRow, 6),
+            "Order Details",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+}
 }
     public static void main(String[] args) {
 
