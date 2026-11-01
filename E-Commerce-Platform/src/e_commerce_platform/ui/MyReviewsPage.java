@@ -31,6 +31,25 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(30, 25, 300, 50);
         headerPanel.add(titleLabel);
+
+        String[] columns = {
+        "Product Name",
+        "Rating",
+        "Your Review",
+        "Date Reviewed"
+        };
+
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        reviewsTable = new JTable(model);
+        reviewsTable.setFont(new Font("Arial", Font.PLAIN, 14));
+        reviewsTable.setRowHeight(30);
+        reviewsTable.getTableHeader().setFont(
+        new Font("Arial", Font.BOLD, 14)
+        );
+
+        scrollPane = new JScrollPane(reviewsTable);
+        scrollPane.setBounds(30, 140, 920, 350);
+        add(scrollPane);
     }
     @Override
         public void actionPerformed(ActionEvent e) {
