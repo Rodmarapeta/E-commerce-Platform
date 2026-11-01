@@ -54,6 +54,17 @@ public class MyOrderPage extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(orderTable);
         scrollPane.setBounds(40, 150, 900, 280);
         add(scrollPane);
+
+        emptyLabel = new JLabel(
+        "No current orders yet."
+    );
+        backButton = new JButton("Back to Profile");
+        backButton.setBounds(40, 450, 160, 40);
+        add(backButton);
+
+        refreshButton = new JButton("Refresh Orders");
+        refreshButton.setBounds(780, 450, 160, 40);
+        add(refreshButton);
     }
 
     @Override
