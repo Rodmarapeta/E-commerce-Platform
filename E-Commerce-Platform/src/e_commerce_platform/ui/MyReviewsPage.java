@@ -50,6 +50,11 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(reviewsTable);
         scrollPane.setBounds(30, 140, 920, 350);
         add(scrollPane);
+
+        JLabel emptyLabel = new JLabel("You have not submitted any reviews yet.");
+        emptyLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        emptyLabel.setBounds(30, 500, 500, 30);
+        add(emptyLabel);
     }
     @Override
         public void actionPerformed(ActionEvent e) {
