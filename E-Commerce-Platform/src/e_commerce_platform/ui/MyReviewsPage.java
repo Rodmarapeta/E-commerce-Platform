@@ -55,6 +55,16 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         emptyLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emptyLabel.setBounds(30, 500, 500, 30);
         add(emptyLabel);
+
+        backButton = new JButton("Back to Profile");
+        backButton.setBounds(30, 550, 160, 40);
+        backButton.addActionListener(this);
+        add(backButton);
+
+        writeReviewButton = new JButton("Write a Review");
+        writeReviewButton.setBounds(780, 550, 170, 40);
+        writeReviewButton.addActionListener(this);
+        add(writeReviewButton);
     }
     @Override
         public void actionPerformed(ActionEvent e) {
