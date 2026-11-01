@@ -67,8 +67,22 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         add(writeReviewButton);
     }
     @Override
-        public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(ActionEvent e) {
+
+    if (e.getSource() == backButton) {
+
+        userProfilePage profile = new userProfilePage();
+        profile.setVisible(true);
+        this.dispose();
+
+    } else if (e.getSource() == writeReviewButton) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "It is not yet available."
+        );
     }
+}
     public static void main(String[] args) {
         MyReviewsPage reviews = new MyReviewsPage();
         reviews.setVisible(true);
