@@ -35,7 +35,28 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(30, 25, 400, 50);
         headerPanel.add(titleLabel);
+        // Orders Table
+        String[] columns = {
+            "Order ID",
+            "Customer",
+            "Product Name",
+            "Total Price",
+            "Payment Status",
+            "Order Status",
+            "Tracking Number"
+};
+        model = new DefaultTableModel(columns, 0);
+        ordersTable = new JTable(model);
 
+        ordersTable.setFont(new Font("Arial", Font.PLAIN, 12));
+        ordersTable.setRowHeight(30);
+        ordersTable.getTableHeader().setFont(
+            new Font("Arial", Font.BOLD, 12)
+);
+
+        scrollPane = new JScrollPane(ordersTable);
+        scrollPane.setBounds(20, 140, 950, 350);
+        add(scrollPane);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
