@@ -1,3 +1,4 @@
+
 package e_commerce_platform.ui;
 
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(30, 25, 400, 50);
         headerPanel.add(titleLabel);
+
         // Orders Table
         String[] columns = {
             "Order ID",
@@ -44,7 +46,8 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
             "Payment Status",
             "Order Status",
             "Tracking Number"
-};
+        };
+
         model = new DefaultTableModel(columns, 0);
         ordersTable = new JTable(model);
 
@@ -52,8 +55,8 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         ordersTable.setRowHeight(30);
         ordersTable.getTableHeader().setFont(
             new Font("Arial", Font.BOLD, 12)
-);
-        
+        );
+
         scrollPane = new JScrollPane(ordersTable);
         scrollPane.setBounds(20, 140, 950, 350);
         add(scrollPane);
@@ -72,51 +75,111 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         viewOrderButton.setBounds(600, 550, 150, 40);
         viewOrderButton.addActionListener(this);
         add(viewOrderButton);
-        
+
         updateStatusButton = new JButton("Update Status");
         updateStatusButton.setBounds(780, 550, 170, 40);
         updateStatusButton.addActionListener(this);
         add(updateStatusButton);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == backButton) {
-        userShop shop = new userShop();
-        shop.setVisible(true);
-        this.dispose();
-}
-        else if (e.getSource() == viewOrderButton) {
 
-    int selectedRow = ordersTable.getSelectedRow();
+            userShop shop = new userShop();
+            shop.setVisible(true);
+            this.dispose();
 
-    if (selectedRow == -1) {
+        } else if (e.getSource() == viewOrderButton) {
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Please select an order first."
-        );
+            int selectedRow = ordersTable.getSelectedRow();
 
-    } else {
+            if (selectedRow == -1) {
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Order ID: " + model.getValueAt(selectedRow, 0)
-            + "\nCustomer: " + model.getValueAt(selectedRow, 1)
-            + "\nProduct: " + model.getValueAt(selectedRow, 2)
-            + "\nTotal Price: " + model.getValueAt(selectedRow, 3)
-            + "\nPayment Status: " + model.getValueAt(selectedRow, 4)
-            + "\nOrder Status: " + model.getValueAt(selectedRow, 5)
-            + "\nTracking Number: " + model.getValueAt(selectedRow, 6),
-            "Order Details",
-            JOptionPane.INFORMATION_MESSAGE
-        );
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Please select an order first."
+                );
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Order ID: " + model.getValueAt(selectedRow, 0)
+                    + "\nCustomer: " + model.getValueAt(selectedRow, 1)
+                    + "\nProduct: " + model.getValueAt(selectedRow, 2)
+                    + "\nTotal Price: " + model.getValueAt(selectedRow, 3)
+                    + "\nPayment Status: " + model.getValueAt(selectedRow, 4)
+                    + "\nOrder Status: " + model.getValueAt(selectedRow, 5)
+                    + "\nTracking Number: " + model.getValueAt(selectedRow, 6),
+                    "Order Details",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+
+        } else if (e.getSource() == updateStatusButton) {
+
+            int selectedRow = ordersTable.getSelectedRow();
+
+            if (selectedRow == -1) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Please select an order first."
+                );
+
+            } else {
+
+                String paymentStatus = model.getValueAt(selectedRow, 4).toString();
+
+                String[] statuses = {
+                    "Pending",
+                    "Processing",
+                    "Ready to Ship",
+                    "Shipped",
+                    "Delivered"
+                };
+
+                String newStatus = (String) JOptionPane.showInputDialog(
+                    this,
+                    "Select new order status:",
+                    "Update Order Status",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    statuses,
+                    model.getValueAt(selectedRow, 5)
+                );
+
+                if (newStatus != null) {
+
+                    if (newStatus.equals("Ready to Ship")
+                            && !paymentStatus.equalsIgnoreCase("Paid")) {
+
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "This order must be paid first before shipping.\n"
+                            + "Exception: COD orders can proceed."
+                        );
+
+                    } else {
+
+                        model.setValueAt(newStatus, selectedRow, 5);
+
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "Order status updated successfully!"
+                        );
+                    }
+                }
+            }
+        }
     }
-}
-}
+
     public static void main(String[] args) {
 
-    ManageOrdersPage page = new ManageOrdersPage();
-    page.setVisible(true);
+        ManageOrdersPage page = new ManageOrdersPage();
+        page.setVisible(true);
 
-}
+    }
 }
