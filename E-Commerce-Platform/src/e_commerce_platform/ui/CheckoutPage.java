@@ -2,18 +2,25 @@ package e_commerce_platform.ui;
 
 import e_commerce_platform.Cart;
 import e_commerce_platform.Product;
+import e_commerce_platform.UserSession;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
+import dao.OrderDao;
 
-public class CheckoutPage extends JFrame {
+public class CheckoutPage extends JFrame implements ActionListener {
 
+    private JLabel titleLabel, nameLabel, addressLabel, orderLabel, totalLabel;
+    private JTextField nameField, addressField;
+    private JTextArea orderArea;
+    private JButton placeOrderButton;
     private Cart cart;
-    private JTextField nameField;
-    private JTextField addressField;
-    private JLabel totalLabel;
+    private OrderDao orderDao;
 
     public CheckoutPage(Cart cart) {
         this.cart = cart;
+        orderDao = new OrderDao();
 
         setTitle("E-Commerce Platform - Checkout");
         setSize(600, 500);
@@ -21,12 +28,12 @@ public class CheckoutPage extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel titleLabel = new JLabel("Checkout");
+        titleLabel = new JLabel("Checkout");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(30, 20, 300, 40);
         add(titleLabel);
 
-        JLabel nameLabel = new JLabel("Customer Name:");
+        nameLabel = new JLabel("Customer Name:");
         nameLabel.setBounds(30, 90, 150, 30);
         add(nameLabel);
 
@@ -34,7 +41,7 @@ public class CheckoutPage extends JFrame {
         nameField.setBounds(180, 90, 350, 30);
         add(nameField);
 
-        JLabel addressLabel = new JLabel("Delivery Address:");
+        addressLabel = new JLabel("Delivery Address:");
         addressLabel.setBounds(30, 150, 150, 30);
         add(addressLabel);
 
@@ -42,76 +49,65 @@ public class CheckoutPage extends JFrame {
         addressField.setBounds(180, 150, 350, 30);
         add(addressField);
 
-        JLabel orderLabel = new JLabel("Order Summary:");
+        orderLabel = new JLabel("Order Summary:");
         orderLabel.setFont(new Font("Arial", Font.BOLD, 18));
         orderLabel.setBounds(30, 210, 200, 30);
         add(orderLabel);
 
-        JTextArea orderArea = new JTextArea();
+        orderArea = new JTextArea();
         orderArea.setEditable(false);
         orderArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        orderArea.setBounds(30, 250, 500, 90);
+        add(orderArea);
 
         for (Product product : cart.getCartProducts()) {
-            orderArea.append(
-                product.getName() + " - PHP "
-                + String.format("%.2f", product.getPrice()) + "\n"
-            );
+            orderArea.append(product.getName() + " - PHP " + String.format("%.2f", product.getPrice()) + "\n");
         }
 
-        JScrollPane scrollPane = new JScrollPane(orderArea);
-        scrollPane.setBounds(30, 250, 500, 90);
-        add(scrollPane);
-
-        totalLabel = new JLabel(
-            String.format("Total: PHP %.2f", cart.getTotalPrice())
-        );
+        totalLabel = new JLabel("Total: PHP " + String.format("%.2f", cart.getTotalPrice()));
         totalLabel.setFont(new Font("Arial", Font.BOLD, 18));
         totalLabel.setBounds(30, 350, 250, 30);
         add(totalLabel);
 
-        JButton placeOrderButton = new JButton("Place Order");
+        placeOrderButton = new JButton("Place Order");
         placeOrderButton.setBounds(350, 400, 180, 40);
         add(placeOrderButton);
 
-        placeOrderButton.addActionListener(e -> {
-            if (nameField.getText().trim().isEmpty()
-                    || addressField.getText().trim().isEmpty()) {
+        placeOrderButton.addActionListener(this);
+    }
 
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter your name and delivery address."
-                );
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == placeOrderButton) {
 
-            } else if (cart.isEmpty()) {
+        if (nameField.getText().trim().isEmpty()|| addressField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your name and delivery address.");
+        } else if (cart.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Your cart is empty. Please add a product first.");
+        } else if (UserSession.getUserId() <= 0) {
+            JOptionPane.showMessageDialog(this, "Please login first.");
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(this, "Confirm your order for PHP "
+                    + String.format("%.2f", cart.getTotalPrice()) + "?", "Confirm Order", JOptionPane.YES_NO_OPTION);
 
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Your cart is empty. Please add a product first."
-                );
+            if (confirm == JOptionPane.YES_OPTION) {
+                boolean saved = orderDao.saveOrder(UserSession.getUserId(), nameField.getText().trim(),
+                        addressField.getText().trim(), "Not Provided", "Cash on Delivery", cart);
 
-            } else {
-
-                int confirm = JOptionPane.showConfirmDialog(
-                    this,
-                    "Confirm your order for PHP "
-                    + String.format("%.2f", cart.getTotalPrice()) + "?",
-                    "Confirm Order",
-                    JOptionPane.YES_NO_OPTION
-                );
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(
-                        this,
-                        "WOW! Order placed successfully!\n"
-                        + "Customer: " + nameField.getText().trim()
-                        + "\nDelivery Address: "
-                        + addressField.getText().trim()
-                    );
+                if (saved) {
+                    JOptionPane.showMessageDialog(this, "Order placed successfully!\n" + "Customer: " + nameField.getText().trim()
+                            + "\nDelivery Address: " + addressField.getText().trim());
 
                     cart.clearCart();
+                    homePage home = new homePage();
+                    home.setVisible(true);
                     dispose();
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to save your order. Please try again.");
                 }
             }
-        });
+        }
     }
+  }
 }

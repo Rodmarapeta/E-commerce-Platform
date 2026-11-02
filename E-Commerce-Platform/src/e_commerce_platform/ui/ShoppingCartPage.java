@@ -1,4 +1,5 @@
 package e_commerce_platform.ui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,13 +10,9 @@ import e_commerce_platform.Product;
 public class ShoppingCartPage extends JFrame implements ActionListener {
 
     private Cart cart;
-    private JPanel cartPanel;
-    private JPanel itemsPanel;
-
-    private JButton backbtn, continueButton, checkoutButton;
-
-    private JLabel productLabel, priceLabel, quantityLabel;
-    private JLabel subtotalLabel, emptyCartLabel, totalLabel;
+    private JPanel cartPanel, itemsPanel, row;
+    private JButton backbtn, continueButton, checkoutButton, removeButton;
+    private JLabel titleLabel, productLabel, priceLabel, quantityLabel, subtotalLabel, emptyCartLabel, totalLabel, name, price, quantity, subtotal;
 
     public ShoppingCartPage(Cart cart) {
         this.cart = cart;
@@ -26,7 +23,7 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JLabel titleLabel = new JLabel("Shopping Cart");
+        titleLabel = new JLabel("Shopping Cart");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setBounds(30, 20, 300, 50);
         add(titleLabel);
@@ -39,8 +36,7 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         cartPanel.setLayout(null);
         cartPanel.setBounds(30, 100, 920, 350);
         cartPanel.setBorder(
-                BorderFactory.createTitledBorder("Your Cart Items")
-        );
+        BorderFactory.createTitledBorder("Your Cart Items"));
         add(cartPanel);
 
         productLabel = new JLabel("Product");
@@ -61,8 +57,7 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
 
         itemsPanel = new JPanel();
         itemsPanel.setLayout(
-                new BoxLayout(itemsPanel, BoxLayout.Y_AXIS)
-        );
+        new BoxLayout(itemsPanel, BoxLayout.Y_AXIS));
 
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
         scrollPane.setBounds(15, 65, 885, 260);
@@ -95,55 +90,46 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
 
     private void displayCartItems() {
         itemsPanel.removeAll();
-
         if (cart.isEmpty()) {
             emptyCartLabel.setVisible(true);
         } else {
             emptyCartLabel.setVisible(false);
-
             for (Product product : cart.getCartProducts()) {
 
-                JPanel row = new JPanel(null);
+                row = new JPanel(null);
                 row.setPreferredSize(new Dimension(860, 40));
                 row.setMinimumSize(new Dimension(860, 40));
                 row.setMaximumSize(new Dimension(860, 40));
 
-                JLabel name = new JLabel(product.getName());
+                name = new JLabel(product.getName());
                 name.setBounds(15, 5, 300, 30);
                 row.add(name);
 
-                JLabel price = new JLabel(
-                        String.format("PHP %.2f", product.getPrice())
-                );
+                price = new JLabel(
+                String.format("PHP %.2f", product.getPrice()));
                 price.setBounds(335, 5, 130, 30);
                 row.add(price);
 
-                JLabel quantity = new JLabel("1");
+                quantity = new JLabel("1");
                 quantity.setBounds(485, 5, 100, 30);
                 row.add(quantity);
 
-                JLabel subtotal = new JLabel(
-                        String.format("PHP %.2f", product.getPrice())
-                );
+                subtotal = new JLabel(
+                String.format("PHP %.2f", product.getPrice()));
                 subtotal.setBounds(635, 5, 130, 30);
                 row.add(subtotal);
 
-                JButton removeButton = new JButton("Remove");
+                removeButton = new JButton("Remove");
                 removeButton.setBounds(780, 5, 75, 30);
                 row.add(removeButton);
 
-                removeButton.addActionListener(e -> {
-                    cart.removeProduct(product);
-                    displayCartItems();
-                });
-
+                removeButton.addActionListener(this);
                 itemsPanel.add(row);
             }
         }
 
         totalLabel.setText(
-                String.format("Total: PHP %.2f", cart.getTotalPrice())
-        );
+        String.format("Total: PHP %.2f", cart.getTotalPrice()));
 
         itemsPanel.revalidate();
         itemsPanel.repaint();
@@ -151,27 +137,30 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == backbtn
-                || e.getSource() == continueButton) {
-
+        if (e.getSource() == backbtn || e.getSource() == continueButton) {
             homePage home = new homePage();
             home.setVisible(true);
-            this.dispose();
-
+            dispose();
+            
         } else if (e.getSource() == checkoutButton) {
-
             if (cart.isEmpty()) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Your cart is empty. Please add products first."
-                );
+                JOptionPane.showMessageDialog(this, "Your cart is empty. Please add products first.");
             } else {
-                CheckoutPage checkout = new CheckoutPage(cart);
-                checkout.setVisible(true);
-                this.dispose();
+             CheckoutPage checkout = new CheckoutPage(cart);
+             checkout.setVisible(true);
+             dispose();
+            }
+
+        } else if (e.getSource() instanceof JButton) {
+            JButton clickedButton = (JButton) e.getSource();
+            if (clickedButton.getText().equals("Remove")) {
+                int rowIndex = itemsPanel.getComponentZOrder((JPanel) clickedButton.getParent());
+
+                if (rowIndex >= 0) {
+                    cart.removeProduct(cart.getCartProducts().get(rowIndex));
+                    displayCartItems();
+                }
             }
         }
     }
-
 }
