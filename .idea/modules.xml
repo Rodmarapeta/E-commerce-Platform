@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/E-commerce-Platform.iml" filepath="$PROJECT_DIR$/E-commerce-Platform.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/JavaApplication6.iml" filepath="$PROJECT_DIR$/JavaApplication6.iml" />
+>>>>>>> DREUV2
     </modules>
   </component>
 </project>

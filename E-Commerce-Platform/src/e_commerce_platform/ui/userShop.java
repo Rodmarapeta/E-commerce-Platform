@@ -83,12 +83,12 @@ public class userShop extends JFrame implements ActionListener {
             sellProduct gooditembusseng = new sellProduct();
             gooditembusseng.setVisible(true);
             this.dispose();
-        } else if (e.getSource() == inventoryButton) {
+        } 
+        else if (e.getSource() == inventoryButton) {
             inventory baihubi = new inventory();
             baihubi.setVisible(true);
             this.dispose();
         }
-
 
     }
 
