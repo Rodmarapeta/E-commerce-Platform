@@ -51,14 +51,11 @@ public class ProductDao {
     }
 
     public List<Product> getAllProducts() {
-
         List<Product> products = new ArrayList<>();
-
         String sql = "SELECT id, name, price, category, quantity "
                 + "FROM products";
 
         try (Connection conn = DBConnection.getConnection()) {
-
             if (conn == null) {
                 return products;
             }
@@ -127,9 +124,7 @@ public class ProductDao {
         }
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setInt(1, id);
-
             int rowsDeleted = stmt.executeUpdate();
 
             return rowsDeleted > 0;
