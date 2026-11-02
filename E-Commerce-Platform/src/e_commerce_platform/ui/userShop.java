@@ -63,6 +63,7 @@ public class userShop extends JFrame implements ActionListener {
         reportsButton.addActionListener(this);
         shopButton.addActionListener(this);
         inventoryButton.addActionListener(this);
+        salesButton.addActionListener(this);
     }
 
     @Override
