@@ -44,7 +44,6 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
             "Total Price",
             "Payment Status",
             "Order Status",
-            "Tracking Number"
         };
 
         model = new DefaultTableModel(columns, 0);
