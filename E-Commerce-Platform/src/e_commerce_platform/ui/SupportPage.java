@@ -73,7 +73,7 @@ public class SupportPage extends JFrame implements ActionListener {
         orderField = new JTextField();
         orderField.setBounds(320, 240, 500, 35);
         mainPanel.add(orderField);
-        // Message
+        
         messageLabel = new JLabel("Your Message:");
         messageLabel.setBounds(150, 305, 150, 30);
         mainPanel.add(messageLabel);
