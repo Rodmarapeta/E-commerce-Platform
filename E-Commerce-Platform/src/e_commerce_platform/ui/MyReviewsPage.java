@@ -35,8 +35,7 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         String[] columns = {
         "Product Name",
         "Rating",
-        "Your Review",
-        "Date Reviewed"
+        "Your Review"
         };
 
         DefaultTableModel model = new DefaultTableModel(columns, 0);
