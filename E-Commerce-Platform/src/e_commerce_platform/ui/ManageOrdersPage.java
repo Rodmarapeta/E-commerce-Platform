@@ -36,8 +36,7 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(30, 25, 400, 50);
         headerPanel.add(titleLabel);
-
-        // Orders Table
+        
         String[] columns = {
             "Order ID",
             "Customer",
@@ -174,12 +173,5 @@ public class ManageOrdersPage extends JFrame implements ActionListener {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-
-        ManageOrdersPage page = new ManageOrdersPage();
-        page.setVisible(true);
-
     }
 }

@@ -31,7 +31,7 @@ public class MyOrderPage extends JFrame implements ActionListener {
         sectionLabel.setFont(new Font("Arial", Font.BOLD, 22));
         sectionLabel.setBounds(60, 40, 800, 90);
         add(sectionLabel);
-        // Table Columns
+
         String[] columns = {
             "Product Name",
             "Deliver Date",
@@ -86,8 +86,4 @@ public class MyOrderPage extends JFrame implements ActionListener {
         );
     }
 }
-    public static void main(String[] args) {
-        MyOrderPage orders = new MyOrderPage();
-        orders.setVisible(true);
-    }
 }

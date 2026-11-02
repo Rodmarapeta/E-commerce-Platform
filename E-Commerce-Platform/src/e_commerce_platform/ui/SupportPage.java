@@ -140,8 +140,4 @@ public void actionPerformed(ActionEvent e) {
          this.dispose();
 }
 }       
-    public static void main(String[] args) {
-        SupportPage page = new SupportPage();
-        page.setVisible(true);
-    }
 }

@@ -94,11 +94,5 @@ public class userShop extends JFrame implements ActionListener {
             orders.setVisible(true);
             this.dispose();
         }
-    }   
-
-    public static void main(String[] args) {
-        userShop bisaya = new userShop();
-        bisaya.setVisible(true);
     }
-    
 }

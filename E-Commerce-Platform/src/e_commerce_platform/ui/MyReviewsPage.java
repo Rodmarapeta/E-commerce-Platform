@@ -82,8 +82,4 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         );
     }
 }
-    public static void main(String[] args) {
-        MyReviewsPage reviews = new MyReviewsPage();
-        reviews.setVisible(true);
-}
 }
