@@ -44,7 +44,7 @@ public class homePage extends JFrame implements ActionListener {
     homePage() {
 
         setTitle("E-Commerce Platform - Home");
-        setSize(1000, 650);
+        setSize(1050, 650);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -190,6 +190,7 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.addActionListener(this);
         cartButton.addActionListener(this);
         searchButton.addActionListener(this);
+        homeButton.addActionListener(this);
     }
     
     public void loadProducts() {
@@ -332,6 +333,11 @@ public class homePage extends JFrame implements ActionListener {
             bisaya.setVisible(true);
             this.dispose();
         }
+        else if (e.getSource() == homeButton) {
+        searchProduct.setText("");
+        comboBox.setSelectedItem("All Categories");
+        displayProducts("All Categories");
+        }
         else if (e.getSource()== cartButton) {
             ShoppingCartPage ilocano = new ShoppingCartPage(cart);
             ilocano.setVisible(true);
@@ -351,11 +357,5 @@ public class homePage extends JFrame implements ActionListener {
         }
 
     }
-
-    public static void main(String[] args) {
-        homePage tagalog = new homePage();
-        tagalog.setVisible(true);
-    }
-
 
 }

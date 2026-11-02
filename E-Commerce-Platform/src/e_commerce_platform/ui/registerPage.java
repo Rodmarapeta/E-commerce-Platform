@@ -3,6 +3,11 @@ package e_commerce_platform.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import e_commerce_platform.DBConnection;
+import e_commerce_platform.Encryption;
 
 public class registerPage extends JFrame implements ActionListener {
 
@@ -72,50 +77,56 @@ public class registerPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnRegister) {
-
             String username = txtUsername.getText();
             String email = txtEmail.getText();
             String password = new String(txtPassword.getPassword());
             String confirmPassword = new String(txtConfirmPassword.getPassword());
 
-            if (username.isEmpty() || email.isEmpty()
-                    || password.isEmpty() || confirmPassword.isEmpty()) {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Please complete all fields",
-                        "Input Error",
-                        JOptionPane.ERROR_MESSAGE
-                );
-
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please complete all fields", "Input Error", JOptionPane.ERROR_MESSAGE);
+            
             } else if (!password.equals(confirmPassword)) {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Passwords do not match",
-                        "Input Error",
-                        JOptionPane.ERROR_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this, "Passwords do not match", "Input Error", JOptionPane.ERROR_MESSAGE);
 
             } else {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Registration successful"
-                );
+                String sql = "Insert into users (username, email, password) Values (?, ?, ?)";
+                
+                try {
+                    Connection con = DBConnection.getConnection();
+                    
+                    if (con == null) {
+                        JOptionPane.showMessageDialog(this, "Database connection failed!");
+                        return;
+                    }
+                    
+                    String hashedPassword = Encryption.securePassword(password);
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    
+                    pst.setString(1, username);
+                    pst.setString(2, email);
+                    pst.setString(3, hashedPassword);
+                    
+                    pst.executeUpdate();
+                    
+                    JOptionPane.showMessageDialog(this, "Registration Successful!");
+                    
+                    pst.close();
+                    con.close();
+                    
+                    loginPage login = new loginPage();
+                    login.setVisible(true);
+                    this.dispose();
+                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Registration failed: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                }
             }
-
         } else if (e.getSource() == btnBack) {
-
             loginPage login = new loginPage();
             login.setVisible(true);
             this.dispose();
         }
     }
 
-    public static void main(String[] args) {
-
-        registerPage register = new registerPage();
-        register.setVisible(true);
-    }
 }

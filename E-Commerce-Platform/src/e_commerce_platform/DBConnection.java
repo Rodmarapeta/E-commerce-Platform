@@ -50,20 +50,4 @@ public class DBConnection {
         }
     }
     
-     public static void main(String[] args) {
-
-        createDatabase();
-
-        Connection conn = getConnection();
-
-        if (conn != null) {
-            System.out.println("Connection test successful!");
-
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package e_commerce_platform;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- *
- * @author Rodmar
- */
+
 public class ProductReview {
 
     private int productId;
@@ -19,8 +12,7 @@ public class ProductReview {
 
     private static final List<ProductReview> reviews = new ArrayList<>();
 
-    public ProductReview(int productId, String reviewer,
-                         int stars, String comment) {
+    public ProductReview(int productId, String reviewer, int stars, String comment) {
         this.productId = productId;
         this.reviewer = reviewer;
         this.stars = stars;
@@ -30,26 +22,23 @@ public class ProductReview {
     public int getProductId() {
         return productId;
     }
-
     public String getReviewer() {
         return reviewer;
     }
-
     public int getStars() {
         return stars;
     }
-
     public String getComment() {
         return comment;
     }
 
-public static void addReview(ProductReview review) {
+    public static void addReview(ProductReview review) {
     if (review != null && review.getStars() >= 1 && review.getStars() <= 5) {
         reviews.add(review);
     }
   }
 
-public static double getAverageRating(int productId) {
+    public static double getAverageRating(int productId) {
     int totalStars = 0;
     int count = 0;
     
@@ -67,7 +56,7 @@ public static double getAverageRating(int productId) {
     return (double) totalStars / count;
  }
 
-public static int getReviewCount(int productId) {
+    public static int getReviewCount(int productId) {
     int count = 0;
     
     for (ProductReview review : reviews) {
@@ -79,7 +68,7 @@ public static int getReviewCount(int productId) {
     return count;
 }
 
-public static List<ProductReview> getReviewsForProduct(int productId) {
+    public static List<ProductReview> getReviewsForProduct(int productId) {
     List<ProductReview> result = new ArrayList<>();
     
     for (ProductReview review : reviews) {

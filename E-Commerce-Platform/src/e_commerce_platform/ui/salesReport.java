@@ -19,8 +19,5 @@ public class salesReport extends JFrame {
     public void actionPerformed(ActionEvent e) {
 
     }
-    public static  void main(String[] args) {
-        inventoryReport obj = new inventoryReport();
-        obj.setVisible(true);
-    }
+    
 }

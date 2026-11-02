@@ -174,15 +174,4 @@ public class ShoppingCartPage extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        Cart cart = new Cart();
-
-        // Sample product for testing
-        cart.addProduct(
-                new Product(1, "Power Bank", 500.00, "Electronics", 1)
-        );
-
-        ShoppingCartPage page = new ShoppingCartPage(cart);
-        page.setVisible(true);
-    }
 }
