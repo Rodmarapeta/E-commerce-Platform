@@ -1,14 +1,5 @@
 package e_commerce_platform;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Rodmar
- */
 public class Product {
     public int id;
     public String name;
@@ -22,26 +13,21 @@ public class Product {
         price = productPrice;
         category = productCategory;
         quantity = productQuantity;
-
+        
     }
-public int getId() {
+    public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public double getPrice() {
         return price;
     }
-
     public String getCategory() {
         return category;
     }
-    
     public int getQuantity() {
         return quantity;
     }
-    
 }

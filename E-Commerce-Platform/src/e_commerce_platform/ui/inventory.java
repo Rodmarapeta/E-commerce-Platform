@@ -12,10 +12,10 @@ import java.util.List;
 public class inventory extends JFrame implements ActionListener {
 
     private JLabel lblName,lblId,lblPrice,lblQuantity,lblCategory;
-    private JTextField txtId, txtName, txtPrice, txtQuantity, txtCategory;
+    private JTextField txtId, txtName, txtPrice, txtQuantity, txtCategory, txtSearch;
     private JTable productTable;
     private DefaultTableModel tableModel;
-    private JButton btnback, btnAdd, btnUpdate , btnRemove, btnClear, btnSelect;
+    private JButton btnback, btnAdd, btnUpdate , btnRemove, btnClear, btnSelect, btnSearch;
     JScrollPane scrollPane;
 
     public inventory() {
@@ -31,63 +31,63 @@ public class inventory extends JFrame implements ActionListener {
         add(btnback);
 
         lblId = new JLabel("Product ID:");
-        lblId.setBounds(30, 80, 100, 25);
+        lblId.setBounds(30, 120, 100, 25);
         add(lblId);
 
         txtId = new JTextField();
-        txtId.setBounds(130, 80, 180, 25);
+        txtId.setBounds(130, 120, 180, 25);
         add(txtId);
 
         lblName = new JLabel("Product Name:");
-        lblName.setBounds(30, 120, 100, 25);
+        lblName.setBounds(30, 160, 100, 25);
         add(lblName);
 
         txtName = new JTextField();
-        txtName.setBounds(130, 120, 180, 25);
+        txtName.setBounds(130, 160, 180, 25);
         add(txtName);
 
         lblPrice = new JLabel("Price:");
-        lblPrice.setBounds(30, 160, 100, 25);
+        lblPrice.setBounds(30, 200, 100, 25);
         add(lblPrice);
 
         txtPrice = new JTextField();
-        txtPrice.setBounds(130, 160, 180, 25);
+        txtPrice.setBounds(130, 200, 180, 25);
         add(txtPrice);
 
         lblQuantity = new JLabel("Quantity:");
-        lblQuantity.setBounds(30, 200, 100, 25);
+        lblQuantity.setBounds(30, 240, 100, 25);
         add(lblQuantity);
 
         txtQuantity = new JTextField();
-        txtQuantity.setBounds(130, 200, 180, 25);
+        txtQuantity.setBounds(130, 240, 180, 25);
         add(txtQuantity);
 
         lblCategory = new JLabel("Category:");
-        lblCategory.setBounds(30, 240, 100, 25);
+        lblCategory.setBounds(30, 280, 100, 25);
         add(lblCategory);
 
         txtCategory = new JTextField();
-        txtCategory.setBounds(130, 240, 180, 25);
+        txtCategory.setBounds(130, 280, 180, 25);
         add(txtCategory);
 
         btnAdd = new JButton("Add");
-        btnAdd.setBounds(30, 290, 80, 30);
+        btnAdd.setBounds(30, 330, 80, 30);
         add(btnAdd);
 
         btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(120, 290, 90, 30);
+        btnUpdate.setBounds(120, 330, 90, 30);
         add(btnUpdate);
 
         btnRemove = new JButton("Remove");
-        btnRemove.setBounds(220, 290, 90, 30);
+        btnRemove.setBounds(220, 330, 90, 30);
         add(btnRemove);
 
         btnClear = new JButton("Clear");
-        btnClear.setBounds(120, 330, 90, 30);
+        btnClear.setBounds(120, 370, 90, 30);
         add(btnClear);
 
         btnSelect = new JButton("Select");
-        btnSelect.setBounds(220, 330, 90, 30);
+        btnSelect.setBounds(220, 370, 90, 30);
         add(btnSelect);
 
         //make columns for product info
@@ -101,9 +101,17 @@ public class inventory extends JFrame implements ActionListener {
         };
         
         productTable = new JTable(tableModel);
+        
+        txtSearch = new JTextField();
+        txtSearch.setBounds(340, 65, 350, 30);
+        add(txtSearch);
+
+        btnSearch = new JButton("Search");
+        btnSearch.setBounds(700, 65, 110, 30);
+        add(btnSearch);
 
         scrollPane = new JScrollPane(productTable);
-        scrollPane.setBounds(340, 80, 470, 430);
+        scrollPane.setBounds(340, 110, 470, 400);
         add(scrollPane);
 
         btnback.addActionListener(this);
@@ -112,6 +120,8 @@ public class inventory extends JFrame implements ActionListener {
         btnRemove.addActionListener(this);
         btnClear.addActionListener(this);
         btnSelect.addActionListener(this);
+        btnSearch.addActionListener(this);
+        txtSearch.addActionListener(this);
         
         loadProducts();
     }
@@ -133,31 +143,150 @@ public class inventory extends JFrame implements ActionListener {
         tableModel.addRow(row);
     }
 }
+    
+    public void searchProducts() {
+    String keyword = txtSearch.getText().trim().toLowerCase();
+    ProductDao dao = new ProductDao();
+    List<Product> products = dao.getAllProducts();
+
+    tableModel.setRowCount(0);
+
+    for (Product product : products) {
+        if (product.getName().toLowerCase().contains(keyword)) {
+
+            Object[] row = {
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getQuantity(),
+                product.getCategory()
+            };
+
+            tableModel.addRow(row);
+        }
+    }
+
+    if (tableModel.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "No matching product found.");
+    }
+}
 
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == btnAdd) {
-            int id = Integer.parseInt(txtId.getText());
-            String name = txtName.getText();
-            int price = Integer.parseInt(txtPrice.getText());
-            int quantity = Integer.parseInt(txtQuantity.getText());
-            String category = txtCategory.getText();
+
+        try {
+
+        String name = txtName.getText().trim();
+        double price = Double.parseDouble(txtPrice.getText());
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        String category = txtCategory.getText().trim();
+
+        if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) {
+            JOptionPane.showMessageDialog(this, "Please enter valid product details.");
+            return;
+        }
+
+        Product product = new Product(0, name, price, category, quantity);
+        ProductDao dao = new ProductDao();
+
+        if (dao.addProduct(product)) {
+            JOptionPane.showMessageDialog(this, "Product added successfully!");
+
+            loadProducts();
+
+            txtId.setText("");
+            txtName.setText("");
+            txtPrice.setText("");
+            txtQuantity.setText("");
+            txtCategory.setText("");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to add product.");
+        }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid price and quantity.");
+    }
+}
+         else if (e.getSource() == btnUpdate) {
+
+        try {
+
+        int id = Integer.parseInt(txtId.getText());
+        String name = txtName.getText().trim();
+        double price = Double.parseDouble(txtPrice.getText());
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        String category = txtCategory.getText().trim();
+
+        if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) {
+            JOptionPane.showMessageDialog(this, "Please enter valid product details.");
+            return;
+        }
+
+        Product product = new Product(id, name, price, category, quantity);
+        ProductDao dao = new ProductDao();
+        if (dao.updateProduct(product)) {
+            JOptionPane.showMessageDialog(this, "Product updated successfully!");
+
+            loadProducts();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Product update failed.");
 
         }
-        else if (e.getSource() == btnUpdate) {
-            int id = Integer.parseInt(txtId.getText());
-        }
+
+    }   catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter valid ID, price, and quantity.");
+    }
+}
         else if (e.getSource() == btnRemove) {
-            int id = Integer.parseInt(txtId.getText());
+
+        try {
+
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a product first.");
+            return;
         }
+
+        int id = Integer.parseInt(txtId.getText());
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this product?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            ProductDao dao = new ProductDao();
+
+            if (dao.deleteProduct(id)) {
+                JOptionPane.showMessageDialog(this, "Product removed successfully!");
+                loadProducts();
+
+                txtId.setText("");
+                txtName.setText("");
+                txtPrice.setText("");
+                txtQuantity.setText("");
+                txtCategory.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Product removal failed.");
+            }
+        }
+
+    } catch (NumberFormatException ex) {JOptionPane.showMessageDialog(this, "Invalid Product ID.");
+    }
+}
         else if (e.getSource() == btnClear) {
             txtId.setText("");
             txtName.setText("");
             txtPrice.setText("");
             txtQuantity.setText("");
+            txtCategory.setText("");
+            txtSearch.setText("");
+            
+            productTable.clearSelection();
+            
+            loadProducts();
         }
+        
         else if (e.getSource() == btnSelect) {
-
         int selectedRow = productTable.getSelectedRow();
 
         if (selectedRow == -1) {
@@ -174,6 +303,9 @@ public class inventory extends JFrame implements ActionListener {
 
     }
 }
+        else if (e.getSource() == btnSearch || e.getSource() == txtSearch) {
+        searchProducts();
+}
         else if (e.getSource() == btnback) {
             userShop blonde  = new userShop();
             blonde.setVisible(true);
@@ -182,8 +314,4 @@ public class inventory extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        inventory frame = new inventory();
-        frame.setVisible(true);
-    }
 }

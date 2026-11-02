@@ -181,9 +181,4 @@ public class PaymentPage extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        Cart cart = new Cart();
-        ShoppingCartPage cartPage = new ShoppingCartPage(cart);
-        cartPage.setVisible(true);
-    }
 }

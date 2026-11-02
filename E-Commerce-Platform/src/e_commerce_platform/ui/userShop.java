@@ -3,18 +3,18 @@ package e_commerce_platform.ui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import e_commerce_platform.UserSession;
 
 public class userShop extends JFrame implements ActionListener {
 
-    private JLabel headerTitle, nameLabel, locationLabel;
-    private JButton backButton, shopButton, salesButton,
-            ordersButton, accountButton, reportsButton, inventoryButton;
+    private JLabel headerTitle, nameLabel, msgLabel;
+    private JButton backButton, shopButton, salesButton, ordersButton, accountButton, reportsButton, inventoryButton;
 
     public userShop() {
 
         setTitle("Shop Owner Dashboard");
         setSize(800, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
@@ -26,13 +26,13 @@ public class userShop extends JFrame implements ActionListener {
         backButton.setBounds(650, 18, 100, 35);
         add(backButton);
 
-        nameLabel = new JLabel("Welcome, Name");
+        nameLabel = new JLabel("Welcome, " + UserSession.getUsername() + "!");
         nameLabel.setBounds(35, 75, 500, 25);
         add(nameLabel);
 
-        locationLabel = new JLabel("Location: Location of user");
-        locationLabel.setBounds(35, 100, 500, 20);
-        add(locationLabel);
+        msgLabel = new JLabel("Manage your shop here.");
+        msgLabel.setBounds(35, 100, 500, 20);
+        add(msgLabel);
 
         shopButton = new JButton("Sell Items");
         shopButton.setBounds(30, 155, 720, 100);

@@ -32,7 +32,7 @@ public class sellProduct extends JFrame implements ActionListener{
         setTitle("USER SHOP");
         setLayout(null);
         setSize(800,800);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -128,11 +128,12 @@ public class sellProduct extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(this, "Please enter valid price and quantity.");
     }
 }
+    else if (e.getSource() == backButton) {
+    userShop shop = new userShop();
+    shop.setVisible(true);
+    this.dispose();
+}
 
     }
 
-    public static void main(String[] args) {
-        sellProduct frame = new sellProduct();
-        frame.setVisible(true);
-    }
 }
