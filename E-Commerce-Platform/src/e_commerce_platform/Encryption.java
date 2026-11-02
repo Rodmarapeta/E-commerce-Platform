@@ -15,7 +15,7 @@ import javax.crypto.spec.PBEKeySpec;
  * @author Rodmar
  */
 public class Encryption {
-    private static final int ITERATIONS = 1;
+    private static final int ITERATIONS = 120000;
     private static final int KEY_LENGTH = 256;
     private static final int SALT_LENGTH = 16;
 
