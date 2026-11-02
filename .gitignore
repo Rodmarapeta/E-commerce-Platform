@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 build/
 nbproject/private/
@@ -12,3 +13,8 @@ E-Commerce-Platform/nbproject/private/
 
 # NetBeans distribution files
 /E-Commerce-Platform/dist/
+=======
+/nbproject/private/
+/build/
+/dist/
+>>>>>>> DREUV2
