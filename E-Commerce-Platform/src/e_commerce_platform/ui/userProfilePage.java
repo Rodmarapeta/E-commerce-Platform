@@ -3,12 +3,13 @@ package e_commerce_platform.ui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import e_commerce_platform.UserSession;
+import e_commerce_platform.ui.loginPage;
 
 public class userProfilePage extends JFrame implements ActionListener{
 
-    private JLabel nameLabel, locationLabel;
-    private JButton backButton, cartButton, orderButton, reviewsButton, shopButton, addressButton, accountButton;
+    private JLabel nameLabel, emailLabel;
+    private JButton backButton, cartButton, orderButton, reviewsButton, shopButton, addressButton, accountButton, logoutButton;
 
     public userProfilePage() {
 
@@ -18,17 +19,21 @@ public class userProfilePage extends JFrame implements ActionListener{
         setLocationRelativeTo(null);
         setLayout(null);
 
-        nameLabel = new JLabel("Name");
+        nameLabel = new JLabel("Name: " + UserSession.getUsername());
         nameLabel.setBounds(55, 42, 470, 25);
         add(nameLabel);
 
-        locationLabel = new JLabel("Location of user");
-        locationLabel.setBounds(55, 70, 470, 25);
-        add(locationLabel);
+        emailLabel = new JLabel("Email: " + UserSession.getEmail());
+        emailLabel.setBounds(55, 70, 470, 25);
+        add(emailLabel);
 
         backButton = new JButton("Back to Home Page");
         backButton.setBounds(460, 30, 300, 30);
         add(backButton);
+        
+        logoutButton = new JButton("Logout");
+        logoutButton.setBounds(460, 70, 300,30);
+        add(logoutButton);
 
         cartButton = new JButton("My Cart");
         cartButton.setBounds(40, 150, 340, 160);
@@ -57,6 +62,7 @@ public class userProfilePage extends JFrame implements ActionListener{
         backButton.addActionListener(this);
         cartButton.addActionListener(this);
         shopButton.addActionListener(this);
+        logoutButton.addActionListener(this);
     }
 
     @Override
@@ -73,6 +79,16 @@ public class userProfilePage extends JFrame implements ActionListener{
             userShop Mobailegends = new userShop();
             Mobailegends.setVisible(true);
             this.dispose();
+        } else if (e.getSource() == logoutButton) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                UserSession.clearSession();
+                
+                loginPage login =  new loginPage();
+                login.setVisible(true);
+                this.dispose();
+            }
         }
     }
 

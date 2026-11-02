@@ -44,7 +44,7 @@ public class homePage extends JFrame implements ActionListener {
     homePage() {
 
         setTitle("E-Commerce Platform - Home");
-        setSize(1000, 650);
+        setSize(1050, 650);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -357,8 +357,5 @@ public class homePage extends JFrame implements ActionListener {
         }
 
     }
-
-
-
 
 }
