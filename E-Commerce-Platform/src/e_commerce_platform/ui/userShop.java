@@ -63,6 +63,7 @@ public class userShop extends JFrame implements ActionListener {
         reportsButton.addActionListener(this);
         shopButton.addActionListener(this);
         inventoryButton.addActionListener(this);
+        ordersButton.addActionListener(this);
     }
 
     @Override
@@ -87,9 +88,13 @@ public class userShop extends JFrame implements ActionListener {
             baihubi.setVisible(true);
             this.dispose();
         }
+        else if (e.getSource() == ordersButton) {
 
-
-    }
+            ManageOrdersPage orders = new ManageOrdersPage();
+            orders.setVisible(true);
+            this.dispose();
+        }
+    }   
 
     public static void main(String[] args) {
         userShop bisaya = new userShop();
