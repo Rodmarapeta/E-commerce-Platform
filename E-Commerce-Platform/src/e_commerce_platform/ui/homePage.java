@@ -111,10 +111,21 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.setBounds(740, 25, 110, 40);
         mainPanel.add(myAccountButton);
 
-        // Back button
-        backButton = new JButton("Back");
-        backButton.setBounds(855, 25, 80, 40);
-        mainPanel.add(backButton);
+        // Payment button
+        JButton paymentButton = new JButton("Payment");
+        paymentButton.setBounds(855, 25, 80, 40);
+        mainPanel.add(paymentButton);
+
+        paymentButton.addActionListener(e -> {
+        
+            if (cart.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Your cart is empty!");
+        } 
+            else {
+        PaymentPage paymentPage = new PaymentPage(cart);
+        paymentPage.setVisible(true);
+        }
+        });
 
         // Cart button
         cartButton = new JButton("Cart");
@@ -202,8 +213,7 @@ public class homePage extends JFrame implements ActionListener {
 
     JPanel panel;
     JLabel productName, productPrice, productCategory;
-    JButton orderButton,addCartButton;
-
+    
     private JPanel createProduct(Product product) {
 
         panel = new JPanel();
@@ -259,18 +269,28 @@ public class homePage extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Thank you for rating " + product.getName() + "!");
           }
         });
+        
+        JButton addCartButton = new JButton("Add to Cart");
+        addCartButton.setBounds(105, 145, 110, 35);
+        panel.add(addCartButton);
 
-        orderButton = new JButton("Order");
+        addCartButton.addActionListener(e -> {
+        cart.addProduct(product);
+        JOptionPane.showMessageDialog(this,
+        product.getName() + " added to cart!");
+});
+
+        JButton orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
         panel.add(orderButton);
 
-        addCartButton = new JButton("Add to Cart");
-        addCartButton.setBounds(100, 145, 90, 35);
-        panel.add(addCartButton);
-        addCartButton.addActionListener( e ->{
-            cart.addProduct(product);
+        orderButton.addActionListener(e -> {
+        Cart orderCart = new Cart();
+        orderCart.addProduct(product);
 
-            JOptionPane.showMessageDialog(this, product.getName() + " Added to Cart!");
+        PaymentPage paymentPage = new PaymentPage(orderCart);
+        paymentPage.setVisible(true);
+     
         });
 
         return panel;
@@ -346,16 +366,17 @@ public class homePage extends JFrame implements ActionListener {
         else if (e.getSource()== searchButton) {
 
         }
-        else if (e.getSource()== orderButton) {
-
-        }
-        else if (e.getSource()== addCartButton) {
-
-        }
         else if (e.getSource()== productPanel) {
 
         }
 
     }
+    
+    public static void main(String[] args) {
+    SwingUtilities.invokeLater(() -> {
+        homePage home = new homePage();
+        home.setVisible(true);
+    });
+}
 
 }
