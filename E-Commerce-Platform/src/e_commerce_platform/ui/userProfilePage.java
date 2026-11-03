@@ -67,6 +67,8 @@ public class userProfilePage extends JFrame implements ActionListener{
         cartButton.addActionListener(this);
         orderButton.addActionListener(this);
         shopButton.addActionListener(this);
+        orderButton.addActionListener(this);
+        reviewsButton.addActionListener(this);
         logoutButton.addActionListener(this);
     }
 
@@ -110,6 +112,18 @@ public class userProfilePage extends JFrame implements ActionListener{
                 this.dispose();
             }
         }
+        else if (e.getSource() == orderButton) {
+            MyOrderPage order = new MyOrderPage();
+            order.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource() == reviewsButton) {
+            MyReviewsPage reviews = new MyReviewsPage();
+            reviews.setVisible(true);
+            this.dispose();
+
+    }
+        
     }
 
 }

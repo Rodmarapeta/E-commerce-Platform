@@ -58,11 +58,11 @@ public class userShop extends JFrame implements ActionListener {
         accountButton.setBounds(30, 575, 720, 75);
         add(accountButton);
 
-        //add to actionlistener
         backButton.addActionListener(this);
         reportsButton.addActionListener(this);
         shopButton.addActionListener(this);
         inventoryButton.addActionListener(this);
+        ordersButton.addActionListener(this);
         salesButton.addActionListener(this);
     }
 
@@ -89,7 +89,13 @@ public class userShop extends JFrame implements ActionListener {
             baihubi.setVisible(true);
             this.dispose();
         }
+        else if (e.getSource() == ordersButton) {
+
+
+            ManageOrdersPage orders = new ManageOrdersPage();
+            orders.setVisible(true);
+            this.dispose();
+        }
 
     }
-
 }

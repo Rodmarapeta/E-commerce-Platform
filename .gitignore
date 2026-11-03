@@ -12,6 +12,9 @@ E-Commerce-Platform/nbproject/private/
 *.iml
 
 # NetBeans distribution files
+build/ 
+nbproject/private/ 
+E-Commerce-Platform/nbproject/private/ 
 /E-Commerce-Platform/dist/
 =======
 /nbproject/private/

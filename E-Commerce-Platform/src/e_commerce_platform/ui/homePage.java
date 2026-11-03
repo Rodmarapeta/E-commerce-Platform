@@ -67,6 +67,7 @@ public class homePage extends JFrame implements ActionListener {
         upperPanel.add(warrantyLabel);
 
         supportButton = new JButton("Support");
+        supportButton.addActionListener(this);
         supportButton.setBounds(730, 15, 100, 30);
         upperPanel.add(supportButton);
 
@@ -201,6 +202,7 @@ public class homePage extends JFrame implements ActionListener {
         myAccountButton.addActionListener(this);
         cartButton.addActionListener(this);
         searchButton.addActionListener(this);
+        supportButton.addActionListener(this);
         homeButton.addActionListener(this);
     }
     
@@ -369,14 +371,11 @@ public class homePage extends JFrame implements ActionListener {
         else if (e.getSource()== productPanel) {
 
         }
+       else if (e.getSource() == supportButton) {
 
-    }
-    
-    public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> {
-        homePage home = new homePage();
-        home.setVisible(true);
-    });
+     SupportPage support = new SupportPage();
+    support.setVisible(true);
+    this.dispose();
 }
-
+    }
 }
