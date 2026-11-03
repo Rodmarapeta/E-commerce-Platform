@@ -5,27 +5,37 @@
 package e_commerce_platform.ui;
 
 import e_commerce_platform.DBConnection;
-import javax.swing.JOptionPane;
-import e_commerce_platform.ProductTable;
-
+import java.sql.Connection;
+import java.sql.SQLException;
 /**
  *
  * @author Rodmar
  */
 public class E_Commerce_Platform {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
-        DBConnection.getConnection();
-        ProductTable.createTable();
-        
-        loginPage frame = new loginPage();
-        frame.setVisible(true);
-                
+
+        DBConnection.createDatabase();
+        DBConnection.createTables();
+
+        Connection c = DBConnection.getConnection();
+
+        if (c != null) {
+            System.out.println("SUCCESS: Java is connected to MySQL!");
+
+            try {
+                c.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+            java.awt.EventQueue.invokeLater(() -> {
+                new loginPage().setVisible(true);
+            });
+
+        } else {
+            System.out.println("Unable to connect to database.");
+        }
     }
-    
 }
+
