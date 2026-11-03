@@ -49,5 +49,73 @@ public class DBConnection {
             return null;
         }
     }
+    public static void createTables() {
+
+    String[] tables = {
+
+        "CREATE TABLE IF NOT EXISTS users ("
+        + "id INT AUTO_INCREMENT PRIMARY KEY, "
+        + "username VARCHAR(50) NOT NULL UNIQUE, "
+        + "email VARCHAR(100) NOT NULL UNIQUE, "
+        + "password VARCHAR(255) NOT NULL"
+        + ")",
+
+        "CREATE TABLE IF NOT EXISTS products ("
+        + "id INT AUTO_INCREMENT PRIMARY KEY, "
+        + "name VARCHAR(100) NOT NULL, "
+        + "price DECIMAL(10,2) NOT NULL, "
+        + "category VARCHAR(100) NOT NULL, "
+        + "quantity INT NOT NULL DEFAULT 0"
+        + ")",
+
+        "CREATE TABLE IF NOT EXISTS orders ("
+        + "order_id INT AUTO_INCREMENT PRIMARY KEY, "
+        + "user_id INT NOT NULL, "
+        + "customer_name VARCHAR(100) NOT NULL, "
+        + "address VARCHAR(255) NOT NULL, "
+        + "contact VARCHAR(30) NOT NULL, "
+        + "payment_method VARCHAR(50) NOT NULL, "
+        + "total_price DECIMAL(10,2) NOT NULL, "
+        + "order_status VARCHAR(50) DEFAULT 'Pending', "
+        + "order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        + ")",
+
+        // ORDER ITEMS TABLE
+        "CREATE TABLE IF NOT EXISTS order_items ("
+        + "item_id INT AUTO_INCREMENT PRIMARY KEY, "
+        + "order_id INT NOT NULL, "
+        + "product_id INT NOT NULL, "
+        + "product_name VARCHAR(100) NOT NULL, "
+        + "price DECIMAL(10,2) NOT NULL, "
+        + "quantity INT NOT NULL, "
+        + "subtotal DECIMAL(10,2) NOT NULL"
+        + ")"
+    };
+
+    try (Connection conn = getConnection()) {
+
+        if (conn == null) {
+            System.out.println("Cannot create tables. Database connection failed.");
+            return;
+        }
+
+        try (Statement stmt = conn.createStatement()) {
+
+            for (String sql : tables) {
+                stmt.executeUpdate(sql);
+            }
+
+            System.out.println("All database tables are ready!");
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Table creation failed!");
+        e.printStackTrace();
+    }
+ } 
+    public static void initializeDatabase() {
+    createDatabase();
+    createTables();
+}
     
 }
