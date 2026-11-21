@@ -74,8 +74,7 @@ public class loginPage extends JFrame implements ActionListener {
                 return;
             } 
             
-            String query = "Select id, username, email, password from users where email = ?";
-            
+            String query = "SELECT id, username, email, password, role FROM users WHERE email = ?";            
             try (Connection conn = DBConnection.getConnection();
                     PreparedStatement pst = conn.prepareStatement(query)) {
                 
@@ -90,15 +89,23 @@ public class loginPage extends JFrame implements ActionListener {
                         int userId = rs.getInt("id");
                         String username = rs.getString("username");
                         String userEmail = rs.getString("email");
-                        
-                        UserSession.setUser(userId, username, userEmail);
-                        
-                        JOptionPane.showMessageDialog(this, "Login Successful!");
-                            
-                        homePage home = new homePage();
-                        home.setVisible(true);
-                        this.dispose();
-                            
+                        String role = rs.getString("role");
+
+                    UserSession.setUser(userId, username, userEmail);
+
+                    JOptionPane.showMessageDialog(this, "Login Successful!");
+
+                    if (role.equalsIgnoreCase("Admin")) {
+                    adminPage admin = new adminPage();
+                    admin.setVisible(true);
+
+                   } else {
+
+                    homePage home = new homePage();
+                    home.setVisible(true);
+                    }
+
+                     this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Incorrect password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
                         }
