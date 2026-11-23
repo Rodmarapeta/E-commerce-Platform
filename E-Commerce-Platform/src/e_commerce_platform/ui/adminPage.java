@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
+import e_commerce_platform.UserSession;
 
 public class adminPage extends JFrame implements ActionListener {
 
@@ -76,13 +77,15 @@ public class adminPage extends JFrame implements ActionListener {
             dispose();
 
         } else if (e.getSource() == logoutButton) {
-            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+           int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
 
-            if (confirm == JOptionPane.YES_OPTION) {
-                loginPage login = new loginPage();
-                login.setVisible(true);
-                dispose();
-            }
+           if (confirm == JOptionPane.YES_OPTION) {
+             UserSession.clearSession();
+
+            loginPage login = new loginPage();
+            login.setVisible(true);
+            dispose();
         }
-    }
+      }
+   }
 }
