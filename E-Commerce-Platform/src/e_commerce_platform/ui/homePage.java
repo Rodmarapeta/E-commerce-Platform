@@ -20,11 +20,11 @@ public class homePage extends JFrame implements ActionListener {
 
     private JLabel shippingLabel, returnLabel, warrantyLabel, storeLabel, categoryLabel;
     private JPanel upperPanel, mainPanel, categoryPanel, productPanel;
-    private JButton myAccountButton, cartButton, supportButton, trackOrderButton,
-                    searchButton, backButton, homeButton, shopButton, electronicsButton, kitchenButton,
-                    fashionButton, applianceButton;
-    private JComboBox<String> comboBox;
+    private JButton myAccountButton, cartButton, supportButton, trackOrderButton, searchButton, backButton, homeButton, 
+            shopButton, electronicsButton, kitchenButton, fashionButton, applianceButton;
+    private JComboBox<String> comboBox, sortComboBox;
     private JTextField searchProduct;
+    private List<Product> originalProducts = new ArrayList<>();
     private List<Product> allProducts = new ArrayList<>();
     Cart cart= new Cart();
 
@@ -137,8 +137,24 @@ public class homePage extends JFrame implements ActionListener {
 
         categoryPanel = new JPanel();
         categoryPanel.setLayout(null);
-        categoryPanel.setBounds(0, 195, 1000, 55);
+        categoryPanel.setBounds(0, 195, 1000, 85);
         add(categoryPanel);
+        
+        JLabel sortLabel = new JLabel("Sort by Price:");
+        sortLabel.setBounds(30, 55, 100, 25);
+        categoryPanel.add(sortLabel);
+
+         String[] sortOptions = {
+            "Default Order", "Price: Low to High", "Price: High to Low"
+        };
+
+        sortComboBox = new JComboBox<>(sortOptions);
+        sortComboBox.setBounds(130, 55, 180, 25);
+        categoryPanel.add(sortComboBox);
+
+        sortComboBox.addActionListener(e -> {
+        sortProducts();
+        });
 
         homeButton = new JButton("Home");
         homeButton.setBounds(30, 10, 90, 35);
@@ -195,7 +211,7 @@ public class homePage extends JFrame implements ActionListener {
         loadProducts();
 
         JScrollPane scrollPane = new JScrollPane(productPanel);
-        scrollPane.setBounds(25, 255, 950, 345);
+        scrollPane.setBounds(25, 285, 950, 315);
         add(scrollPane);
 
         //addtoactionlistener
@@ -210,8 +226,25 @@ public class homePage extends JFrame implements ActionListener {
         
         ProductDao productDao = new ProductDao();
         allProducts = productDao.getAllProducts();
+        originalProducts = new ArrayList<>(allProducts);
         displayProducts("All Categories");
     }
+    
+    private void sortProducts() {
+
+    String selectedSort = (String) sortComboBox.getSelectedItem();
+
+    if (selectedSort.equals("Default Order")) {
+        allProducts = new ArrayList<>(originalProducts);
+
+    } else if (selectedSort.equals("Price: Low to High")) {
+        Collections.sort(allProducts, Comparator.comparingDouble(Product::getPrice));
+
+    } else if (selectedSort.equals("Price: High to Low")) {
+        Collections.sort(allProducts, Comparator.comparingDouble(Product::getPrice).reversed());
+    }
+    searchProducts();
+}
 
     JPanel panel;
     JLabel productName, productPrice, productCategory;
@@ -222,8 +255,7 @@ public class homePage extends JFrame implements ActionListener {
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(200, 220));
         panel.setBorder(
-                BorderFactory.createLineBorder(Color.LIGHT_GRAY)
-        );
+        BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
         productName = new JLabel(product.getName());
         productName.setBounds(15, 25, 185, 30);
