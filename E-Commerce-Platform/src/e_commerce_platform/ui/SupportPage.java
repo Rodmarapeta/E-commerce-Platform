@@ -1,29 +1,21 @@
+
 package e_commerce_platform.ui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SupportPage extends JFrame implements ActionListener {
-    private JPanel headerPanel;
-    private JPanel mainPanel;
-    private JLabel subtitleLabel;
-    private JLabel nameLabel;
-    private JLabel emailLabel;
-    private JTextField nameField;
-    private JTextField emailField;
-    private JLabel orderLabel;
-    private JTextField orderField;
-    private JLabel messageLabel;
+public class SupportPage extends JFrame implements ActionListener 
+{
+    private JPanel headerPanel,mainPanel;
+    private JLabel subtitleLabel,nameLabel,emailLabel,orderLabel,messageLabel,titleLabel;
+    private JTextField nameField,emailField,orderField;
     private JTextArea messageArea;
     private JScrollPane messageScroll;
-    private JButton submitButton;
-    private JButton clearButton;
-    private JButton backButton;
-    private JLabel titleLabel;
+    private JButton submitButton,clearButton,backButton;
   
-    public SupportPage() {
-
+    public SupportPage() 
+    {
         setTitle("Customer Support");
         setSize(1000, 700);
         setLayout(null);
@@ -102,42 +94,40 @@ public class SupportPage extends JFrame implements ActionListener {
         mainPanel.add(backButton);
     }
     
-@Override
-public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == submitButton) {
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        if (e.getSource() == submitButton) 
+        {
+            String name = nameField.getText().trim();
+            String email = emailField.getText().trim();
+            String message = messageArea.getText().trim();
 
-        String name = nameField.getText().trim();
-        String email = emailField.getText().trim();
-        String message = messageArea.getText().trim();
-
-        if (name.isEmpty() || email.isEmpty() || message.isEmpty()) {
-            JOptionPane.showMessageDialog(
-                this,
-                "Please complete all required fields."
-            );
-        } else {
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Your support request has been submitted successfully!"
-            );
+            if (name.isEmpty() || email.isEmpty() || message.isEmpty()) 
+            {
+                JOptionPane.showMessageDialog(this,"Please complete all required fields.");
+            } 
+            else 
+            {
+                JOptionPane.showMessageDialog(this,"Your support request has been submitted successfully!");
+                nameField.setText("");
+                emailField.setText("");
+                orderField.setText("");
+                messageArea.setText("");
+            }
+        }       
+        else if (e.getSource() == clearButton) 
+        {
             nameField.setText("");
             emailField.setText("");
             orderField.setText("");
             messageArea.setText("");
+        } 
+        else if (e.getSource() == backButton) 
+        {
+            homePage a = new homePage();
+            a.setVisible(true);
+            this.dispose();
         }
-}       
-        else if (e.getSource() == clearButton) {
-
-            nameField.setText("");
-            emailField.setText("");
-            orderField.setText("");
-            messageArea.setText("");
-       
-    
-    } else if (e.getSource() == backButton) {
-
-         this.dispose();
-}
-}       
+    }       
 }

@@ -32,11 +32,7 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         titleLabel.setBounds(30, 25, 300, 50);
         headerPanel.add(titleLabel);
 
-        String[] columns = {
-        "Product Name",
-        "Rating",
-        "Your Review"
-        };
+        String[] columns = {"Product Name","Rating","Your Review"};
 
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         reviewsTable = new JTable(model);
@@ -65,21 +61,15 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         writeReviewButton.addActionListener(this);
         add(writeReviewButton);
     }
+    
     @Override
-      public void actionPerformed(ActionEvent e) {
-
-    if (e.getSource() == backButton) {
-
-        userProfilePage profile = new userProfilePage();
-        profile.setVisible(true);
-        this.dispose();
-
-    } else if (e.getSource() == writeReviewButton) {
-
-        JOptionPane.showMessageDialog(
-            this,
-            "It is not yet available."
-        );
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == backButton) {
+            userProfilePage profile = new userProfilePage();
+            profile.setVisible(true);
+            this.dispose();
+        } else if (e.getSource() == writeReviewButton) {
+            JOptionPane.showMessageDialog(this,"It is not yet available.");
+        }
     }
-}
 }

@@ -5,8 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class inventoryReport extends JFrame implements ActionListener{
-
+public class inventoryReport extends JFrame implements ActionListener
+{
     JLabel store, productID, productName, productPrice, productQty, productCatgy, lblReportsHeader;
     JTextField txtProductID, txtProductName, txtProductPrice, txtProductQty, txtproductCatgy;
     JButton btnBack, AddProduct, btnInventoryReport, btnUserReport, btnSalesReport;
@@ -14,7 +14,8 @@ public class inventoryReport extends JFrame implements ActionListener{
     JScrollPane scrollPane;
     JTable reportTable;
 
-    public inventoryReport() {
+    public inventoryReport() 
+    {
         setTitle("Inventory Report");
         setSize(1000, 800);
         setLayout(null);
@@ -99,15 +100,17 @@ public class inventoryReport extends JFrame implements ActionListener{
         //add to actionlistner
         btnBack.addActionListener(this);
     }
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent e) 
+    {
         if (e.getSource() == btnBack) {
             userShop user = new userShop();
             user.setVisible(true);
             this.dispose();
         }
-        else if (e.getSource() == btnInventoryReport) {
-
+        else if (e.getSource() == btnInventoryReport) 
+        {
+            //make inventory report
+            
         }
     }
 

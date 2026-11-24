@@ -9,15 +9,15 @@ import java.sql.SQLException;
 import e_commerce_platform.DBConnection;
 import e_commerce_platform.Encryption;
 
-public class registerPage extends JFrame implements ActionListener {
-
+public class registerPage extends JFrame implements ActionListener 
+{
     private JLabel lblTitle, lblUsername, lblEmail, lblPassword, lblConfirmPassword;
     private JTextField txtUsername, txtEmail;
     private JPasswordField txtPassword, txtConfirmPassword;
     private JButton btnRegister, btnBack;
 
-    public registerPage() {
-
+    public registerPage() 
+    {
         setTitle("E-Commerce Platform - Register");
         setSize(1000, 650);
         setLayout(null);
@@ -74,27 +74,31 @@ public class registerPage extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == btnRegister) {
+    public void actionPerformed(ActionEvent e) 
+    {
+        if (e.getSource() == btnRegister) 
+        {
             String username = txtUsername.getText();
             String email = txtEmail.getText();
             String password = new String(txtPassword.getPassword());
             String confirmPassword = new String(txtConfirmPassword.getPassword());
 
-            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) 
+            {
                 JOptionPane.showMessageDialog(this, "Please complete all fields", "Input Error", JOptionPane.ERROR_MESSAGE);
-            
-            } else if (!password.equals(confirmPassword)) {
+            } 
+            else if (!password.equals(confirmPassword)) 
+            {
                 JOptionPane.showMessageDialog(this, "Passwords do not match", "Input Error", JOptionPane.ERROR_MESSAGE);
-
-            } else {
+            } 
+            else 
+            {
                 String sql = "Insert into users (username, email, password) Values (?, ?, ?)";
-                
-                try {
+                try 
+                {
                     Connection con = DBConnection.getConnection();
-                    
-                    if (con == null) {
+                    if (con == null) 
+                    {
                         JOptionPane.showMessageDialog(this, "Database connection failed!");
                         return;
                     }
@@ -117,16 +121,19 @@ public class registerPage extends JFrame implements ActionListener {
                     login.setVisible(true);
                     this.dispose();
                     
-                } catch (Exception ex) {
+                } 
+                catch (Exception ex) 
+                {
                     JOptionPane.showMessageDialog(this, "Registration failed: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
             }
-        } else if (e.getSource() == btnBack) {
+        } 
+        else if (e.getSource() == btnBack) 
+        {
             loginPage login = new loginPage();
             login.setVisible(true);
             this.dispose();
         }
     }
-
 }

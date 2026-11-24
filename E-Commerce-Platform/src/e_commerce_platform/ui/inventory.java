@@ -9,7 +9,8 @@ import e_commerce_platform.Product;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-public class inventory extends JFrame implements ActionListener {
+public class inventory extends JFrame implements ActionListener 
+{
 
     private JLabel lblName,lblId,lblPrice,lblQuantity,lblCategory;
     private JTextField txtId, txtName, txtPrice, txtQuantity, txtCategory, txtSearch;
@@ -18,8 +19,8 @@ public class inventory extends JFrame implements ActionListener {
     private JButton btnback, btnAdd, btnUpdate , btnRemove, btnClear, btnSelect, btnSearch;
     JScrollPane scrollPane;
 
-    public inventory() {
-
+    public inventory() 
+    {
         setTitle("Inventory Management System");
         setSize(850, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,11 +94,13 @@ public class inventory extends JFrame implements ActionListener {
         //make columns for product info
         String[] columns = {"ID", "Name", "Price", "Quantity", "Category"};
 
-        tableModel = new DefaultTableModel(columns, 0) {
-         @Override
-          public boolean isCellEditable(int row, int column) {
-          return false;
-           }
+        tableModel = new DefaultTableModel(columns, 0) 
+        {
+            @Override
+            public boolean isCellEditable(int row, int column) 
+            {
+                return false;
+            }
         };
         
         productTable = new JTable(tableModel);
@@ -126,192 +129,205 @@ public class inventory extends JFrame implements ActionListener {
         loadProducts();
     }
     
-    public void loadProducts() {
-    ProductDao dao = new ProductDao();
-    List<Product> products = dao.getAllProducts();
-    tableModel.setRowCount(0);
-    for (Product product : products) {
-
-        Object[] row = {
-            product.getId(),
-            product.getName(),
-            product.getPrice(),
-            product.getQuantity(),
-            product.getCategory()
-        };
-
-        tableModel.addRow(row);
-    }
-}
-    
-    public void searchProducts() {
-    String keyword = txtSearch.getText().trim().toLowerCase();
-    ProductDao dao = new ProductDao();
-    List<Product> products = dao.getAllProducts();
-
-    tableModel.setRowCount(0);
-
-    for (Product product : products) {
-        if (product.getName().toLowerCase().contains(keyword)) {
-
-            Object[] row = {
+    public void loadProducts() 
+    {
+        ProductDao dao = new ProductDao();
+        List<Product> products = dao.getAllProducts();
+        tableModel.setRowCount(0);
+        
+        for (Product product : products) 
+        {
+            Object[] row = 
+            {
                 product.getId(),
                 product.getName(),
                 product.getPrice(),
                 product.getQuantity(),
                 product.getCategory()
             };
-
             tableModel.addRow(row);
         }
     }
-
-    if (tableModel.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(this, "No matching product found.");
-    }
-}
-
-    @Override
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource() == btnAdd) {
-
-        try {
-
-        String name = txtName.getText().trim();
-        double price = Double.parseDouble(txtPrice.getText());
-        int quantity = Integer.parseInt(txtQuantity.getText());
-        String category = txtCategory.getText().trim();
-
-        if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter valid product details.");
-            return;
-        }
-
-        Product product = new Product(0, name, price, category, quantity);
+    
+    public void searchProducts() 
+    {
+        String keyword = txtSearch.getText().trim().toLowerCase();
         ProductDao dao = new ProductDao();
+        List<Product> products = dao.getAllProducts();
 
-        if (dao.addProduct(product)) {
-            JOptionPane.showMessageDialog(this, "Product added successfully!");
+        tableModel.setRowCount(0);
 
-            loadProducts();
-
-            txtId.setText("");
-            txtName.setText("");
-            txtPrice.setText("");
-            txtQuantity.setText("");
-            txtCategory.setText("");
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Failed to add product.");
-        }
-
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Please enter a valid price and quantity.");
-    }
-}
-         else if (e.getSource() == btnUpdate) {
-
-        try {
-
-        int id = Integer.parseInt(txtId.getText());
-        String name = txtName.getText().trim();
-        double price = Double.parseDouble(txtPrice.getText());
-        int quantity = Integer.parseInt(txtQuantity.getText());
-        String category = txtCategory.getText().trim();
-
-        if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) {
-            JOptionPane.showMessageDialog(this, "Please enter valid product details.");
-            return;
-        }
-
-        Product product = new Product(id, name, price, category, quantity);
-        ProductDao dao = new ProductDao();
-        if (dao.updateProduct(product)) {
-            JOptionPane.showMessageDialog(this, "Product updated successfully!");
-
-            loadProducts();
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Product update failed.");
-
-        }
-
-    }   catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Please enter valid ID, price, and quantity.");
-    }
-}
-        else if (e.getSource() == btnRemove) {
-
-        try {
-
-        if (txtId.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please select a product first.");
-            return;
-        }
-
-        int id = Integer.parseInt(txtId.getText());
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this product?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            ProductDao dao = new ProductDao();
-
-            if (dao.deleteProduct(id)) {
-                JOptionPane.showMessageDialog(this, "Product removed successfully!");
-                loadProducts();
-
-                txtId.setText("");
-                txtName.setText("");
-                txtPrice.setText("");
-                txtQuantity.setText("");
-                txtCategory.setText("");
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Product removal failed.");
+        for (Product product : products) 
+        {
+            if (product.getName().toLowerCase().contains(keyword)) 
+            {
+                Object[] row = 
+                {
+                    product.getId(),
+                    product.getName(),
+                    product.getPrice(),
+                    product.getQuantity(),
+                    product.getCategory()
+                };
+                tableModel.addRow(row);
             }
         }
 
-    } catch (NumberFormatException ex) {JOptionPane.showMessageDialog(this, "Invalid Product ID.");
+        if (tableModel.getRowCount() == 0) 
+        {
+            JOptionPane.showMessageDialog(this, "No matching product found.");
+        }
     }
-}
-        else if (e.getSource() == btnClear) {
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == btnAdd) 
+        {
+            try 
+            {
+                String name = txtName.getText().trim();
+                double price = Double.parseDouble(txtPrice.getText());
+                int quantity = Integer.parseInt(txtQuantity.getText());
+                String category = txtCategory.getText().trim();
+
+                if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) 
+                {
+                    JOptionPane.showMessageDialog(this, "Please enter valid product details.");
+                    return;
+                }
+
+                Product product = new Product(0, name, price, category, quantity);
+                ProductDao dao = new ProductDao();
+
+                if (dao.addProduct(product)) 
+                {
+                    JOptionPane.showMessageDialog(this, "Product added successfully!");
+                    loadProducts();
+                    txtId.setText("");
+                    txtName.setText("");
+                    txtPrice.setText("");
+                    txtQuantity.setText("");
+                    txtCategory.setText("");
+                } 
+                else 
+                {
+                    JOptionPane.showMessageDialog(this, "Failed to add product.");
+                }
+            } 
+            catch (NumberFormatException ex) 
+            {
+                JOptionPane.showMessageDialog(this, "Please enter a valid price and quantity.");
+            }
+        }
+        else if (e.getSource() == btnUpdate) 
+        {
+            try 
+            {
+                int id = Integer.parseInt(txtId.getText());
+                String name = txtName.getText().trim();
+                double price = Double.parseDouble(txtPrice.getText());
+                int quantity = Integer.parseInt(txtQuantity.getText());
+                String category = txtCategory.getText().trim();
+
+                if (name.isEmpty() || category.isEmpty() || price <= 0 || quantity < 0) 
+                {
+                    JOptionPane.showMessageDialog(this, "Please enter valid product details.");
+                    return;
+                }
+                Product product = new Product(id, name, price, category, quantity);
+                ProductDao dao = new ProductDao();
+                
+                if (dao.updateProduct(product)) 
+                {
+                    JOptionPane.showMessageDialog(this, "Product updated successfully!");
+                    loadProducts();
+                } 
+                else 
+                {
+                    JOptionPane.showMessageDialog(this, "Product update failed.");
+                }
+            }   
+            catch (NumberFormatException ex) 
+            {
+                JOptionPane.showMessageDialog(this, "Please enter valid ID, price, and quantity.");
+            }
+        }
+        else if (e.getSource() == btnRemove) 
+        {
+            try {
+                if (txtId.getText().trim().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(this, "Please select a product first.");
+                    return;
+                }
+                int id = Integer.parseInt(txtId.getText());
+                int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this product?", "Confirm Removal", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) 
+                {
+                    ProductDao dao = new ProductDao();
+                    if (dao.deleteProduct(id)) 
+                    {
+                        JOptionPane.showMessageDialog(this, "Product removed successfully!");
+                        loadProducts();
+                        txtId.setText("");
+                        txtName.setText("");
+                        txtPrice.setText("");
+                        txtQuantity.setText("");
+                        txtCategory.setText("");
+                    } 
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(this, "Product removal failed.");
+                    }
+                }
+
+            } 
+            catch (NumberFormatException ex)
+            {
+                JOptionPane.showMessageDialog(this, "Invalid Product ID.");
+            }
+        }
+        else if (e.getSource() == btnClear) 
+        {
             txtId.setText("");
             txtName.setText("");
             txtPrice.setText("");
             txtQuantity.setText("");
             txtCategory.setText("");
             txtSearch.setText("");
-            
+   
             productTable.clearSelection();
             
             loadProducts();
         }
         
-        else if (e.getSource() == btnSelect) {
-        int selectedRow = productTable.getSelectedRow();
-
-        if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a product from the table.");
+        else if (e.getSource() == btnSelect) 
+        {
+            int selectedRow = productTable.getSelectedRow();
+            if (selectedRow == -1) 
+            {
+                JOptionPane.showMessageDialog(this, "Please select a product from the table.");
+            }
+            else 
+            {
+                txtId.setText(tableModel.getValueAt(selectedRow, 0).toString());
+                txtName.setText(tableModel.getValueAt(selectedRow, 1).toString());
+                txtPrice.setText(tableModel.getValueAt(selectedRow, 2).toString());
+                txtQuantity.setText(tableModel.getValueAt(selectedRow, 3).toString());
+                txtCategory.setText(tableModel.getValueAt(selectedRow, 4).toString());
+            }
         }
-        
-        else {
-
-        txtId.setText(tableModel.getValueAt(selectedRow, 0).toString());
-        txtName.setText(tableModel.getValueAt(selectedRow, 1).toString());
-        txtPrice.setText(tableModel.getValueAt(selectedRow, 2).toString());
-        txtQuantity.setText(tableModel.getValueAt(selectedRow, 3).toString());
-        txtCategory.setText(tableModel.getValueAt(selectedRow, 4).toString());
-
-    }
-}
-        else if (e.getSource() == btnSearch || e.getSource() == txtSearch) {
-        searchProducts();
-}
-        else if (e.getSource() == btnback) {
+        else if (e.getSource() == btnSearch || e.getSource() == txtSearch) 
+        {
+            searchProducts();
+        }
+        else if (e.getSource() == btnback) 
+        {
             userShop blonde  = new userShop();
             blonde.setVisible(true);
             this.dispose();
         }
-
     }
-
 }
