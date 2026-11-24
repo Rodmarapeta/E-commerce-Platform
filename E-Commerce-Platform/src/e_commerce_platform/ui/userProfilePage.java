@@ -13,6 +13,7 @@ public class userProfilePage extends JFrame implements ActionListener{
     private JLabel nameLabel, emailLabel;
     private OrderHistoryDao orderHistoryDao;
     private JButton backButton, cartButton, orderButton, reviewsButton, shopButton, addressButton, accountButton, logoutButton;
+//    public ShoppingCart cart; 
 
     public userProfilePage() {
 
@@ -81,29 +82,30 @@ public class userProfilePage extends JFrame implements ActionListener{
             this.dispose();
         }
         else if (e.getSource() == cartButton) {
-            JOptionPane.showMessageDialog (this, "Please open the cart from the Home Page.");
-        
-        } else if (e.getSource() == orderButton) {
-         List<String> orders = orderHistoryDao.getOrderHistory(UserSession.getUserId());
-
-         if (orders.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No order history found.");
-        } else {
-        String orderDetails = "";
-
-        for (int i = 0; i < orders.size(); i++) {
-            orderDetails += orders.get(i) + "\n\n";
-        }
-        JOptionPane.showMessageDialog(this, orderDetails, "My Order History", JOptionPane.INFORMATION_MESSAGE);
-        }
-        } else if (e.getSource()== shopButton) {
+//            ShoppingCartPage n = new ShoppingCartPage(cart);
+//            n.setVisible(true);
+//            this.dispose();        
+        } 
+        else if (e.getSource() == orderButton) {
+            List<String> orders = orderHistoryDao.getOrderHistory(UserSession.getUserId());
+            if (orders.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No order history found.");
+            } 
+            else {
+            String orderDetails = "";
+            for (int i = 0; i < orders.size(); i++) {
+                orderDetails += orders.get(i) + "\n\n";
+            }
+            JOptionPane.showMessageDialog(this, orderDetails, "My Order History", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } 
+        else if (e.getSource()== shopButton) {
             userShop Mobailegends = new userShop();
             Mobailegends.setVisible(true);
-            this.dispose();
-            
-        } else if (e.getSource() == logoutButton) {
-            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
-            
+            this.dispose();            
+        } 
+        else if (e.getSource() == logoutButton) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);            
             if (confirm == JOptionPane.YES_OPTION) {
                 UserSession.clearSession();
                 
@@ -121,9 +123,6 @@ public class userProfilePage extends JFrame implements ActionListener{
             MyReviewsPage reviews = new MyReviewsPage();
             reviews.setVisible(true);
             this.dispose();
-
+        }        
     }
-        
-    }
-
 }

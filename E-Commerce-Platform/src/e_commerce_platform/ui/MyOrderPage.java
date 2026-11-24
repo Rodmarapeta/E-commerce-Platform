@@ -37,15 +37,12 @@ public class MyOrderPage extends JFrame implements ActionListener {
             "Deliver Date",
             "Total Price",
             "Order Status"
-};
+        };
 
         tableModel = new DefaultTableModel(columns, 0) {
-
-    @Override
-            public boolean isCellEditable(int row, int column) {
-            return false;
-    }
-};
+            @Override
+            public boolean isCellEditable(int row, int column) {return false;}
+        };
         
         orderTable = new JTable(tableModel);
         orderTable.setRowHeight(45);
@@ -55,9 +52,7 @@ public class MyOrderPage extends JFrame implements ActionListener {
         scrollPane.setBounds(40, 150, 900, 280);
         add(scrollPane);
 
-        emptyLabel = new JLabel(
-        "No current orders yet."
-    );
+        emptyLabel = new JLabel("No current orders yet.");
         backButton = new JButton("Back to Profile");
         backButton.setBounds(40, 450, 160, 40);
         add(backButton);
@@ -71,19 +66,18 @@ public class MyOrderPage extends JFrame implements ActionListener {
     }
     
     @Override
-        public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
 
-    if (e.getSource() == backButton) {
-        userProfilePage profile = new userProfilePage();
-        profile.setVisible(true);
-        this.dispose();
+        if (e.getSource() == backButton) {
+            userProfilePage profile = new userProfilePage();
+            profile.setVisible(true);
+            this.dispose();
+        }
+        else if (e.getSource() == refreshButton) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Order refresh will be connected to the database."
+            );
+        }
     }
-    else if (e.getSource() == refreshButton) {
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Order refresh will be connected to the database."
-        );
-    }
-}
 }

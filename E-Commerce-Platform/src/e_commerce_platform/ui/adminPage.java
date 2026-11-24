@@ -1,3 +1,4 @@
+
 package e_commerce_platform.ui;
 
 import java.awt.event.ActionEvent;
@@ -9,7 +10,8 @@ import e_commerce_platform.UserSession;
 public class adminPage extends JFrame implements ActionListener {
 
     private JLabel titleLabel, welcomeLabel;
-    private JButton productsButton, inventoryButton, salesButton, ordersButton, logoutButton;
+    private JButton productsButton, inventoryButton, salesButton, ordersButton, logoutButton,
+            homeButton;
 
     public adminPage() {
 
@@ -49,11 +51,16 @@ public class adminPage extends JFrame implements ActionListener {
         logoutButton.setBounds(580, 480, 140, 35);
         add(logoutButton);
 
+        homeButton = new JButton("Home Page");
+        homeButton.setBounds(580, 30, 140, 30);
+        add(homeButton);
+
         productsButton.addActionListener(this);
         inventoryButton.addActionListener(this);
         salesButton.addActionListener(this);
         ordersButton.addActionListener(this);
         logoutButton.addActionListener(this);
+        homeButton.addActionListener(this);
     }
 
     @Override
@@ -77,15 +84,31 @@ public class adminPage extends JFrame implements ActionListener {
             dispose();
 
         } else if (e.getSource() == logoutButton) {
-           int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
 
-           if (confirm == JOptionPane.YES_OPTION) {
-             UserSession.clearSession();
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to logout?",
+                    "Logout",
+                    JOptionPane.YES_NO_OPTION
+            );
 
-            loginPage login = new loginPage();
-            login.setVisible(true);
+            if (confirm == JOptionPane.YES_OPTION) {
+                UserSession.clearSession();
+
+                loginPage login = new loginPage();
+                login.setVisible(true);
+                dispose();
+            }
+
+        } else if (e.getSource() == homeButton) {
+            homePage b = new homePage();
+            b.setVisible(true);
             dispose();
         }
-      }
-   }
+    }
+
+    public static void main(String[] args) {
+        adminPage a = new adminPage();
+        a.setVisible(true);
+    }
 }

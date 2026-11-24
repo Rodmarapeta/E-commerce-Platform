@@ -90,12 +90,14 @@ public class userShop extends JFrame implements ActionListener {
             this.dispose();
         }
         else if (e.getSource() == ordersButton) {
-
-
             ManageOrdersPage orders = new ManageOrdersPage();
             orders.setVisible(true);
             this.dispose();
         }
-
+        else if (e.getSource() == salesButton) {
+            salesReport sales = new salesReport();
+            sales.setVisible(true);
+            this.dispose();
+        }
     }
 }

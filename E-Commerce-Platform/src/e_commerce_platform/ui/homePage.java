@@ -91,9 +91,7 @@ public class homePage extends JFrame implements ActionListener {
         comboBox.setBounds(210, 25, 170, 40);
         mainPanel.add(comboBox);
 
-        comboBox.addActionListener(e -> {
-            searchProducts();
-        });
+        comboBox.addActionListener(e -> {searchProducts();});
 
         // Search bar ng mga product
         searchProduct = new JTextField();
@@ -103,9 +101,7 @@ public class homePage extends JFrame implements ActionListener {
         searchButton = new JButton("Search");
         searchButton.setBounds(640, 25, 90, 40);
         mainPanel.add(searchButton);
-        searchButton.addActionListener(e -> {
-            searchProducts();
-        });
+        searchButton.addActionListener(e -> {searchProducts();});
 
         // My Account button
         myAccountButton = new JButton("My Account");
@@ -118,14 +114,13 @@ public class homePage extends JFrame implements ActionListener {
         mainPanel.add(paymentButton);
 
         paymentButton.addActionListener(e -> {
-        
             if (cart.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Your cart is empty!");
-        } 
+            JOptionPane.showMessageDialog(this, "Your cart is empty!");
+            } 
             else {
-        PaymentPage paymentPage = new PaymentPage(cart);
-        paymentPage.setVisible(true);
-        }
+            PaymentPage paymentPage = new PaymentPage(cart);
+            paymentPage.setVisible(true);
+            }
         });
 
         // Cart button
@@ -184,28 +179,17 @@ public class homePage extends JFrame implements ActionListener {
         applianceButton.setBounds(765, 10, 130, 35);
         categoryPanel.add(applianceButton);
 
-        electronicsButton.addActionListener(e -> {
-            comboBox.setSelectedItem("Electronics");
-        });
+        electronicsButton.addActionListener(e -> {comboBox.setSelectedItem("Electronics");});
 
-        kitchenButton.addActionListener(e -> {
-            comboBox.setSelectedItem("Kitchen and Living");
-        });
+        kitchenButton.addActionListener(e -> {comboBox.setSelectedItem("Kitchen and Living");});
 
-        fashionButton.addActionListener(e -> {
-            comboBox.setSelectedItem("Fashion and Apparel");
-        });
+        fashionButton.addActionListener(e -> {comboBox.setSelectedItem("Fashion and Apparel");});
 
-        applianceButton.addActionListener(e -> {
-            comboBox.setSelectedItem("Home Appliances");
-        });
+        applianceButton.addActionListener(e -> {comboBox.setSelectedItem("Home Appliances");});
 
         // Product Panel
-
         productPanel = new JPanel();
         productPanel.setLayout(new GridLayout(0, 4, 15, 15));
-
-        // Mga Sample Product
 
         // Load products from MySQL database
         loadProducts();
@@ -222,8 +206,8 @@ public class homePage extends JFrame implements ActionListener {
         homeButton.addActionListener(this);
     }
     
-    public void loadProducts() {
-        
+    public void loadProducts() 
+    {    
         ProductDao productDao = new ProductDao();
         allProducts = productDao.getAllProducts();
         originalProducts = new ArrayList<>(allProducts);
@@ -248,14 +232,19 @@ public class homePage extends JFrame implements ActionListener {
 
     JPanel panel;
     JLabel productName, productPrice, productCategory;
+    JButton rateButton;
     
-    private JPanel createProduct(Product product) {
-
+    private JPanel createProduct(Product product) 
+    {
         panel = new JPanel();
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(200, 220));
+<<<<<<< HEAD
         panel.setBorder(
         BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+=======
+        panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+>>>>>>> origin/main
 
         productName = new JLabel(product.getName());
         productName.setBounds(15, 25, 185, 30);
@@ -273,35 +262,33 @@ public class homePage extends JFrame implements ActionListener {
         
         double averageRating = ProductReview.getAverageRating(product.getId());
         int reviewCount = ProductReview.getReviewCount(product.getId());
-        JLabel ratingLabel = new JLabel(String.format("★ %.1f (%d reviews)", averageRating, reviewCount)
-        
-        );
+        JLabel ratingLabel = new JLabel(String.format("★ %.1f (%d reviews)", averageRating, reviewCount));
         
         ratingLabel.setBounds(15, 115, 185, 25);
         panel.add(ratingLabel);
         
-        JButton rateButton = new JButton("Rate");
+        rateButton = new JButton("Rate");
         rateButton.setBounds(15, 185, 80, 30);
         panel.add(rateButton);
         
-        rateButton.addActionListener(e -> { String[] ratings = {"1", "2", "3", "4", "5"};
-        
-        String selectedRating = (String) JOptionPane.showInputDialog(this, "Select Your Rating (1-5 Stars):", 
-                "Rate Product", JOptionPane.QUESTION_MESSAGE, null, ratings, ratings[4]);
-        
-        if (selectedRating != null) {
-            int stars = Integer.parseInt(selectedRating);
-            
-            ProductReview review = new ProductReview(product.getId(), "User", stars, "");
-            
-            ProductReview.addReview(review);
-            
-            double newAverage = ProductReview.getAverageRating(product.getId());
-            int newCount = ProductReview.getReviewCount(product.getId());
-            ratingLabel.setText(String.format("★ %.1f (%d reviews)", newAverage, newCount));
-            
-            JOptionPane.showMessageDialog(this, "Thank you for rating " + product.getName() + "!");
-          }
+        rateButton.addActionListener(e -> { 
+            String[] ratings = {"1", "2", "3", "4", "5"};
+            String selectedRating = (String) JOptionPane.showInputDialog(this, "Select Your Rating (1-5 Stars):", 
+                    "Rate Product", JOptionPane.QUESTION_MESSAGE, null, ratings, ratings[4]);
+
+            if (selectedRating != null) {
+                int stars = Integer.parseInt(selectedRating);
+
+                ProductReview review = new ProductReview(product.getId(), "User", stars, "");
+
+                ProductReview.addReview(review);
+
+                double newAverage = ProductReview.getAverageRating(product.getId());
+                int newCount = ProductReview.getReviewCount(product.getId());
+                ratingLabel.setText(String.format("★ %.1f (%d reviews)", newAverage, newCount));
+
+                JOptionPane.showMessageDialog(this, "Thank you for rating " + product.getName() + "!");
+            }
         });
         
         JButton addCartButton = new JButton("Add to Cart");
@@ -312,85 +299,62 @@ public class homePage extends JFrame implements ActionListener {
         cart.addProduct(product);
         JOptionPane.showMessageDialog(this,
         product.getName() + " added to cart!");
-});
+        });
 
         JButton orderButton = new JButton("Order");
         orderButton.setBounds(15, 145, 80, 35);
+        orderButton.putClientProperty("product", product);
+        orderButton.addActionListener(this);
         panel.add(orderButton);
 
         orderButton.addActionListener(e -> {
-        Cart orderCart = new Cart();
-        orderCart.addProduct(product);
-
-        PaymentPage paymentPage = new PaymentPage(orderCart);
-        paymentPage.setVisible(true);
-     
+            
+            JOptionPane.showMessageDialog(this, product.getName() + " order this product?");
+            CheckoutPage paymentPage = new CheckoutPage(cart);
+            paymentPage.setVisible(true);
         });
-
         return panel;
     }
 
     private void displayProducts(String selectedCategory) {
-
         productPanel.removeAll();
-
         for (Product product : allProducts) {
-
-            if (selectedCategory.equals("All Categories")
-                    || product.getCategory().equalsIgnoreCase(selectedCategory)){
-
+            if (selectedCategory.equals("All Categories")|| product.getCategory().equalsIgnoreCase(selectedCategory)){
                 productPanel.add(createProduct(product));
             }
         }
-
         productPanel.revalidate();
         productPanel.repaint();
     }
 
     private void searchProducts() {
-
-        String keyword = searchProduct.getText()
-                .trim()
-                .toLowerCase();
-
-        String selectedCategory =
-                (String) comboBox.getSelectedItem();
-
+        String keyword = searchProduct.getText().trim().toLowerCase();
+        String selectedCategory = (String) comboBox.getSelectedItem();
         productPanel.removeAll();
 
-        for (Product product : allProducts) {
-
-            boolean matchesCategory =
-                    selectedCategory.equals("All Categories")
-                    || product.getCategory()
-                           .equalsIgnoreCase(selectedCategory);
-
-            boolean matchesKeyword =
-                    product.getName()
-                           .toLowerCase()
-                           .contains(keyword);
+        for (Product product : allProducts){
+            boolean matchesCategory = selectedCategory.equals("All Categories")|| product.getCategory().equalsIgnoreCase(selectedCategory);
+            boolean matchesKeyword = product.getName().toLowerCase().contains(keyword);
 
             if (matchesCategory && matchesKeyword) {
                 productPanel.add(createProduct(product));
             }
         }
-
         productPanel.revalidate();
         productPanel.repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource()== myAccountButton) {
             userProfilePage bisaya = new userProfilePage();
             bisaya.setVisible(true);
             this.dispose();
         }
         else if (e.getSource() == homeButton) {
-        searchProduct.setText("");
-        comboBox.setSelectedItem("All Categories");
-        displayProducts("All Categories");
+            searchProduct.setText("");
+            comboBox.setSelectedItem("All Categories");
+            displayProducts("All Categories");
         }
         else if (e.getSource()== cartButton) {
             ShoppingCartPage ilocano = new ShoppingCartPage(cart);
@@ -403,11 +367,11 @@ public class homePage extends JFrame implements ActionListener {
         else if (e.getSource()== productPanel) {
 
         }
-       else if (e.getSource() == supportButton) {
-
-     SupportPage support = new SupportPage();
-    support.setVisible(true);
-    this.dispose();
-}
+        else if (e.getSource() == supportButton) 
+        {
+            SupportPage support = new SupportPage();
+            support.setVisible(true);
+            this.dispose();
+        }        
     }
 }

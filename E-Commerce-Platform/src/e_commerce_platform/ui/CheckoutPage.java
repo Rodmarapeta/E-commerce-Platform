@@ -71,9 +71,7 @@ public class CheckoutPage extends JFrame implements ActionListener {
             );
         }
 
-        totalLabel = new JLabel(
-            "Total: PHP " + String.format("%.2f", cart.getTotalPrice())
-        );
+        totalLabel = new JLabel("Total: PHP " + String.format("%.2f", cart.getTotalPrice()));
         totalLabel.setFont(new Font("Arial", Font.BOLD, 18));
         totalLabel.setBounds(30, 350, 250, 30);
         add(totalLabel);
@@ -90,30 +88,13 @@ public class CheckoutPage extends JFrame implements ActionListener {
 
         if (e.getSource() == placeOrderButton) {
 
-            if (nameField.getText().trim().isEmpty()
-                    || addressField.getText().trim().isEmpty()) {
-
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter your name and delivery address."
-                );
-
+            if (nameField.getText().trim().isEmpty()|| addressField.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this,"Please enter your name and delivery address.");
             } else if (cart.isEmpty()) {
-
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Your cart is empty. Please add a product first."
-                );
-
+                JOptionPane.showMessageDialog(this,"Your cart is empty. Please add a product first.");
             } else if (UserSession.getUserId() <= 0) {
-
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Please login first."
-                );
-
+                JOptionPane.showMessageDialog(this,"Please login first.");
             } else {
-
                 int confirm = JOptionPane.showConfirmDialog(
                     this,
                     "Confirm your order for PHP "
@@ -121,9 +102,7 @@ public class CheckoutPage extends JFrame implements ActionListener {
                     "Confirm Order",
                     JOptionPane.YES_NO_OPTION
                 );
-
                 if (confirm == JOptionPane.YES_OPTION) {
-
                     boolean saved = orderDao.saveOrder(
                         UserSession.getUserId(),
                         nameField.getText().trim(),
@@ -134,7 +113,6 @@ public class CheckoutPage extends JFrame implements ActionListener {
                     );
 
                     if (saved) {
-
                         JOptionPane.showMessageDialog(
                             this,
                             "Order placed successfully!\n"
@@ -151,14 +129,11 @@ public class CheckoutPage extends JFrame implements ActionListener {
                         dispose();
 
                     } else {
-
-                        JOptionPane.showMessageDialog(
-                            this,
-                            "Failed to save your order. Please try again."
-                        );
+                        JOptionPane.showMessageDialog(this,"Failed to save your order. Please try again.");
                     }
                 }
             }
         }
     }
+
 }
