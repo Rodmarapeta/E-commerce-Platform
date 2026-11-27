@@ -11,6 +11,13 @@ public class E_Commerce_Platform {
         DBConnection.createDatabase();
         DBConnection.createTables();
 
+        try {
+            DBConnection.defaultadmin();
+        } catch (Exception ex) {
+            System.out.println("Failed to create default admin!");
+            ex.printStackTrace();
+        }
+
         Connection c = DBConnection.getConnection();
 
         if (c != null) {
