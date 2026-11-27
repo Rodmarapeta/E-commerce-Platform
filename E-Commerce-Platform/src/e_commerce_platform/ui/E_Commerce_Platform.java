@@ -17,7 +17,6 @@ public class E_Commerce_Platform {
 
         DBConnection.createDatabase();
         DBConnection.createTables();
-
         Connection c = DBConnection.getConnection();
 
         if (c != null) {

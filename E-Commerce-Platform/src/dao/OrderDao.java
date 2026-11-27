@@ -32,7 +32,7 @@ public class OrderDao {
             conn.setAutoCommit(false);
 
             String orderQuery = "INSERT INTO orders " + "(user_id, customer_name, address, contact, "
-                    + "payment_method, total_price, order_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            + "payment_method, total_price, order_status) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             orderStatement = conn.prepareStatement(orderQuery, PreparedStatement.RETURN_GENERATED_KEYS);
 

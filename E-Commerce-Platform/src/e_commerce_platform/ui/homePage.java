@@ -3,7 +3,6 @@ package e_commerce_platform.ui;
 import e_commerce_platform.Cart;
 import e_commerce_platform.Product;
 import e_commerce_platform.ProductReview;
-import e_commerce_platform.DBConnection;
 import dao.ProductDao;
 
 import javax.swing.*;
@@ -12,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Comparator;
-import java.util.Collections;
 
 
 public class homePage extends JFrame implements ActionListener {
@@ -28,7 +25,7 @@ public class homePage extends JFrame implements ActionListener {
     private List<Product> allProducts = new ArrayList<>();
     Cart cart= new Cart();
 
-    private String[] allCat = {
+    private final String[] allCat = {
             "All Categories",
             "Electronics",
             "Kitchen and Living",
@@ -83,7 +80,7 @@ public class homePage extends JFrame implements ActionListener {
         // Store name
         storeLabel = new JLabel("Store");
         storeLabel.setBounds(25, 20, 180, 60);
-        storeLabel.setFont(new Font("Arial", Font.BOLD, 40));
+//        storeLabel.setFont(new Font("Arial", Font.BOLD, 40));
         mainPanel.add(storeLabel);
 
         // All Categories Nung Product
@@ -112,16 +109,6 @@ public class homePage extends JFrame implements ActionListener {
         JButton paymentButton = new JButton("Payment");
         paymentButton.setBounds(855, 25, 80, 40);
         mainPanel.add(paymentButton);
-
-        paymentButton.addActionListener(e -> {
-            if (cart.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Your cart is empty!");
-            } 
-            else {
-            PaymentPage paymentPage = new PaymentPage(cart);
-            paymentPage.setVisible(true);
-            }
-        });
 
         // Cart button
         cartButton = new JButton("Cart");
@@ -234,6 +221,7 @@ public class homePage extends JFrame implements ActionListener {
         panel.add(rateButton);
         
         rateButton.addActionListener(e -> { 
+            
             String[] ratings = {"1", "2", "3", "4", "5"};
             String selectedRating = (String) JOptionPane.showInputDialog(this, "Select Your Rating (1-5 Stars):", 
                     "Rate Product", JOptionPane.QUESTION_MESSAGE, null, ratings, ratings[4]);
@@ -270,10 +258,8 @@ public class homePage extends JFrame implements ActionListener {
         panel.add(orderButton);
 
         orderButton.addActionListener(e -> {
-            
-            JOptionPane.showMessageDialog(this, product.getName() + " order this product?");
-            CheckoutPage paymentPage = new CheckoutPage(cart);
-            paymentPage.setVisible(true);
+        ordercheckout checkout = new ordercheckout(product);
+        checkout.setVisible(true);
         });
         return panel;
     }

@@ -12,6 +12,14 @@ public class adminPage extends JFrame implements ActionListener {
             homeButton;
 
     public adminPage() {
+        
+        if (!UserSession.isAdmin()) {
+        JOptionPane.showMessageDialog(null,"Access denied. Only administrators can open the Admin Panel.",
+            "Unauthorized",JOptionPane.ERROR_MESSAGE
+        );
+        dispose();
+        return;
+        }
 
         setTitle("E-Commerce Platform - Admin Dashboard");
         setSize(800, 600);

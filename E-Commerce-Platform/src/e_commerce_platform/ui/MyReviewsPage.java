@@ -21,6 +21,7 @@ public class MyReviewsPage extends JFrame implements ActionListener {
         setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
         
         headerPanel = new JPanel();
         headerPanel.setBounds(0, 0, 1000, 100);

@@ -91,7 +91,7 @@ public class loginPage extends JFrame implements ActionListener {
                         String userEmail = rs.getString("email");
                         String role = rs.getString("role");
 
-                    UserSession.setUser(userId, username, userEmail);
+                    UserSession.setUser(userId, username, userEmail,role);
 
                     JOptionPane.showMessageDialog(this, "Login Successful!");
 
